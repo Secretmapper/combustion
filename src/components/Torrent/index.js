@@ -8,6 +8,7 @@ import ProgressDetails from './ProgressDetails';
 
 import styles from './styles';
 
+@CSSModules(styles)
 class Torrent extends Component {
   render() {
     const torrent = this.props.torrent;
@@ -23,4 +24,4 @@ class Torrent extends Component {
   }
 }
 
-export default CSSModules(Torrent, styles);
+export default Torrent;
