@@ -7,4 +7,4 @@ import TorrentStore from './torrent';
 useStrict(true);
 
 export const view = new ViewStore();
-export const torrent = new TorrentStore();
+export const torrents_store = new TorrentStore();
