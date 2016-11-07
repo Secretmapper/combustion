@@ -1,4 +1,9 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
+
+import Name from './Name';
+import PeerDetails from './PeerDetails';
+import ProgressBar from './ProgressBar';
+import ProgressDetails from './ProgressDetails';
 
 class Torrent extends Component {
   render() {
@@ -6,15 +11,10 @@ class Torrent extends Component {
 
     return (
       <div style={{margin: '10px', border: '1px solid grey', padding: '5px'}}>
-        <p>
-          <strong>{torrent.name}</strong>
-        </p>
-        <p>
-          <strong>{torrent.totalSize}</strong>
-        </p>
-        <progress max="100" value="80"></progress>
-        <p>{torrent.status}</p>
-        <p>Downloading ... ↓ {torrent.rateDownload} ↑ {torrent.rateUpload}</p>
+        <Name torrent={torrent} />
+        <PeerDetails torrent={torrent} />
+        <ProgressBar torrent={torrent} />
+        <ProgressDetails torrent={torrent} />
       </div>
     );
   }

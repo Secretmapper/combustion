@@ -19,26 +19,35 @@ function renderDevTools() {
  * App component acts as the application layout.
  */
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.renderTorrents = this.renderTorrents.bind(this);
+  }
 
   componentDidMount() {
     this.props.torrents_store.getAll();
+  }
+
+  renderTorrents() {
+    return this.props.torrents_store.torrents.map((torrent) => {
+      return <Torrent torrent={torrent}/>;
+    });
   }
 
   render() {
     return (
       <div>
         <header>
-          Welcome to Transmission
-        </header>
-        <main role="main">
           <ActionToolbar/>
           <FilterToolbar/>
-          <h1>
-            Next generation Transmission UI
-          </h1>
-          <p>{this.props.torrents_store.torrents.map((t) => <Torrent torrent={t}/>)}</p>
-          <StatusToolbar/>
+        </header>
+        <main role="main">
+          {this.renderTorrents()}
         </main>
+        <footer>
+          <StatusToolbar/>
+        </footer>
         {renderDevTools()}
       </div>
     )

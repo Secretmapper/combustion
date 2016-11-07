@@ -1,12 +1,14 @@
 import {observable, action} from 'mobx';
-import torrents from '../fixtures/torrents.json';
 
 class TorrentStore {
-
   @observable torrents = [];
 
   @action getAll() {
-    this.torrents = torrents.arguments.torrents;
+    return fetch('/src/fixtures/torrents.json').then(action((response) => {
+      response.json().then(action((result) => {
+        this.torrents.replace(result.arguments.torrents);
+      }));
+    }));
   }
 }
 
