@@ -52,7 +52,7 @@ module.exports = {
     'dot-location': ['warn', 'property'],
     eqeqeq: ['warn', 'allow-null'],
     'guard-for-in': 'warn',
-    'new-cap': ['warn', { newIsCap: true }],
+    'new-cap': ['warn', { capIsNewExceptions: ['CSSModules'] }],
     'new-parens': 'warn',
     'no-array-constructor': 'warn',
     'no-caller': 'warn',
