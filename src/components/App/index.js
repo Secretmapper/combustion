@@ -3,10 +3,10 @@ import CSSModules from 'react-css-modules';
 import DevTools, { setLogEnabled } from 'mobx-react-devtools';
 import { inject, observer } from 'mobx-react';
 
-import Torrent from '../Torrent';
-import ActionToolbar from '../ActionToolbar';
-import FilterToolbar from '../FilterToolbar';
-import StatusToolbar from '../StatusToolbar';
+import Torrent from 'components/Torrent';
+import ActionToolbar from 'components/ActionToolbar';
+import FilterToolbar from 'components/FilterToolbar';
+import StatusToolbar from 'components/StatusToolbar';
 
 import styles from './styles';
 

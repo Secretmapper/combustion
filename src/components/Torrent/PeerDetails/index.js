@@ -1,10 +1,10 @@
 import React from 'react';
 
+import { getPeerDetails } from './services/formatters';
+
 function PeerDetails({ torrent }) {
   return (
-    <p>
-      <strong>{torrent.totalSize}</strong>
-    </p>
+    <p>{getPeerDetails(torrent)}</p>
   );
 }
 

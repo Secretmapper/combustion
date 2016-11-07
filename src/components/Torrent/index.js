@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import CSSModules from 'react-css-modules';
 
-import Name from './Name';
 import PeerDetails from './PeerDetails';
 import ProgressBar from './ProgressBar';
 import ProgressDetails from './ProgressDetails';
@@ -15,7 +14,9 @@ class Torrent extends Component {
 
     return (
       <div styleName='torrent'>
-        <Name torrent={torrent} />
+        <p>
+          <strong>{torrent.name}</strong>
+        </p>
         <PeerDetails torrent={torrent} />
         <ProgressBar torrent={torrent} />
         <ProgressDetails torrent={torrent} />

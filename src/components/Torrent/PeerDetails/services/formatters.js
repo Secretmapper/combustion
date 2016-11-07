@@ -1,98 +1,107 @@
-const STATUS_STOPPED = 0;
-const STATUS_CHECK_WAIT = 1;
-const STATUS_CHECK = 2;
-const STATUS_DOWNLOAD_WAIT = 3;
-const STATUS_DOWNLOAD = 4;
-const STATUS_SEED_WAIT = 5;
-const STATUS_SEED = 6;
+import {
+  speedBps,
+  countString,
+  percentString,
+} from 'util/formatters';
+
+import Torrent from 'stores/torrent';
+
+function formatUL(torrent) {
+  return `↑ ${speedBps(torrent.rateUpload)}`;
+};
+
+function formatDL(torrent) {
+    return `↓ ${speedBps(torrent.rateDownload)}`;
+};
 
 // Downloading from 2 of 3 peer(s) and 2 webseed(s)
-function formatDownloadFromPeersAndWebseeds(torrent, peer_count, webseed_count) {
+function formatDownloadFromPeersAndWebseeds(torrent, peerCount, webseedCount) {
   return [
     'Downloading from',
-    torrent.getPeersSendingToUs(),
+    torrent.peersSendingToUs,
     'of',
-    fmt.countString('peer', 'peers', peer_count),
+    countString('peer', 'peers', peerCount),
     'and',
-    fmt.countString('web seed', 'web seeds', webseed_count),
+    countString('web seed', 'web seeds', webseedCount),
     '-',
-    TorrentRendererHelper.formatDL(t),
-    TorrentRendererHelper.formatUL(t)
+    formatDL(torrent),
+    formatUL(torrent)
   ].join(' ');
 }
 
 // Downloading from 2 webseed(s)
-function formatDownloadFromWebseeds(torrent, webseed_count) {
+function formatDownloadFromWebseeds(torrent, webseedCount) {
   return [
     'Downloading from',
-    fmt.countString('web seed', 'web seeds', webseed_count),
+    countString('web seed', 'web seeds', webseedCount),
     '-',
-    TorrentRendererHelper.formatDL(t),
-    TorrentRendererHelper.formatUL(t)
+    formatDL(torrent),
+    formatUL(torrent)
   ].join(' ');
 }
 
 // Downloading from 2 of 3 peer(s)
-function formatDownloadFromSeeds(torrent, peer_count) {
-  return ['Downloading from',
-    torrent.getPeersSendingToUs(),
+function formatDownloadFromSeeds(torrent, peerCount) {
+  return [
+    'Downloading from',
+    torrent.peersSendingToUs,
     'of',
-    fmt.countString('peer', 'peers', peer_count),
+    countString('peer', 'peers', peerCount),
     '-',
-    TorrentRendererHelper.formatDL(torrent),
-    TorrentRendererHelper.formatUL(torrent)
+    formatDL(torrent),
+    formatUL(torrent)
   ].join(' ');
 }
 
 function formatDownloading(torrent) {
-  const peer_count = torrent.getPeersConnected();
-  const webseed_count = torrent.getWebseedsSendingToUs();
+  const peerCount = torrent.peersConnected;
+  const webseedCount = torrent.webseedsSendingToUs;
 
-  if (webseed_count && peer_count) {
-    return formatDownloadFromPeersAndWebseeds(torrent, peer_count, webseed_count);
+  if (webseedCount && peerCount) {
+    return formatDownloadFromPeersAndWebseeds(torrent, peerCount, webseedCount);
   }
 
-  if (webseed_count) {
-    return formatDownloadFromWebseeds(torrent, webseed_count);
+  if (webseedCount) {
+    return formatDownloadFromWebseeds(torrent, webseedCount);
   }
 
-  return formatDownloadFromSeeds(torrent, peer_count);
+  return formatDownloadFromSeeds(torrent, peerCount);
 }
 
 function formatSeeding(torrent) {
   return [
     'Seeding to',
-    torrent.getPeersGettingFromUs(),
+    torrent.peersGettingFromUs,
     'of',
-    fmt.countString('peer', 'peers', torrent.getPeersConnected()),
+    countString('peer', 'peers', torrent.peersConnected),
     '-',
-    TorrentRendererHelper.formatUL(torrent)
+    formatUL(torrent)
   ].join(' ');
 }
 
 function formatChecking(torrent) {
   return [
     'Verifying local data (',
-    Transmission.fmt.percentString(100.0 * torrent.getRecheckProgress()),
+    percentString(100.0 * torrent.recheckProgress),
     '% tested)'
   ].join('');
 }
 
 function formatStatus(torrent) {
-  switch (torrent.getStatus()) {
-  case STATUS_STOPPED:
-    return torrent.isFinished() ? 'Seeding complete' : 'Paused';
-  case STATUS_CHECK_WAIT:
+  switch (torrent.status) {
+  case Torrent.STATUS_STOPPED:
+    return torrent.isFinished ? 'Seeding complete' : 'Paused';
+  case Torrent.STATUS_CHECK_WAIT:
     return 'Queued for verification';
-  case STATUS_CHECK:
+  case Torrent.STATUS_CHECK:
     return 'Verifying local data';
-  case STATUS_DOWNLOAD_WAIT:
+  case Torrent.STATUS_DOWNLOAD_WAIT:
     return 'Queued for download';
-  case STATUS_DOWNLOAD:
+  case Torrent.STATUS_DOWNLOAD:
     return 'Downloading';
-  case STATUS_SEED_WAIT:
+  case Torrent.STATUS_SEED_WAIT:
     return 'Queued for seeding';
-  case STATUS_SEED:
+  case Torrent.STATUS_SEED:
     return 'Seeding';
   case null:
   case undefined:
@@ -102,22 +111,35 @@ function formatStatus(torrent) {
   }
 }
 
-export function getPeerDetails(torrent) {
-  const errorMessage = torrent.getErrorMessage();
+function formatError(torrent) {
+  const errorDescription = torrent.errorDescription;
 
-  if (errorMessage) {
-      return errorMessage;
+  switch (torrent.error) {
+  case Torrent.ERR_TRACKER_WARNING:
+    return `Tracker returned a warning: ${errorDescription}`;
+  case Torrent.ERR_TRACKER_ERROR:
+    return `Tracker returned an error: ${errorDescription}`;
+  case Torrent.ERR_LOCAL_ERROR:
+    return `Error: ${errorDescription}`;
+  default:
+    return null;
+  }
+}
+
+export function getPeerDetails(torrent) {
+  if (torrent.hasErrors) {
+    return formatError(torrent);
   };
 
-  if (torrent.isDownloading()) {
+  if (torrent.isDownloading) {
     return formatDownloading(torrent);
   };
 
-  if (torrent.isSeeding()) {
+  if (torrent.isSeeding) {
     return formatSeeding(torrent);
   };
 
-  if (torrent.isChecking()) {
+  if (torrent.isChecking) {
     return formatChecking(torrent);
   }
 
