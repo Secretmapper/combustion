@@ -15,10 +15,10 @@
       "sessionCount": 1,
       "uploadedBytes": 0
     },
-    "downloadSpeed": 0,
+    "downloadSpeed": 120,
     "pausedTorrentCount": 9,
     "torrentCount": 9,
-    "uploadSpeed": 0
+    "uploadSpeed": 31
   },
   "result": "success"
 }

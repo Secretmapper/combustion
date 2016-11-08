@@ -1,0 +1,32 @@
+.toolbar {
+  background: #ccc;
+  padding: 5px;
+
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+
+  align-items: center;
+}
+
+.button {
+  border: 1px solid #888;
+  border-radius: 25px;
+  background: transparent;
+  padding: 10px;
+  outline: none;
+  margin-right: 5px;
+}
+
+.button:hover {
+  cursor: pointer;
+  background: #ddd;
+}
+
+.filter {
+  border-radius: 5px;
+}
