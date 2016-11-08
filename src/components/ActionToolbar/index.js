@@ -1,5 +1,6 @@
 import React, { Component} from 'react';
 import CSSModules from 'react-css-modules';
+import { inject, observer } from 'mobx-react';
 
 import toolbarFolderImage from '../../images/toolbar-folder.png';
 import toolbarCloseImage from '../../images/toolbar-close.png';
@@ -37,19 +38,21 @@ class ActionToolbar extends Component {
   }
 
   render() {
+    const isSelected = this.props.view_store.selectedTorrents.length > 0;
+
     return (
       <div styleName='toolbar'>
         <button styleName='button' onClick={this.onOpen}>
           <img src={toolbarFolderImage} title='Open Torrent' alt='Open Torrent'/>
         </button>
-        <button styleName='button' onClick={this.onRemove}>
+        <button styleName='button' onClick={this.onRemove} disabled={isSelected}>
           <img src={toolbarCloseImage} title='Remove Selected Torrents' alt='Remove Selected Torrents'/>
         </button>
         <span styleName='separator'></span>
-        <button styleName='button' onClick={this.onStart}>
+        <button styleName='button' onClick={this.onStart} disabled={isSelected}>
           <img src={toolbarStartImage} title='Start Selected Torrents' alt='Start Selected Torrents'/>
         </button>
-        <button styleName='button' onClick={this.onPause}>
+        <button styleName='button' onClick={this.onPause} disabled={!isSelected}>
           <img src={toolbarPauseImage} title='Pause Selected Torrents' alt='Pause Selected Torrents'/>
         </button>
         <span styleName='separator'></span>
@@ -64,4 +67,4 @@ class ActionToolbar extends Component {
   }
 }
 
-export default ActionToolbar;
+export default inject('view_store')(observer(ActionToolbar));

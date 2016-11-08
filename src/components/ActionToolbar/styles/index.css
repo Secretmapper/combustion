@@ -24,6 +24,10 @@
   background: #ddd;
 }
 
+.button:disabled {
+  opacity: 0.25;
+}
+
 .separator {
   border-left: 1px solid #888;
   height: 30px;
