@@ -2,6 +2,8 @@ import React, { Component} from 'react';
 import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
 
+import Torrent from 'stores/torrent';
+
 import arrowUpImage from '../../images/arrow-up.png';
 import arrowDownImage from '../../images/arrow-down.png';
 
@@ -9,27 +11,49 @@ import styles from './styles';
 
 @CSSModules(styles)
 class FilterToolbar extends Component {
+  constructor(props) {
+    super(props);
+
+    this.onChangeFilterState = this.onChangeFilterState.bind(this);
+    this.onChangeFilterTracker = this.onChangeFilterTracker.bind(this);
+  }
+
+  onChangeFilterState(event) {
+    this.props.torrents_store.setStatusFilter(+event.target.value);
+  }
+
+  onChangeFilterTracker(event) {
+    this.props.torrents_store.setTrackerFilter(+event.target.value);
+  }
+
   render() {
     const torrentCount = this.props.stats_store.stats.torrentCount;
     const downloadSpeed = this.props.stats_store.stats.downloadSpeed;
     const uploadSpeed = this.props.stats_store.stats.uploadSpeed;
+    const states = [
+      {value: 11, label: 'Active'},
+      {value: Torrent.STATUS_DOWNLOAD, label: 'Downloading'},
+      {value: Torrent.STATUS_SEED, label: 'Seeding'},
+      {value: Torrent.STATUS_STOPPED, label: 'Paused'},
+      {value: 55, label: 'Finished'},
+    ];
+
+    const trackers = [
+      {value: 1, label: 'Spanishfoo'},
+      {value: 2, label: 'Bittorrent'},
+    ];
 
     return (
       <div styleName='toolbar'>
         <span>Show</span>
 
-        <select>
-          <option>All</option>
-          <option>Active</option>
-          <option>Downloading</option>
-          <option>Seeding</option>
-          <option>Paused</option>
-          <option>Finished</option>
+        <select onChange={this.onChangeFilterState}>
+          <option value=''>All</option>
+          {states.map((state) => <option value={state.value}>{state.label}</option>)}
         </select>
-        <select>
+        <select onChange={this.onChangeFilterTracker}>
           <option>All</option>
-          <option>Foo</option>
-          <option>Bar</option>
+          {trackers.map((tracker) => <option value={tracker.value}>{tracker.label}</option>)}
         </select>
         <input styleName='filter'  type='search' placeholder='Filter'/>
         <span>{torrentCount} Transfers</span>
@@ -47,4 +71,4 @@ class FilterToolbar extends Component {
   }
 }
 
-export default inject('view_store', 'stats_store')(observer(FilterToolbar));
+export default inject('view_store', 'stats_store', 'torrents_store')(observer(FilterToolbar));

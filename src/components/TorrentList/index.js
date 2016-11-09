@@ -39,7 +39,7 @@ class TorrentList extends Component {
   render() {
     return (
       <ul styleName='torrentList'>
-        {this.props.torrents_store.torrents.map((torrent, index) => {
+        {this.props.torrents_store.filteredTorrents.map((torrent, index) => {
           let className = styles.torrentRow;
 
           if (this.props.view_store.isTorrentSelected(torrent.id)) {
