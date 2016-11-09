@@ -45,11 +45,11 @@ class ActionToolbar extends Component {
         <button styleName='button' onClick={this.onOpen}>
           <img src={toolbarFolderImage} title='Open Torrent' alt='Open Torrent'/>
         </button>
-        <button styleName='button' onClick={this.onRemove} disabled={isSelected}>
+        <button styleName='button' onClick={this.onRemove} disabled={!isSelected}>
           <img src={toolbarCloseImage} title='Remove Selected Torrents' alt='Remove Selected Torrents'/>
         </button>
         <span styleName='separator'></span>
-        <button styleName='button' onClick={this.onStart} disabled={isSelected}>
+        <button styleName='button' onClick={this.onStart} disabled={!isSelected}>
           <img src={toolbarStartImage} title='Start Selected Torrents' alt='Start Selected Torrents'/>
         </button>
         <button styleName='button' onClick={this.onPause} disabled={!isSelected}>

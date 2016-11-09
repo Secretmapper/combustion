@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import CSSModules from 'react-css-modules';
+import { inject, observer } from 'mobx-react';
 
-import Name from './Name';
-import PeerDetails from './PeerDetails';
 import ProgressBar from './ProgressBar';
-import ProgressDetails from './ProgressDetails';
+
+import { getPeerDetails } from './services/formatters';
 
 import styles from './styles';
 
+@inject('view_store')
+@observer
 @CSSModules(styles)
 class Torrent extends Component {
   render() {
@@ -15,10 +17,19 @@ class Torrent extends Component {
 
     return (
       <div styleName='torrent'>
-        <Name torrent={torrent} />
-        <PeerDetails torrent={torrent} />
-        <ProgressBar torrent={torrent} />
-        <ProgressDetails torrent={torrent} />
+        <div styleName='name'>
+          {torrent.name}
+        </div>
+        <div styleName='peerDetails'>
+          {getPeerDetails(torrent)}
+        </div>
+        <div styleName='progressBarRow'>
+          <ProgressBar torrent={torrent} />
+          <button></button>
+        </div>
+        <div styleName='progressDetails'>
+          2.24 GB, uploaded 2.25 GB (Ratio 1.00)
+        </div>
       </div>
     );
   }

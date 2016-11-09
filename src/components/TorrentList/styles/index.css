@@ -1,0 +1,21 @@
+.torrentList {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+}
+
+.torrentRow {
+  border-bottom: 1px solid #ccc;
+  padding: 5px 10px;
+  background-color: white;
+  user-select: none;
+}
+
+.torrentRowEven {
+  background-color: #F7F7F7;
+}
+.torrentRowSelected {
+  background-color: #cdcdff;
+}

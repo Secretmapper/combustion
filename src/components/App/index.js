@@ -3,10 +3,10 @@ import CSSModules from 'react-css-modules';
 import DevTools, { setLogEnabled } from 'mobx-react-devtools';
 import { inject, observer } from 'mobx-react';
 
-import Torrent from '../Torrent';
-import ActionToolbar from '../ActionToolbar';
-import FilterToolbar from '../FilterToolbar';
-import StatusToolbar from '../StatusToolbar';
+import TorrentList from 'components/TorrentList';
+import ActionToolbar from 'components/ActionToolbar';
+import FilterToolbar from 'components/FilterToolbar';
+import StatusToolbar from 'components/StatusToolbar';
 
 import styles from './styles';
 
@@ -21,23 +21,13 @@ function renderDevTools() {
 /**
  * App component acts as the application layout.
  */
+@inject('torrents_store', 'stats_store')
+@observer
 @CSSModules(styles)
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.renderTorrents = this.renderTorrents.bind(this);
-  }
-
   componentDidMount() {
     this.props.torrents_store.getAll();
     this.props.stats_store.getStats();
-  }
-
-  renderTorrents() {
-    return this.props.torrents_store.torrents.map((torrent) => {
-      return <Torrent torrent={torrent}/>;
-    });
   }
 
   render() {
@@ -48,7 +38,7 @@ class App extends Component {
           <FilterToolbar/>
         </header>
         <main role="main">
-          {this.renderTorrents()}
+          <TorrentList />
         </main>
         <footer>
           <StatusToolbar/>
@@ -59,4 +49,4 @@ class App extends Component {
   };
 }
 
-export default inject('torrents_store', 'stats_store')(observer(App));
+export default App;

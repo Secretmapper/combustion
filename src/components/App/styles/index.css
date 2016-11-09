@@ -1,4 +1,6 @@
 :global body {
   margin: 0px;
   padding: 0px;
+
+  font: 62.5% "lucida grande", Tahoma, Verdana, Arial, Helvetica, sans-serif;
 }

@@ -1,8 +1,8 @@
 import { useStrict } from 'mobx';
 
-import ViewStore from './view';
-import TorrentStore from './torrent';
-import StatsStore from './stats';
+import ViewStore from './view-store';
+import TorrentStore from './torrent-store';
+import StatsStore from './stats-store';
 
 // Force strict mode so mutations are only allowed within actions.
 useStrict(true);
