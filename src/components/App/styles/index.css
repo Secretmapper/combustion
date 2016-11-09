@@ -4,17 +4,3 @@
 
   font: 62.5% "lucida grande", Tahoma, Verdana, Arial, Helvetica, sans-serif;
 }
-
-.torrentList {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  text-align: left;
-  cursor: pointer;
-}
-
-.torrentRow {
-  border-bottom: 1px solid #ccc;
-  padding: 5px 10px;
-  background-color: white;
-}

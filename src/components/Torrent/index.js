@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CSSModules from 'react-css-modules';
+import { inject, observer } from 'mobx-react';
 
 import ProgressBar from './ProgressBar';
 
@@ -7,6 +8,8 @@ import { getPeerDetails } from './services/formatters';
 
 import styles from './styles';
 
+@inject('view_store')
+@observer
 @CSSModules(styles)
 class Torrent extends Component {
   render() {
