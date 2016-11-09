@@ -35,9 +35,17 @@ class App extends Component {
   }
 
   renderTorrents() {
-    return this.props.torrents_store.torrents.map((torrent) => {
-      return <Torrent torrent={torrent}/>;
-    });
+    return (
+      <ul styleName='torrentList'>
+        {this.props.torrents_store.torrents.map((torrent) => {
+          return (
+            <li styleName='torrentRow'>
+              <Torrent torrent={torrent}/>
+            </li>
+          );
+        })}
+      </ul>
+    );
   }
 
   render() {

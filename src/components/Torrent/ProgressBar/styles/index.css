@@ -1,0 +1,19 @@
+.torrentProgressBar {
+  margin-top: 2px;
+  margin-bottom: 5px;
+}
+
+.torrentProgressBar progress[value],
+.torrentProgressBar progress[value]::-webkit-progress-bar {
+  -webkit-appearance: none;
+  appearance: none;
+
+  width: 100%;
+  background-color: #EEE;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+.progressBarSeeding {
+  background-color: #269E30
+}

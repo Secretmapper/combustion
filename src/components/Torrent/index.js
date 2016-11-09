@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import CSSModules from 'react-css-modules';
 
-import PeerDetails from './PeerDetails';
 import ProgressBar from './ProgressBar';
-import ProgressDetails from './ProgressDetails';
+
+import { getPeerDetails } from './services/formatters';
 
 import styles from './styles';
 
@@ -14,12 +14,19 @@ class Torrent extends Component {
 
     return (
       <div styleName='torrent'>
-        <p>
-          <strong>{torrent.name}</strong>
-        </p>
-        <PeerDetails torrent={torrent} />
-        <ProgressBar torrent={torrent} />
-        <ProgressDetails torrent={torrent} />
+        <div styleName='name'>
+          {torrent.name}
+        </div>
+        <div styleName='peerDetails'>
+          {getPeerDetails(torrent)}
+        </div>
+        <div styleName='progressBarRow'>
+          <ProgressBar torrent={torrent} />
+          <button></button>
+        </div>
+        <div styleName='progressDetails'>
+          2.24 GB, uploaded 2.25 GB (Ratio 1.00)
+        </div>
       </div>
     );
   }
