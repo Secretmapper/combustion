@@ -7,6 +7,7 @@ import TorrentList from 'components/TorrentList';
 import ActionToolbar from 'components/ActionToolbar';
 import FilterToolbar from 'components/FilterToolbar';
 import StatusToolbar from 'components/StatusToolbar';
+import OpenDialog from 'components/OpenDialog';
 
 import styles from './styles';
 
@@ -25,10 +26,22 @@ function renderDevTools() {
 @observer
 @CSSModules(styles)
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.renderOpenDialog = this.renderOpenDialog.bind(this);
+  }
+
   componentDidMount() {
     this.props.torrents_store.getAll();
     this.props.stats_store.getStats();
     this.props.session_store.getSession();
+  }
+
+  renderOpenDialog() {
+    return (
+      <OpenDialog />
+    );
   }
 
   render() {
@@ -45,6 +58,7 @@ class App extends Component {
           <StatusToolbar/>
         </footer>
         {renderDevTools()}
+        {this.renderOpenDialog()}
       </div>
     )
   };

@@ -5,6 +5,11 @@ class ViewStore {
   @observable selectedTorrents = [];
   @observable lastSelectedTorrent = null;
   @observable compact = false;
+  @observable isOpenDialogShown = false;
+
+  @action toggleOpenDialog() {
+    this.isOpenDialogShown = !this.isOpenDialogShown;
+  }
 
   @action toggleCompact() {
     this.compact = !this.compact;

@@ -13,8 +13,14 @@ import styles from './styles';
 
 @CSSModules(styles)
 class ActionToolbar extends Component {
-  onOpen(){
-    alert('open');
+  constructor(props) {
+    super(props);
+
+    this.onOpen = this.onOpen.bind(this);
+  }
+
+  onOpen() {
+    this.props.view_store.toggleOpenDialog();
   }
 
   onRemove(){
