@@ -3,4 +3,20 @@
   padding: 0px;
 
   font: 62.5% "lucida grande", Tahoma, Verdana, Arial, Helvetica, sans-serif;
+  height: 100vh;
+}
+
+:global #root {
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main {
+  flex: 1;
+  overflow-y: scroll;
 }

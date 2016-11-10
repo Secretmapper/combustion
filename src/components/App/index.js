@@ -32,12 +32,12 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div styleName='container'>
         <header>
           <ActionToolbar/>
           <FilterToolbar/>
         </header>
-        <main role="main">
+        <main styleName='main' role='main'>
           <TorrentList />
         </main>
         <footer>
