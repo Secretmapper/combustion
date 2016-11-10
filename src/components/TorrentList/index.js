@@ -2,7 +2,7 @@ import React, { Component} from 'react';
 import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
 
-import Torrent from 'components/Torrent';
+import { Compact, Expanded } from 'components/Torrent';
 
 import styles from './styles';
 
@@ -49,6 +49,12 @@ class TorrentList extends Component {
           if (index % 2 === 1) { // Zero indexed. lololo
             className +=  ` ${styles.torrentRowEven}`;
           }
+
+          if (this.props.view_store.compact) {
+            className += ` ${styles.torrentRowCompact}`;
+          }
+
+          const Torrent = this.props.view_store.compact ? Compact : Expanded;
 
           return (
             <li className={className} onClick={(event) => this.onClick(event, torrent.id)}>

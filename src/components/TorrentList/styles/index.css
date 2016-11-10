@@ -16,6 +16,11 @@
 .torrentRowEven {
   background-color: #F7F7F7;
 }
+
+.torrentRowCompact {
+  padding: 4px;
+}
+
 .torrentRowSelected {
   background-color: #cdcdff;
 }

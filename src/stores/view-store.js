@@ -4,6 +4,11 @@ class ViewStore {
   @observable currentFilter = 'all';
   @observable selectedTorrents = [];
   @observable lastSelectedTorrent = null;
+  @observable compact = false;
+
+  @action toggleCompact() {
+    this.compact = !this.compact;
+  }
 
   @action setFilter(filter) {
     this.currentFilter = filter;

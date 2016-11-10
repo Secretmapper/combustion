@@ -2,6 +2,11 @@
   color: #666;
 }
 
+.torrentCompact {
+  color: #666;
+  display: flex;
+}
+
 .name {
   font-size: 1.3em;
   font-weight: bold;
@@ -13,11 +18,19 @@
   margin-bottom: 2px;
 }
 
+.nameCompact {
+  flex: 1;
+}
+
 .peerDetails {
   clear: left;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.detailsCompact {
+  margin-right: 10px;
 }
 
 .progressBarRow {
@@ -32,6 +45,10 @@
   width: 14px;
   height: 14px;
   margin-left: 8px;
+}
+
+.progressBarRowCompact {
+  width: 50px;
 }
 
 .progressDetails {

@@ -15,19 +15,20 @@ function renderDevTools() {
 
   setLogEnabled(true);
 
-  return <DevTools position={{top: 72, right: 20}} />;
+  return <DevTools position={{top: 20, right: 20}} />;
 }
 
 /**
  * App component acts as the application layout.
  */
-@inject('torrents_store', 'stats_store')
+@inject('torrents_store', 'stats_store', 'session_store')
 @observer
 @CSSModules(styles)
 class App extends Component {
   componentDidMount() {
     this.props.torrents_store.getAll();
     this.props.stats_store.getStats();
+    this.props.session_store.getSession();
   }
 
   render() {
