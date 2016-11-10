@@ -16,6 +16,7 @@ class FilterToolbar extends Component {
 
     this.onChangeFilterState = this.onChangeFilterState.bind(this);
     this.onChangeFilterTracker = this.onChangeFilterTracker.bind(this);
+    this.onChangeFilterText = this.onChangeFilterText.bind(this);
   }
 
   onChangeFilterState(event) {
@@ -23,7 +24,11 @@ class FilterToolbar extends Component {
   }
 
   onChangeFilterTracker(event) {
-    this.props.torrents_store.setTrackerFilter(+event.target.value);
+    this.props.torrents_store.setTrackerFilter(event.target.value);
+  }
+
+  onChangeFilterText(event) {
+    this.props.torrents_store.setTextFilter(event.target.value);
   }
 
   render() {
@@ -38,10 +43,11 @@ class FilterToolbar extends Component {
       {value: 55, label: 'Finished'},
     ];
 
-    const trackers = [
-      {value: 1, label: 'Spanishfoo'},
-      {value: 2, label: 'Bittorrent'},
-    ];
+    const trackers = this.props.torrents_store.trackers.map((domain) => {
+      const label = domain.replace(/\b\w/g, l => l.toUpperCase()); // Capitalize
+
+      return {value: domain, label};
+    });
 
     return (
       <div styleName='toolbar'>
@@ -52,10 +58,10 @@ class FilterToolbar extends Component {
           {states.map((state) => <option value={state.value}>{state.label}</option>)}
         </select>
         <select onChange={this.onChangeFilterTracker}>
-          <option>All</option>
+          <option value=''>All</option>
           {trackers.map((tracker) => <option value={tracker.value}>{tracker.label}</option>)}
         </select>
-        <input styleName='filter'  type='search' placeholder='Filter'/>
+        <input styleName='filter' type='search' placeholder='Filter' onChange={this.onChangeFilterText}/>
         <span>{torrentCount} Transfers</span>
 
         <span>

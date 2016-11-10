@@ -28,8 +28,7 @@ class ViewStore {
   }
 
   @action addSelectedRange(id, ids) {
-    // TODO: Remove duplicates
-    this.selectedTorrents = this.selectedTorrents.concat(ids);
+    this.selectedTorrents = [...new Set(this.selectedTorrents.concat(ids))]; // Unique
     this.lastSelectedTorrent = id;
   }
 
