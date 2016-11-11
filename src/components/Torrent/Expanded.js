@@ -6,7 +6,7 @@ import ProgressBar from './ProgressBar';
 
 import { getPeerDetails } from './services/formatters';
 
-import styles from './styles';
+import styles from './styles/index.css';
 
 @inject('view_store')
 @observer

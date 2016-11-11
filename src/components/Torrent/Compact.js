@@ -4,7 +4,7 @@ import { inject, observer } from 'mobx-react';
 
 import ProgressBar from './ProgressBar';
 
-import styles from './styles';
+import styles from './styles/index.css';
 
 @inject('view_store')
 @observer

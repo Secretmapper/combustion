@@ -7,7 +7,7 @@ import Torrent from 'stores/torrent';
 import arrowUpImage from '../../images/arrow-up.png';
 import arrowDownImage from '../../images/arrow-down.png';
 
-import styles from './styles';
+import styles from './styles/index.css';
 
 @CSSModules(styles)
 class FilterToolbar extends Component {

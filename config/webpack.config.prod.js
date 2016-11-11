@@ -20,15 +20,9 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.json'],
     alias: {
-      // This `alias` section can be safely removed after ejection.
-      // We do this because `babel-runtime` may be inside `react-scripts`,
-      // so when `babel-plugin-transform-runtime` imports it, it will not be
-      // available to the app directly. This is a temporary solution that lets
-      // us ship support for generators. However it is far from ideal, and
-      // if we don't have a good solution, we should just make `babel-runtime`
-      // a dependency in generated projects.
-      // See https://github.com/facebookincubator/create-react-app/issues/255
-      'babel-runtime/regenerator': require.resolve('babel-runtime/regenerator')
+      components: path.join(paths.appSrc, 'components'),
+      stores: path.join(paths.appSrc, 'stores'),
+      util: path.join(paths.appSrc, 'util')
     }
   },
   resolveLoader: {
@@ -56,7 +50,7 @@ module.exports = {
         // Disable autoprefixer in css-loader itself:
         // https://github.com/webpack/css-loader/issues/281
         // We already have it thanks to postcss.
-        loader: ExtractTextPlugin.extract('style', 'css?-autoprefixer!postcss')
+        loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]&-autoprefixer!postcss')
       },
       {
         test: /\.json$/,
@@ -125,6 +119,8 @@ module.exports = {
         screw_ie8: true
       }
     }),
-    new ExtractTextPlugin('static/css/[name].[contenthash:8].css')
+    new ExtractTextPlugin('static/css/[name].[contenthash:8].css', {
+      allChunks: true
+    })
   ]
 };

@@ -8,7 +8,7 @@ import ActionToolbar from 'components/ActionToolbar';
 import FilterToolbar from 'components/FilterToolbar';
 import StatusToolbar from 'components/StatusToolbar';
 
-import styles from './styles';
+import styles from './styles/index.css';
 
 function renderDevTools() {
   if (process.env.NODE_ENV !== 'development') return null;

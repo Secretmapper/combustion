@@ -4,7 +4,7 @@ import { inject, observer } from 'mobx-react';
 
 import { Compact, Expanded } from 'components/Torrent';
 
-import styles from './styles';
+import styles from './styles/index.css';
 
 @inject('torrents_store', 'view_store')
 @observer

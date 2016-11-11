@@ -3,7 +3,7 @@ import { Modal } from 'react-overlays';
 import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
 
-import styles from './styles';
+import styles from './styles/index.css';
 
 @inject('view_store')
 @observer

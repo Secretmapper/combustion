@@ -5,7 +5,7 @@ import { inject, observer } from 'mobx-react';
 import Dialog from '../Dialog'
 import logoImage from '../../images/logo.png';
 
-import styles from './styles';
+import styles from './styles/index.css';
 
 @inject('view_store')
 @observer

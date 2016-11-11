@@ -3,7 +3,6 @@ var autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var paths = require('./paths');
 
 module.exports = {
@@ -52,7 +51,10 @@ module.exports = {
       {
         test: /\.css$/,
         include: paths.appSrc,
-        loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]')
+        loaders: [
+          'style?sourceMap',
+          'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]'
+        ]
       },
       {
         test: /\.json$/,
@@ -91,11 +93,7 @@ module.exports = {
       template: paths.appHtml,
       favicon: paths.appFavicon,
     }),
-    new ExtractTextPlugin('app.css', {
-      allChunks: true
-    }),
     new webpack.DefinePlugin({ 'process.env.NODE_ENV': '"development"' }),
-    // Note: only CSS is currently hot reloaded
     new webpack.HotModuleReplacementPlugin(),
     new CaseSensitivePathsPlugin()
   ]

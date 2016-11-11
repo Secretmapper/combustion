@@ -11,7 +11,7 @@ import toolbarStartAllImage from '../../images/toolbar-start-all.png';
 
 import OpenDialog from 'components/OpenDialog';
 
-import styles from './styles';
+import styles from './styles/index.css';
 
 @CSSModules(styles)
 class ActionToolbar extends Component {

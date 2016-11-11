@@ -7,7 +7,7 @@ import preferencesImage from '../../images/wrench.png';
 import turtleImage from '../../images/turtle.png';
 import compactImage from '../../images/compact.png';
 
-import styles from './styles';
+import styles from './styles/index.css';
 
 @inject('view_store', 'session_store')
 @observer
