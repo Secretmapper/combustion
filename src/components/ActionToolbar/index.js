@@ -9,6 +9,8 @@ import toolbarStartImage from '../../images/toolbar-start.png';
 import toolbarPauseAllImage from '../../images/toolbar-pause-all.png';
 import toolbarStartAllImage from '../../images/toolbar-start-all.png';
 
+import OpenDialog from 'components/OpenDialog';
+
 import styles from './styles';
 
 @CSSModules(styles)
@@ -68,6 +70,8 @@ class ActionToolbar extends Component {
         <button styleName='button' onClick={this.onPauseAll}>
           <img src={toolbarPauseAllImage} title='Pause All Torrents' alt='Pause All Torrents'/>
         </button>
+
+        <OpenDialog />
       </div>
     );
   }

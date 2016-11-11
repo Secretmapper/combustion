@@ -4,6 +4,7 @@
   padding: 0;
   text-align: left;
   cursor: pointer;
+  list-style-type: none;
 }
 
 .torrentRow {
@@ -11,6 +12,7 @@
   padding: 5px 10px;
   background-color: white;
   user-select: none;
+  align-items: center;
 }
 
 .torrentRowEven {

@@ -53,25 +53,29 @@ class FilterToolbar extends Component {
       <div styleName='toolbar'>
         <span>Show</span>
 
-        <select onChange={this.onChangeFilterState}>
-          <option value=''>All</option>
-          {states.map((state) => <option value={state.value}>{state.label}</option>)}
-        </select>
-        <select onChange={this.onChangeFilterTracker}>
-          <option value=''>All</option>
-          {trackers.map((tracker) => <option value={tracker.value}>{tracker.label}</option>)}
-        </select>
-        <input styleName='filter' type='search' placeholder='Filter' onChange={this.onChangeFilterText}/>
-        <span>{torrentCount} Transfers</span>
+        <div styleName='filters'>
+          <select onChange={this.onChangeFilterState}>
+            <option value=''>All</option>
+            {states.map((state) => <option value={state.value}>{state.label}</option>)}
+          </select>
+          <select onChange={this.onChangeFilterTracker}>
+            <option value=''>All</option>
+            {trackers.map((tracker) => <option value={tracker.value}>{tracker.label}</option>)}
+          </select>
+          <input styleName='filter' type='search' placeholder='Filter' onChange={this.onChangeFilterText}/>
+          <span styleName='counter'>{torrentCount} Transfers</span>
+        </div>
 
-        <span>
-          <img src={arrowDownImage} alt='Download speed' title='Download speed'/>
-          {downloadSpeed} Kb/s
-        </span>
-        <span>
-          <img src={arrowUpImage} alt='Upload speed' title='Upload speed'/>
-          {uploadSpeed} Kb/s
-        </span>
+        <div styleName='stats'>
+          <span>
+            <img src={arrowDownImage} alt='Download speed' title='Download speed'/>
+            {downloadSpeed} Kb/s
+          </span>
+          <span>
+            <img src={arrowUpImage} alt='Upload speed' title='Upload speed'/>
+            {uploadSpeed} Kb/s
+          </span>
+        </div>
       </div>
     );
   }
