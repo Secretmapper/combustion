@@ -11,22 +11,49 @@
   -webkit-box-align: center;
 
   align-items: center;
+
+  border-bottom: 1px solid #AAA;
+  background-color: #cccccc;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#dddddd), to(#bbbbbb));
+  background-image: -webkit-linear-gradient(top, #dddddd, #bbbbbb);
+  background-image: -moz-linear-gradient(top, #dddddd, #bbbbbb);
+  background-image: -ms-linear-gradient(top, #dddddd, #bbbbbb);
+  background-image: -o-linear-gradient(top, #dddddd, #bbbbbb);
+  background-image: linear-gradient(top, #dddddd, #bbbbbb);
 }
 
-.button {
-  border: 1px solid #888;
-  border-radius: 25px;
-  background: transparent;
-  padding: 10px;
+.filters {
+  flex: 1;
+}
+
+.filters select {
+  width: 150px;
+  margin-left: 5px;
   outline: none;
-  margin-right: 5px;
-}
-
-.button:hover {
+  border: 1px solid #999;
+  border-radius: 5px;
   cursor: pointer;
-  background: #ddd;
+  padding: 2px 5px;
+  line-height: 16px;
 }
 
 .filter {
   border-radius: 5px;
+  margin-left: 5px;
+  outline: none;
+  border: 1px solid #999;
+  padding: 2px 5px;
+  line-height: 16px;
+}
+
+.stats span {
+  margin-left: 5px;
+}
+
+.stats img {
+  margin-right: 2px;
+}
+
+.counter {
+  margin-left: 5px;
 }
