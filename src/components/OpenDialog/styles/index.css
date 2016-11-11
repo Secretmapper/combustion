@@ -1,0 +1,27 @@
+.body {
+  display: flex;
+}
+
+.body h2 {
+  font-size: 1.2em;
+  color: black;
+}
+
+.body label,
+.body input {
+  display: block;
+}
+
+.body input.inline {
+  display: inline-block;
+}
+
+.logo {
+  width: 64px;
+  height: 64px;
+  margin: 0px 20px;
+}
+
+.form {
+  flex: 1;
+}

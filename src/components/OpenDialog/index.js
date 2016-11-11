@@ -14,7 +14,18 @@ class OpenDialog extends Component {
   constructor(props) {
     super(props);
 
+    this.onUpload = this.onUpload.bind(this);
+    this.onCancel = this.onCancel.bind(this);
     this.onHide = this.onHide.bind(this);
+  }
+
+  onUpload(event) {
+    event.preventDefault();
+  }
+
+  onCancel(event) {
+    event.preventDefault();
+    this.props.view_store.toggleOpenDialog();
   }
 
   onHide() {
@@ -27,22 +38,45 @@ class OpenDialog extends Component {
         show={this.props.view_store.isOpenDialogShown}
         onHide={this.onHide}
       >
-        <img src={logoImage} alt='logo'></img>
-        <h2>Upload Torrent Files</h2>
-        <form action="#" method="post" id="torrent_upload_form" encType="multipart/form-data" target="torrent_upload_frame">
-          <div title="dialog_message">
-            <label htmlFor="torrent_upload_file">Please select a torrent file to upload:</label>
-              <input type="file" name="torrent_files[]" id="torrent_upload_file" multiple="multiple" value="" />
-            <label htmlFor="torrent_upload_url">Or enter a URL:</label>
-              <input type="url" id="torrent_upload_url" value="" />
-            <label id="add-dialog-folder-label" htmlFor="add-dialog-folder-input">Destination folder  <i>(86.2 GB Free)</i>:</label>
-              <input type="text" id="add-dialog-folder-input" value="/home/edu/Downloads" />
-              <input type="checkbox" id="torrent_auto_start" checked="checked" />
-            <label htmlFor="torrent_auto_start" id="auto_start_label">Start when added</label>
+        <div styleName='body'>
+          <div styleName='logo'>
+            <img src={logoImage} alt='logo'></img>
           </div>
-          <button>Upload</button>
-          <button>Cancel</button>
-        </form>
+          <div styleName='form'>
+            <h2>Upload Torrent Files</h2>
+            <form>
+              <section style={{display: 'flex', flexDirection: 'column'}}>
+                <fieldset style={{flex: 1}}>
+                  <label>Please select a torrent file to upload:</label>
+                  <input type="file" multiple="multiple" />
+                </fieldset>
+
+                <fieldset style={{flex: 1}}>
+                  <label>Or enter a URL:</label>
+                  <input type="url" />
+                </fieldset>
+
+
+                <fieldset style={{flex: 1}}>
+                  <label>Destination folder <i>(0 GB Free)</i>:</label>
+                  <input type="text" />
+                </fieldset>
+
+                <fieldset style={{flex: 1}}>
+                <label>
+                  <input styleName='inline  ' type="checkbox" defaultChecked={true} />
+                  Start when added
+                </label>
+                </fieldset>
+              </section>
+              <section>
+                <button onClick={this.onCancel}>Cancel</button>
+                <button onClick={this.onUpload}>Upload</button>
+              </section>
+            </form>
+          </div>
+        </div>
+
       </Dialog>
     );
   }
