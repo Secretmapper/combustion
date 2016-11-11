@@ -53,6 +53,7 @@
   "dependencies": {
     "mobx": "2.4.1",
     "mobx-react": "3.5.3",
+    "normalize.css": "^5.0.0",
     "react": "15.2.1",
     "react-css-modules": "3.7.10",
     "react-dom": "15.2.1",
