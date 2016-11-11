@@ -5,6 +5,7 @@
 .torrentCompact {
   color: #666;
   display: flex;
+  align-items: center;
 }
 
 .name {
