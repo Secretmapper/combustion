@@ -56,11 +56,11 @@ class FilterToolbar extends Component {
         <div styleName='filters'>
           <select onChange={this.onChangeFilterState}>
             <option value=''>All</option>
-            {states.map((state) => <option value={state.value}>{state.label}</option>)}
+            {states.map((state, index) => <option key={index} value={state.value}>{state.label}</option>)}
           </select>
           <select onChange={this.onChangeFilterTracker}>
             <option value=''>All</option>
-            {trackers.map((tracker) => <option value={tracker.value}>{tracker.label}</option>)}
+            {trackers.map((tracker, index) => <option key={index} value={tracker.value}>{tracker.label}</option>)}
           </select>
           <input styleName='filter' type='search' placeholder='Filter' onChange={this.onChangeFilterText}/>
           <span styleName='counter'>{torrentCount} Transfers</span>

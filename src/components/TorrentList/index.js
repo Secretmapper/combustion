@@ -57,7 +57,7 @@ class TorrentList extends Component {
           const Torrent = this.props.view_store.compact ? Compact : Expanded;
 
           return (
-            <li className={className} onClick={(event) => this.onClick(event, torrent.id)}>
+            <li key={index} className={className} onClick={(event) => this.onClick(event, torrent.id)}>
               <Torrent torrent={torrent}/>
             </li>
           );
