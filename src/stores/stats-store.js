@@ -1,10 +1,12 @@
 import {observable, action} from 'mobx';
 
+import rpc from 'util/rpc';
+
 class StatsStore {
   @observable stats = {};
 
-  @action getStats() {
-    return fetch('/src/fixtures/stats.json').then(action((response) => {
+  @action getStats(sessionId) {
+    return rpc('session-stats', sessionId).then(action((response) => {
       response.json().then(action((result) => {
         this.stats = result.arguments;
       }));

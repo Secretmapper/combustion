@@ -27,9 +27,11 @@ function renderDevTools() {
 @CSSModules(styles)
 class App extends Component {
   componentDidMount() {
-    this.props.torrents_store.getAll();
-    this.props.stats_store.getStats();
-    this.props.session_store.getSession();
+    this.props.session_store.getSession().then(() => {
+      const sessionId = this.props.session_store.sessionId;
+      this.props.stats_store.getStats(sessionId);
+      this.props.torrents_store.getAll(sessionId);
+    });
   }
 
   render() {

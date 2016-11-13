@@ -1,3 +1,5 @@
+import './common';
+
 const speed_K = 1000;
 const speed_K_str = 'kB/s';
 const speed_M_str = 'MB/s';
