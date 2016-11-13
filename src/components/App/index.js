@@ -31,7 +31,15 @@ class App extends Component {
       const sessionId = this.props.session_store.sessionId;
       this.props.stats_store.getStats(sessionId);
       this.props.torrents_store.getAll(sessionId);
+
+      this.interval = setInterval(() => {
+        this.props.torrents_store.getAll(sessionId);
+      }, 5000);
     });
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   render() {
