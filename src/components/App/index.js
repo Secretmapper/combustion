@@ -4,6 +4,7 @@ import DevTools, { setLogEnabled } from 'mobx-react-devtools';
 import { inject, observer } from 'mobx-react';
 
 import TorrentList from 'components/TorrentList';
+import Inspector from 'components/Inspector';
 import ActionToolbar from 'components/ActionToolbar';
 import FilterToolbar from 'components/FilterToolbar';
 import StatusToolbar from 'components/StatusToolbar';
@@ -40,6 +41,7 @@ class App extends Component {
         </header>
         <main styleName='main' role='main'>
           <TorrentList />
+          <Inspector />
         </main>
         <footer>
           <StatusToolbar/>

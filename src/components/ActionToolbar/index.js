@@ -8,6 +8,7 @@ import toolbarPauseImage from '../../images/toolbar-pause.png';
 import toolbarStartImage from '../../images/toolbar-start.png';
 import toolbarPauseAllImage from '../../images/toolbar-pause-all.png';
 import toolbarStartAllImage from '../../images/toolbar-start-all.png';
+import toolbarInfoImage from '../../images/toolbar-info.png';
 
 import OpenDialog from 'components/OpenDialog';
 
@@ -19,6 +20,7 @@ class ActionToolbar extends Component {
     super(props);
 
     this.onOpen = this.onOpen.bind(this);
+    this.onToggleInspector = this.onToggleInspector.bind(this);
   }
 
   onOpen() {
@@ -45,6 +47,10 @@ class ActionToolbar extends Component {
     alert('start all');
   }
 
+  onToggleInspector(){
+    this.props.view_store.toggleInspector();
+  }
+
   render() {
     const isSelected = this.props.view_store.selectedTorrents.length > 0;
 
@@ -69,6 +75,10 @@ class ActionToolbar extends Component {
         </button>
         <button styleName='button' onClick={this.onPauseAll}>
           <img src={toolbarPauseAllImage} title='Pause All Torrents' alt='Pause All Torrents'/>
+        </button>
+
+        <button styleName='button' onClick={this.onToggleInspector}>
+          <img src={toolbarInfoImage} title='Toggle inspector' alt='Toggle inspector'/>
         </button>
 
         <OpenDialog />

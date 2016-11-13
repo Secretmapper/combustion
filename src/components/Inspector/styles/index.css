@@ -1,0 +1,23 @@
+.inspectorContainer {
+  display: flex;
+}
+
+.inspector {
+  text-align: left;
+  padding: 15px;
+  width: 40vw;
+  border-left: 1px solid #888;
+}
+
+.row {
+ display: flex;
+ padding-bottom: 10px;
+}
+
+.key {
+ width: 120px;
+}
+
+.value {
+ flex: 1;
+}
