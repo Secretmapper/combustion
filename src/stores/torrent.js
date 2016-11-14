@@ -19,6 +19,15 @@ class Torrent {
     extendObservable(this, torrent);
   }
 
+  // TODO: Find a better name for this (displayName, compareName, etc.)
+  @computed get publicName() {
+    if (!this.collatedName && this.name) {
+      return this.name.toLowerCase();
+    }
+
+    return this.collatedName || '';
+  }
+
   @computed get hasErrors() {
     return this.error > Torrent.ERR_NONE;
   }
@@ -46,6 +55,14 @@ class Torrent {
   @computed get isQueued() {
     return this.status === Torrent.STATUS_DOWNLOAD_WAIT ||
            this.status === Torrent.STATUS_SEED_WAIT;
+  }
+
+  @computed get isDone() {
+    return this.leftUntilDone < 1;
+  }
+
+  @computed get needsMetaData() {
+    return this.metadataPercentComplete < 1;
   }
 }
 

@@ -62,6 +62,7 @@ class App extends Component {
           <StatusToolbar/>
         </footer>
         {renderOpenDialog()}
+        {renderDevTools()}
       </div>
     )
   };

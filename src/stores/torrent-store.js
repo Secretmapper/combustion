@@ -58,6 +58,8 @@ class TorrentStore {
       if (this.textFilter && !regexp.test(torrent.name)) return false;
 
       return true;
+    }).sort((torrentA, torrentB) => {
+      return torrentA.publicName.localeCompare(torrentB.publicName);
     });
   }
 

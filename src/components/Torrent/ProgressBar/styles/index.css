@@ -1,16 +1,21 @@
 .torrentProgressBar {}
 
-.torrentProgressBar progress[value],
-.torrentProgressBar progress[value]::-webkit-progress-bar {
+.torrentProgressBar progress {
   -webkit-appearance: none;
   appearance: none;
-
   width: 100%;
+}
+
+.torrentProgressBar progress::-webkit-progress-bar {
+  border: 1px solid #29AD35;
   background-color: #EEE;
-  border-radius: 2px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) outset;
+}
+
+.torrentProgressBar progress::-webkit-progress-value {
+  background-image: linear-gradient(to bottom, #47e75f 0%,#44de5b 50%,#3ec953 51%,#45e25d 100%);
 }
 
 .progressBarSeeding {
-  background-color: #269E30
+
 }
