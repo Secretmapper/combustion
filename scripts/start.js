@@ -149,7 +149,13 @@ function runDevServer(port) {
     quiet: true,
     watchOptions: {
       ignored: /node_modules/
-    }
+    },
+    proxy: {
+      '/transmission/rpc': {
+        target: 'http://127.0.0.1:9091',
+        changeOrigin: true
+      }
+    },
   }).listen(port, (err, result) => {
     if (err) {
       return console.log(err);

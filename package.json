@@ -63,8 +63,7 @@
   },
   "scripts": {
     "start": "node ./scripts/start.js",
-    "build": "node ./scripts/build.js",
-    "proxy": "node ./scripts/proxy.js"
+    "build": "node ./scripts/build.js"
   },
   "main": "index.js",
   "eslintConfig": {
