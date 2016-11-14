@@ -72,6 +72,12 @@ class TorrentStore {
   @action setTextFilter(textFilter) {
     this.textFilter = textFilter;
   }
+
+  getByIds(ids) {
+    return this.torrents.filter((torrent) => {
+      return ids.indexOf(torrent.id) !== -1;
+    });
+  }
 }
 
 export default TorrentStore;

@@ -11,9 +11,12 @@ import toolbarStartAllImage from '../../images/toolbar-start-all.png';
 import toolbarInfoImage from '../../images/toolbar-info.png';
 
 import OpenDialog from 'components/OpenDialog';
+import Torrent from 'stores/torrent';
 
 import styles from './styles/index.css';
 
+@inject('torrents_store', 'view_store')
+@observer
 @CSSModules(styles)
 class ActionToolbar extends Component {
   constructor(props) {
@@ -53,6 +56,9 @@ class ActionToolbar extends Component {
 
   render() {
     const isSelected = this.props.view_store.selectedTorrents.length > 0;
+    const multipleSelection = this.props.view_store.selectedTorrents.length > 1;
+    const selectedTorrent = this.props.torrents_store.getByIds(this.props.view_store.selectedTorrents)[0];
+    const isPaused = selectedTorrent && selectedTorrent.status === Torrent.STATUS_STOPPED;
 
     return (
       <div styleName='toolbar'>
@@ -63,10 +69,10 @@ class ActionToolbar extends Component {
           <img src={toolbarCloseImage} title='Remove Selected Torrents' alt='Remove Selected Torrents'/>
         </button>
         <span styleName='separator'></span>
-        <button styleName='button' onClick={this.onStart} disabled={!isSelected}>
+        <button styleName='button' onClick={this.onStart} disabled={!isSelected && !isPaused && !multipleSelection}>
           <img src={toolbarStartImage} title='Start Selected Torrents' alt='Start Selected Torrents'/>
         </button>
-        <button styleName='button' onClick={this.onPause} disabled={!isSelected}>
+        <button styleName='button' onClick={this.onPause} disabled={!isSelected && !isPaused && !multipleSelection}>
           <img src={toolbarPauseImage} title='Pause Selected Torrents' alt='Pause Selected Torrents'/>
         </button>
         <span styleName='separator'></span>
@@ -87,4 +93,4 @@ class ActionToolbar extends Component {
   }
 }
 
-export default inject('view_store')(observer(ActionToolbar));
+export default ActionToolbar;
