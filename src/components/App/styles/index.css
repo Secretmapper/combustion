@@ -24,4 +24,5 @@
   overflow-y: scroll;
   display: flex;
   flex-direction: row;
+  background: #fffce8;
 }
