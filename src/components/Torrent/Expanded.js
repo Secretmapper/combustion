@@ -1,19 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { findDOMNode } from 'react-dom'
 import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
 
+import PureComponent from 'components/PureComponent';
 import ContextMenu from 'components/ContextMenu';
 import ProgressBar from './ProgressBar';
 
-import { getPeerDetails } from './services/formatters';
+import { getPeerDetails, getProgressDetails } from './services';
 
 import styles from './styles/index.css';
 
 @inject('view_store')
 @observer
 @CSSModules(styles)
-class Expanded extends Component {
+class Expanded extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -99,7 +100,7 @@ class Expanded extends Component {
             <button></button>
           </div>
           <div styleName='progressDetails'>
-            2.24 GB, uploaded 2.25 GB (Ratio 1.00)
+            {getProgressDetails(torrent)}
           </div>
           {this.renderContextMenu()}
       </div>

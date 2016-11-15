@@ -126,7 +126,7 @@ function formatError(torrent) {
   }
 }
 
-export function getPeerDetails(torrent) {
+export default function getPeerDetails(torrent) {
   if (torrent.hasErrors) {
     return formatError(torrent);
   };
