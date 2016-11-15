@@ -22,9 +22,29 @@ function getPercentage(torrent) {
   return 100;
 }
 
+function getProgressStyles(torrent) {
+  let barStyle = '';
+
+  if (torrent.isStopped) {
+    barStyle = styles.paused;
+  } else if (torrent.isDownloadingQueued) {
+    barStyle = styles.leechingQueued;
+  } else if (torrent.needsMetaData) {
+    barStyle = styles.magnet;
+  } else if (torrent.isDownloading) {
+    barStyle = styles.leeching;
+  } else if (torrent.isSeedingQueued) {
+    barStyle = styles.seedingQueued;
+  } else if (torrent.isSeeding) {
+    barStyle = styles.seeding;
+  }
+
+  return `${styles.progressBar} ${barStyle}`;
+}
+
 function ProgressBar({ torrent }) {
   return (
-    <div styleName='torrentProgressBar'>
+    <div className={getProgressStyles(torrent)}>
       <progress max='100' value={getPercentage(torrent)} />
     </div>
   );

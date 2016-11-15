@@ -52,9 +52,16 @@ class Torrent {
     return this.status === Torrent.STATUS_DOWNLOAD;
   }
 
+  @computed get isSeedingQueued() {
+    return this.status === Torrent.STATUS_SEED_WAIT;
+  }
+
+  @computed get isDownloadingQueued() {
+    return this.status === Torrent.STATUS_DOWNLOAD_WAIT;
+  }
+
   @computed get isQueued() {
-    return this.status === Torrent.STATUS_DOWNLOAD_WAIT ||
-           this.status === Torrent.STATUS_SEED_WAIT;
+    return this.isDownloadingQueued || this.isSeedingQueued;
   }
 
   @computed get isDone() {

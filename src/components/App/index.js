@@ -8,7 +8,6 @@ import Inspector from 'components/Inspector';
 import ActionToolbar from 'components/ActionToolbar';
 import FilterToolbar from 'components/FilterToolbar';
 import StatusToolbar from 'components/StatusToolbar';
-import OpenDialog from 'components/OpenDialog';
 
 import styles from './styles/index.css';
 
@@ -18,10 +17,6 @@ function renderDevTools() {
   setLogEnabled(true);
 
   return <DevTools position={{bottom: 10, right: 10}} />;
-}
-
-function renderOpenDialog() {
-  return <OpenDialog />;
 }
 
 /**
@@ -61,7 +56,6 @@ class App extends Component {
         <footer>
           <StatusToolbar/>
         </footer>
-        {renderOpenDialog()}
         {renderDevTools()}
       </div>
     )
