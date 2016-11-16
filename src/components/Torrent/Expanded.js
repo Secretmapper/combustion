@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom'
 import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
 
-import PureComponent from 'components/PureComponent';
 import ContextMenu from 'components/ContextMenu';
 import ProgressBar from './ProgressBar';
 
@@ -14,7 +13,7 @@ import styles from './styles/index.css';
 @inject('view_store')
 @observer
 @CSSModules(styles)
-class Expanded extends PureComponent {
+class Expanded extends Component {
   constructor(props) {
     super(props);
 
