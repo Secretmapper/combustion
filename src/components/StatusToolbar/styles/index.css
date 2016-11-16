@@ -1,6 +1,6 @@
 .toolbar {
   background: #ccc;
-  padding: 5px;
+  padding: 2px;
 
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -11,15 +11,35 @@
   -webkit-box-align: center;
 
   align-items: center;
+
+  border-bottom: 1px solid #AAA;
+  background-color: #cccccc;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#dddddd), to(#bbbbbb));
+  background-image: -webkit-linear-gradient(top, #dddddd, #bbbbbb);
+  background-image: -moz-linear-gradient(top, #dddddd, #bbbbbb);
+  background-image: -ms-linear-gradient(top, #dddddd, #bbbbbb);
+  background-image: -o-linear-gradient(top, #dddddd, #bbbbbb);
+  background-image: linear-gradient(top, #dddddd, #bbbbbb);
+
+  border-top: 1px solid #666;
 }
 
 .button {
   border: 1px solid #888;
-  border-radius: 25px;
+  border-radius: 5px;
   background: transparent;
-  padding: 10px;
+  padding: 2px 10px;
   outline: none;
   margin-right: 5px;
+  height: 20px;
+
+  background-color: #dddddd;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#bbbbbb));
+  background-image: -webkit-linear-gradient(top, #ffffff, #bbbbbb);
+  background-image: -moz-linear-gradient(top, #ffffff, #bbbbbb);
+  background-image: -ms-linear-gradient(top, #ffffff, #bbbbbb);
+  background-image: -o-linear-gradient(top, #ffffff, #bbbbbb);
+  background-image: linear-gradient(top, #ffffff, #bbbbbb);
 }
 
 .button:hover {
