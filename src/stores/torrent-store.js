@@ -23,7 +23,7 @@ class TorrentStore {
     this.rpc = rpc;
   }
 
-  @action getAll() {
+  @action getAll(torrentIds) {
     const data = {
       fields: ['id', 'addedDate', 'name', 'totalSize', 'error', 'errorString',
         'eta', 'isFinished', 'isStalled', 'leftUntilDone', 'metadataPercentComplete',
@@ -33,11 +33,31 @@ class TorrentStore {
         'downloadDir', 'uploadedEver', 'uploadRatio', 'webseedsSendingToUs'
       ]
     };
+
+    if (torrentIds) {
+      data['ids'] = torrentIds;
+    }
+
     return this.rpc.sendRequest('torrent-get', data).then(action((response) => {
       response.json().then(action((result) => {
         this.torrents.replace(
           result.arguments.torrents.map((torrent) => new Torrent(torrent))
         );
+      }));
+    }));
+  }
+
+  @action start(torrentIds) {
+    const data = {
+      ids: torrentIds,
+    };
+
+    return this.rpc.sendRequest('torrent-start', data).then(action((response) => {
+      response.json().then(action((result) => {
+        // TODO: Review!
+        if (result.result.success !== 'success') return;
+
+        this.getAll(torrentIds);
       }));
     }));
   }

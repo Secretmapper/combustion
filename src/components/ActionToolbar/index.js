@@ -23,6 +23,7 @@ class ActionToolbar extends Component {
     super(props);
 
     this.onOpen = this.onOpen.bind(this);
+    this.onStart = this.onStart.bind(this);
     this.onToggleInspector = this.onToggleInspector.bind(this);
   }
 
@@ -38,8 +39,8 @@ class ActionToolbar extends Component {
     alert('pause');
   }
 
-  onStart(){
-    alert('start');
+  onStart() {
+    this.props.torrents_store.start(this.props.view_store.selectedTorrents);
   }
 
   onPauseAll(){
@@ -58,7 +59,7 @@ class ActionToolbar extends Component {
     const isSelected = this.props.view_store.selectedTorrents.length > 0;
     const multipleSelection = this.props.view_store.selectedTorrents.length > 1;
     const selectedTorrent = this.props.torrents_store.getByIds(this.props.view_store.selectedTorrents)[0];
-    const isPaused = selectedTorrent && selectedTorrent.status === Torrent.STATUS_STOPPED;
+    const isPaused = selectedTorrent && selectedTorrent.isStopped;
 
     return (
       <div styleName='toolbar'>
