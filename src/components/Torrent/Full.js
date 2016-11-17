@@ -14,7 +14,7 @@ import styles from './styles/index.css';
 @inject('view_store')
 @observer
 @CSSModules(styles)
-class Expanded extends Component {
+class Full extends Component {
   constructor(props) {
     super(props);
 
@@ -80,4 +80,4 @@ class Expanded extends Component {
   }
 }
 
-export default Expanded;
+export default Full;

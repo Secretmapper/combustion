@@ -3,7 +3,7 @@ import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
 
-import { Compact, Expanded } from 'components/Torrent';
+import { Compact, Full } from 'components/Torrent';
 
 import styles from './styles/index.css';
 
@@ -25,7 +25,7 @@ class TorrentList extends Component {
       const lastSelectedTorrentIndex = torrentIds.indexOf(view_store.lastSelectedTorrent);
       const [lower, upper] = [lastSelectedTorrentIndex, selectedTorrentIndex].sort();
       const selectedIds = torrentIds.filter((_, index) => index >= lower && index <= upper);
-      
+
       this.props.view_store.addSelectedRange(id, selectedIds);
       return;
     }
@@ -51,7 +51,7 @@ class TorrentList extends Component {
             className += ` ${styles.torrentRowCompact}`;
           }
 
-          const Torrent = this.props.view_store.compact ? Compact : Expanded;
+          const Torrent = this.props.view_store.compact ? Compact : Full;
 
           return (
             <li key={index} className={className} onClick={(event) => this.onClick(event, torrent.id)}>
