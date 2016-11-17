@@ -4,6 +4,8 @@ import { inject, observer } from 'mobx-react';
 
 import ProgressBar from './ProgressBar';
 
+import { getPeerDetailsShort } from './services';
+
 import styles from './styles/index.css';
 
 @inject('view_store')
@@ -19,7 +21,7 @@ class Compact extends Component {
           {torrent.name}
         </div>
         <div styleName='detailsCompact'>
-          Ratio: 0.41, ↑ 50 kB/s
+          {getPeerDetailsShort(torrent)}
         </div>
         <div styleName='progressBarRowCompact'>
           <ProgressBar torrent={torrent} />
