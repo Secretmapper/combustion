@@ -2,6 +2,7 @@ import {observable, action} from 'mobx';
 
 class ViewStore {
   @observable currentFilter = 'all';
+  // TODO: Rename to selectedTorrentIds
   @observable selectedTorrents = [];
   @observable lastSelectedTorrent = null;
   @observable compact = false;

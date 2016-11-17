@@ -25,8 +25,8 @@ class Inspector extends Component {
     return (
       <div>
         <h2>Activity</h2>
-        {activity.map((activity) => (
-          <div styleName='row'>
+        {activity.map((activity, index) => (
+          <div key={index} styleName='row'>
             <div styleName='key'>{activity.label}:</div>
             <div styleName='value'>{activity.value}</div>
           </div>
@@ -48,8 +48,8 @@ class Inspector extends Component {
     return (
       <div>
         <h2>Details</h2>
-        {detail.map((detail) => (
-          <div styleName='row'>
+        {detail.map((detail, index) => (
+          <div key={index} styleName='row'>
             <div styleName='key'>{detail.label}:</div>
             <div styleName='value'>{detail.value}</div>
           </div>
