@@ -4,7 +4,7 @@ import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
 
-import ContextMenu from 'components/ContextMenu';
+import TorrentContextMenu from 'components/TorrentContextMenu';
 import ProgressBar from './ProgressBar';
 
 import { getPeerDetails, getProgressDetails } from './services';
@@ -43,36 +43,12 @@ class Expanded extends Component {
 
     return (
       <div ref='target' style={{position: 'absolute', visibility: 'hidden', ...position, left: position.left + 50}}>
-        <ContextMenu
+        <TorrentContextMenu
           show={showContextMenu}
           container={this}
-          target={() => {
-            return findDOMNode(this.refs.target);
-          }}
+          target={() => findDOMNode(this.refs.target)}
           onHide={() => this.setState({showContextMenu: false})}
-        >
-          <ul styleName='torrentMenu'>
-            <li styleName='torrentMenuItem'>Pause</li>
-            <li styleName='torrentMenuItem'>Resume</li>
-            <li styleName='torrentMenuItem'>Resume Now</li>
-            <li styleName='torrentMenuSeparator' />
-            <li styleName='torrentMenuItem'>Move to Top</li>
-            <li styleName='torrentMenuItem'>Move Up</li>
-            <li styleName='torrentMenuItem'>Move Down</li>
-            <li styleName='torrentMenuItem'>Move to Bottom</li>
-            <li styleName='torrentMenuSeparator' />
-            <li styleName='torrentMenuItem'>Remove From List...</li>
-            <li styleName='torrentMenuItem'>Trash Data & Remove From List...</li>
-            <li styleName='torrentMenuSeparator' />
-            <li styleName='torrentMenuItem'>Verify Local Data</li>
-            <li styleName='torrentMenuItem'>Set Location...</li>
-            <li styleName='torrentMenuSeparator' />
-            <li styleName='torrentMenuItem'>Ask tracker for more peers</li>
-            <li styleName='torrentMenuSeparator' />
-            <li styleName='torrentMenuItem'>Select All</li>
-            <li styleName='torrentMenuItem'>Deselect All</li>
-          </ul>
-        </ContextMenu>
+        />
       </div>
     );
   }

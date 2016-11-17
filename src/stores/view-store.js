@@ -48,6 +48,13 @@ class ViewStore {
     this.lastSelectedTorrent = id;
   }
 
+  @action selectTorrents(torrentIds) {
+    this.selectedTorrents = torrentIds;
+  }
+
+  // TODO: Does this method belong to view store? If we're adding more logic to
+  // selectedTorrents array, maybe it's a good idea to create an observable
+  // TorrentCollection
   isTorrentSelected(id) {
     return this.selectedTorrents.includes(id);
   }
