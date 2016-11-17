@@ -28,7 +28,7 @@ class ActionToolbar extends Component {
   }
 
   @autobind onPause(){
-    alert('pause');
+    this.props.torrents_store.stop(this.props.view_store.selectedTorrents);
   }
 
   @autobind onStart() {
@@ -36,11 +36,11 @@ class ActionToolbar extends Component {
   }
 
   @autobind onPauseAll(){
-    alert('pause all');
+    this.props.torrents_store.stop(this.props.torrents_store.torrents.map((torrent) => torrent.id));
   }
 
   @autobind onStartAll(){
-    alert('start all');
+    this.props.torrents_store.start(this.props.torrents_store.torrents.map((torrent) => torrent.id));
   }
 
   @autobind onToggleInspector(){

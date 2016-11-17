@@ -48,7 +48,7 @@ class ViewStore {
   }
 
   isTorrentSelected(id) {
-    return this.selectedTorrents.indexOf(id) !== -1;
+    return this.selectedTorrents.includes(id);
   }
 }
 

@@ -62,6 +62,21 @@ class TorrentStore {
     }));
   }
 
+  @action stop(torrentIds) {
+    const data = {
+      ids: torrentIds,
+    };
+
+    return this.rpc.sendRequest('torrent-stop', data).then(action((response) => {
+      response.json().then(action((result) => {
+        // TODO: Review!
+        if (result.result.success !== 'success') return;
+
+        this.getAll(torrentIds);
+      }));
+    }));
+  }
+
   @computed get trackers() {
     const trackers = this.torrents.reduce((memo, torrent) => {
       memo = memo.concat(extractDomains(torrent));
@@ -76,7 +91,7 @@ class TorrentStore {
 
     return this.torrents.filter((torrent) => {
       if (this.statusFilter && this.statusFilter !== torrent.status) return false;
-      if (this.trackerFilter && extractDomains(torrent).indexOf(this.trackerFilter) === -1) return false;
+      if (this.trackerFilter && !extractDomains(torrent).includes(this.trackerFilter)) return false;
       if (this.textFilter && !regexp.test(torrent.name)) return false;
 
       return true;
@@ -98,9 +113,7 @@ class TorrentStore {
   }
 
   getByIds(ids) {
-    return this.torrents.filter((torrent) => {
-      return ids.indexOf(torrent.id) !== -1;
-    });
+    return this.torrents.filter((torrent) => ids.includes(torrent.id));
   }
 }
 
