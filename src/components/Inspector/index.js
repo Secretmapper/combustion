@@ -1,6 +1,7 @@
 import React, { Component} from 'react';
 import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
+import autobind from 'autobind-decorator';
 
 import styles from './styles/index.css';
 
@@ -8,15 +9,7 @@ import styles from './styles/index.css';
 @observer
 @CSSModules(styles)
 class Inspector extends Component {
-  constructor(props) {
-    super(props);
-
-    this.renderInspector = this.renderInspector.bind(this);
-    this.renderActivity = this.renderActivity.bind(this);
-    this.renderDetails = this.renderDetails.bind(this);
-  }
-
-  renderActivity(torrent) {
+  @autobind renderActivity(torrent) {
     const activity = [
       {value: torrent.totalSize, label: 'Have'},
       {value: 12, label: 'Availability'},
@@ -42,7 +35,7 @@ class Inspector extends Component {
     );
   }
 
-  renderDetails(torrent) {
+  @autobind renderDetails(torrent) {
     const detail = [
       {value: 11, label: 'Size'},
       {value: torrent.downloadDir, label: 'Location'},
@@ -65,7 +58,7 @@ class Inspector extends Component {
     );
   }
 
-  renderInspector() {
+  @autobind renderInspector() {
     const torrentId = this.props.view_store.selectedTorrents[0]; //TODO: Fix no selection
     const torrent = this.props.torrents_store.torrents.find((torrent) => torrent.id === torrentId);
 

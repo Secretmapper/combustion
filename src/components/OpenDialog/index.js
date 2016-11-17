@@ -1,6 +1,7 @@
 import React, { Component} from 'react';
 import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
+import autobind from 'autobind-decorator';
 
 import Dialog from '../Dialog'
 import logoImage from '../../images/logo.png';
@@ -11,24 +12,16 @@ import styles from './styles/index.css';
 @observer
 @CSSModules(styles)
 class OpenDialog extends Component {
-  constructor(props) {
-    super(props);
-
-    this.onUpload = this.onUpload.bind(this);
-    this.onCancel = this.onCancel.bind(this);
-    this.onHide = this.onHide.bind(this);
-  }
-
-  onUpload(event) {
+  @autobind onUpload(event) {
     event.preventDefault();
   }
 
-  onCancel(event) {
+  @autobind onCancel(event) {
     event.preventDefault();
     this.props.view_store.toggleOpenDialog();
   }
 
-  onHide() {
+  @autobind onHide() {
     this.props.view_store.toggleOpenDialog();
   }
 

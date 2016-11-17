@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom'
 import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
+import autobind from 'autobind-decorator';
 
 import ContextMenu from 'components/ContextMenu';
 import ProgressBar from './ProgressBar';
@@ -24,24 +25,20 @@ class Expanded extends Component {
         top: 0,
       },
     };
-
-    this.onContextMenu = this.onContextMenu.bind(this);
-    this.toggleContextMenu = this.toggleContextMenu.bind(this);
-    this.renderContextMenu = this.renderContextMenu.bind(this);
   }
 
-  onContextMenu(event) {
+  @autobind onContextMenu(event) {
     const { clientX, clientY } = event;
 
     event.preventDefault();
     this.toggleContextMenu({left: clientX, top: clientY});
   }
 
-  toggleContextMenu(position) {
+  @autobind toggleContextMenu(position) {
     this.setState({showContextMenu: true, position});
   }
 
-  renderContextMenu() {
+  @autobind renderContextMenu() {
     const { position, showContextMenu } = this.state;
 
     return (

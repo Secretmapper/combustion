@@ -1,6 +1,7 @@
 import React, { Component} from 'react';
 import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
+import autobind from 'autobind-decorator';
 
 import toolbarFolderImage from '../../images/toolbar-folder.png';
 import toolbarCloseImage from '../../images/toolbar-close.png';
@@ -11,7 +12,6 @@ import toolbarStartAllImage from '../../images/toolbar-start-all.png';
 import toolbarInfoImage from '../../images/toolbar-info.png';
 
 import OpenDialog from 'components/OpenDialog';
-import Torrent from 'stores/torrent';
 
 import styles from './styles/index.css';
 
@@ -19,39 +19,31 @@ import styles from './styles/index.css';
 @observer
 @CSSModules(styles)
 class ActionToolbar extends Component {
-  constructor(props) {
-    super(props);
-
-    this.onOpen = this.onOpen.bind(this);
-    this.onStart = this.onStart.bind(this);
-    this.onToggleInspector = this.onToggleInspector.bind(this);
-  }
-
-  onOpen() {
+  @autobind onOpen() {
     this.props.view_store.toggleOpenDialog();
   }
 
-  onRemove(){
+  @autobind onRemove(){
     alert('remove');
   }
 
-  onPause(){
+  @autobind onPause(){
     alert('pause');
   }
 
-  onStart() {
+  @autobind onStart() {
     this.props.torrents_store.start(this.props.view_store.selectedTorrents);
   }
 
-  onPauseAll(){
+  @autobind onPauseAll(){
     alert('pause all');
   }
 
-  onStartAll(){
+  @autobind onStartAll(){
     alert('start all');
   }
 
-  onToggleInspector(){
+  @autobind onToggleInspector(){
     this.props.view_store.toggleInspector();
   }
 

@@ -1,6 +1,7 @@
 import React, { Component} from 'react';
 import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
+import autobind from 'autobind-decorator';
 
 import Torrent from 'stores/torrent';
 
@@ -11,23 +12,15 @@ import styles from './styles/index.css';
 
 @CSSModules(styles)
 class FilterToolbar extends Component {
-  constructor(props) {
-    super(props);
-
-    this.onChangeFilterState = this.onChangeFilterState.bind(this);
-    this.onChangeFilterTracker = this.onChangeFilterTracker.bind(this);
-    this.onChangeFilterText = this.onChangeFilterText.bind(this);
-  }
-
-  onChangeFilterState(event) {
+  @autobind onChangeFilterState(event) {
     this.props.torrents_store.setStatusFilter(+event.target.value);
   }
 
-  onChangeFilterTracker(event) {
+  @autobind onChangeFilterTracker(event) {
     this.props.torrents_store.setTrackerFilter(event.target.value);
   }
 
-  onChangeFilterText(event) {
+  @autobind onChangeFilterText(event) {
     this.props.torrents_store.setTextFilter(event.target.value);
   }
 

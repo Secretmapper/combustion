@@ -1,6 +1,7 @@
 import React, { Component} from 'react';
 import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
+import autobind from 'autobind-decorator';
 
 import { Compact, Expanded } from 'components/Torrent';
 
@@ -10,26 +11,22 @@ import styles from './styles/index.css';
 @observer
 @CSSModules(styles)
 class TorrentList extends Component {
-  constructor(props) {
-    super(props);
-
-    this.onClick = this.onClick.bind(this);
-  }
-
-  onClick(event, id) {
+  @autobind onClick(event, id) {
     if (event.ctrlKey) {
       this.props.view_store.toggleSelected(id);
       return;
     }
 
     if (event.shiftKey) {
-      const view_store = this.props.view_store;
-      const torrents = this.props.torrents_store.torrents;
-      const lastPosition = torrents.findIndex((torrent) => torrent.id === view_store.lastSelectedTorrent);
-      const position = torrents.findIndex((torrent) => torrent.id === id);
-      const [lower, upper] = [lastPosition, position].sort();
-      const range = torrents.map((torrent) => torrent.id).filter((torrentId, index) => index >= lower && index <= upper);
-      this.props.view_store.addSelectedRange(id, range);
+      const { view_store, torrents_store } = this.props;
+
+      const torrentIds = torrents_store.filteredTorrents.map((torrent) => torrent.id);
+      const selectedTorrentIndex = torrentIds.indexOf(id);
+      const lastSelectedTorrentIndex = torrentIds.indexOf(view_store.lastSelectedTorrent);
+      const [lower, upper] = [lastSelectedTorrentIndex, selectedTorrentIndex].sort();
+      const selectedIds = torrentIds.filter((_, index) => index >= lower && index <= upper);
+      
+      this.props.view_store.addSelectedRange(id, selectedIds);
       return;
     }
 

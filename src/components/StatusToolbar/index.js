@@ -1,6 +1,7 @@
 import React, { Component} from 'react';
 import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
+import autobind from 'autobind-decorator';
 
 import settingsImage from '../../images/settings.png';
 import preferencesImage from '../../images/wrench.png';
@@ -13,13 +14,7 @@ import styles from './styles/index.css';
 @observer
 @CSSModules(styles)
 class StatusToolbar extends Component {
-  constructor(props) {
-    super(props);
-
-    this.onToggleCompact = this.onToggleCompact.bind(this);
-  }
-
-  onToggleCompact() {
+  @autobind onToggleCompact() {
     this.props.view_store.toggleCompact();
   }
 
