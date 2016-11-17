@@ -2,8 +2,6 @@ import {observable, action, computed} from 'mobx';
 
 import Torrent from 'stores/torrent';
 
-import rpc from 'util/rpc';
-
 const domainRegExp = /([a-zA-Z0-9]+\.)?([a-zA-Z0-9][a-zA-Z0-9-]+)\.[a-zA-Z]{2,6}/i;
 
 const extractDomain = (url) => {
@@ -21,7 +19,11 @@ class TorrentStore {
   @observable trackerFilter = '';
   @observable textFilter = '';
 
-  @action getAll(sessionId) {
+  constructor(rpc) {
+    this.rpc = rpc;
+  }
+
+  @action getAll() {
     const data = {
       fields: ['id', 'addedDate', 'name', 'totalSize', 'error', 'errorString',
         'eta', 'isFinished', 'isStalled', 'leftUntilDone', 'metadataPercentComplete',
@@ -31,7 +33,7 @@ class TorrentStore {
         'downloadDir', 'uploadedEver', 'uploadRatio', 'webseedsSendingToUs'
       ]
     };
-    return rpc('torrent-get', sessionId, data).then(action((response) => {
+    return this.rpc.sendRequest('torrent-get', data).then(action((response) => {
       response.json().then(action((result) => {
         this.torrents.replace(
           result.arguments.torrents.map((torrent) => new Torrent(torrent))

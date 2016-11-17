@@ -14,9 +14,9 @@ import styles from './styles/index.css';
 function renderDevTools() {
   if (process.env.NODE_ENV !== 'development') return null;
 
-  setLogEnabled(true);
+  setLogEnabled(false);
 
-  return <DevTools position={{bottom: 10, right: 10}} />;
+  return <DevTools position={{top: 0, right: 0}} />;
 }
 
 /**
@@ -28,12 +28,11 @@ function renderDevTools() {
 class App extends Component {
   componentDidMount() {
     this.props.session_store.getSession().then(() => {
-      const sessionId = this.props.session_store.sessionId;
-      this.props.stats_store.getStats(sessionId);
-      this.props.torrents_store.getAll(sessionId);
+      this.props.stats_store.getStats();
+      this.props.torrents_store.getAll();
 
       this.interval = setInterval(() => {
-        this.props.torrents_store.getAll(sessionId);
+        this.props.torrents_store.getAll();
       }, 5000);
     });
   }
