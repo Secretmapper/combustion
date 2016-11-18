@@ -10,17 +10,26 @@ import arrowDownImage from '../../images/arrow-down.png';
 
 import styles from './styles/index.css';
 
+@inject('view_store', 'stats_store', 'torrents_store')
+@observer
 @CSSModules(styles)
 class FilterToolbar extends Component {
+  @autobind deselectAllTorrents() {
+    this.props.view_store.selectTorrents([]);
+  }
+
   @autobind onChangeFilterState(event) {
+    this.deselectAllTorrents();
     this.props.torrents_store.setStatusFilter(+event.target.value);
   }
 
   @autobind onChangeFilterTracker(event) {
+    this.deselectAllTorrents();
     this.props.torrents_store.setTrackerFilter(event.target.value);
   }
 
   @autobind onChangeFilterText(event) {
+    this.deselectAllTorrents();
     this.props.torrents_store.setTextFilter(event.target.value);
   }
 
@@ -74,4 +83,4 @@ class FilterToolbar extends Component {
   }
 }
 
-export default inject('view_store', 'stats_store', 'torrents_store')(observer(FilterToolbar));
+export default FilterToolbar;
