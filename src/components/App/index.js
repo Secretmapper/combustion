@@ -59,7 +59,6 @@ class App extends Component {
           <StatusToolbar/>
         </footer>
 
-        // Dialogs
         <OpenDialog />
         <PreferencesDialog />
 

@@ -5,7 +5,7 @@ Math.ratio = function(numerator, denominator) {
   var result = Math.floor(100 * numerator / denominator) / 100;
 
   // check for special cases
-  if (result==Number.POSITIVE_INFINITY || result==Number.NEGATIVE_INFINITY) result = -2;
+  if (result === Number.POSITIVE_INFINITY || result === Number.NEGATIVE_INFINITY) result = -2;
   else if (isNaN(result)) result = -1;
 
   return result;
@@ -17,10 +17,6 @@ Math.ratio = function(numerator, denominator) {
 Number.prototype.toTruncFixed = function(place) {
   var ret = Math.floor(this * Math.pow (10, place)) / Math.pow(10, place);
   return ret.toFixed(place);
-}
-
-Number.prototype.toStringWithCommas = function() {
-  return this.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",");
 }
 
 /*

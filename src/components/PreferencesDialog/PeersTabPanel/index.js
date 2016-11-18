@@ -1,8 +1,7 @@
 import React, { Component} from 'react';
-import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
-import autobind from 'autobind-decorator';
 
+@inject('view_store')
 @observer
 class PeersTabPanel extends Component {
   render() {
