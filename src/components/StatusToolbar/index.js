@@ -45,7 +45,7 @@ class StatusToolbar extends Component {
 
   @autobind toggleContextMenu(position) {
     this.props.view_store.toggleSettingsContextMenu();
-    this.setState({ position });
+    this.setState({position});
   }
 
   @autobind renderContextMenu() {
@@ -57,7 +57,7 @@ class StatusToolbar extends Component {
           show={this.props.view_store.isSettingsContextMenuShown}
           container={this}
           target={() => findDOMNode(this.refs.target)}
-          onHide={() => this.setState({showContextMenu: false})}
+          onHide={() => this.props.view_store.toggleSettingsContextMenu()}
         />
       </div>
     );

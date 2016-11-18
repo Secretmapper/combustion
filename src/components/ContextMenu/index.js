@@ -8,7 +8,7 @@ function ContextMenu(props) {
   return (
     <Overlay
       show={props.show}
-      placement='top'
+      placement={props.placement}
       target={props.target}
       shouldUpdatePosition={true}
       rootClose={true}
