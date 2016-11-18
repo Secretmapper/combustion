@@ -1,4 +1,5 @@
 import React, { Component} from 'react';
+import { findDOMNode } from 'react-dom'
 import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
@@ -8,18 +9,58 @@ import preferencesImage from '../../images/wrench.png';
 import turtleImage from '../../images/turtle.png';
 import compactImage from '../../images/compact.png';
 
+import SettingsContextMenu from 'components/SettingsContextMenu';
+
 import styles from './styles/index.css';
 
 @inject('view_store', 'session_store')
 @observer
 @CSSModules(styles)
 class StatusToolbar extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      position: {
+        left: 0,
+        top: 0,
+      },
+    };
+  }
+
   @autobind onTogglePreferences() {
     this.props.view_store.togglePreferencesDialog();
   }
 
   @autobind onToggleCompact() {
     this.props.view_store.toggleCompact();
+  }
+
+  @autobind onToggleSettings(event) {
+    const { clientX, clientY } = event;
+
+    event.preventDefault();
+    this.toggleContextMenu({left: clientX, top: clientY});
+  }
+
+  @autobind toggleContextMenu(position) {
+    this.props.view_store.toggleSettingsContextMenu();
+    this.setState({ position });
+  }
+
+  @autobind renderContextMenu() {
+    const { position } = this.state;
+
+    return (
+      <div ref='target' style={{position: 'absolute', visibility: 'hidden', ...position, left: position.left + 50}}>
+        <SettingsContextMenu
+          show={this.props.view_store.isSettingsContextMenuShown}
+          container={this}
+          target={() => findDOMNode(this.refs.target)}
+          onHide={() => this.setState({showContextMenu: false})}
+        />
+      </div>
+    );
   }
 
   render() {
@@ -36,7 +77,7 @@ class StatusToolbar extends Component {
 
     return (
       <div styleName='toolbar'>
-        <button styleName='button'>
+        <button styleName='button' onClick={this.onToggleSettings}>
           <img src={settingsImage} alt='Settings'/>
         </button>
         <button styleName='button' onClick={this.onTogglePreferences}>
@@ -48,6 +89,7 @@ class StatusToolbar extends Component {
         <button className={compactClassName} onClick={this.onToggleCompact}>
           <img src={compactImage} alt='Compact view'/>
         </button>
+        {this.renderContextMenu()}
       </div>
     );
   }

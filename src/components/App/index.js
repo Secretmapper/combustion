@@ -11,6 +11,9 @@ import StatusToolbar from 'components/StatusToolbar';
 
 import OpenDialog from 'components/OpenDialog';
 import PreferencesDialog from 'components/PreferencesDialog';
+import ConnectionDialog from 'components/ConnectionDialog';
+import StatisticsDialog from 'components/StatisticsDialog';
+import AboutDialog from 'components/AboutDialog';
 
 import styles from './styles/index.css';
 
@@ -61,6 +64,9 @@ class App extends Component {
 
         <OpenDialog />
         <PreferencesDialog />
+        <ConnectionDialog />
+        <StatisticsDialog />
+        <AboutDialog />
 
         {renderDevTools()}
       </div>

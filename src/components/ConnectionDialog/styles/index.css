@@ -1,0 +1,19 @@
+.body {
+  display: flex;
+  padding: 20px;
+}
+
+.body h2 {
+  font-size: 1.2em;
+  color: black;
+}
+
+.logo {
+  width: 64px;
+  height: 64px;
+  margin: 0px 20px;
+}
+
+.form {
+  flex: 1;
+}

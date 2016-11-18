@@ -6,16 +6,43 @@ class ViewStore {
   @observable selectedTorrents = [];
   @observable lastSelectedTorrent = null;
   @observable compact = false;
-  @observable isPreferencesDialogShown = false;
+
+  @observable isSettingsContextMenuShown = false;
+  @observable isTorrentContextMenuShown = false;
+
   @observable isOpenDialogShown = false;
+  @observable isPreferencesDialogShown = false;
+  @observable isConnectionDialogShown = false;
+  @observable isStatisticsDialogShown = false;
+  @observable isAboutDialogShown = false;
   @observable isInspectorShown = false;
+
+  @action toggleSettingsContextMenu() {
+    this.isSettingsContextMenuShown = !this.isSettingsContextMenuShown;
+  }
+
+  @action toggleTorrentContextMenu() {
+    this.isTorrentContextMenuShown = !this.isTorrentContextMenuShown;
+  }
+
+  @action toggleOpenDialog() {
+    this.isOpenDialogShown = !this.isOpenDialogShown;
+  }
 
   @action togglePreferencesDialog() {
     this.isPreferencesDialogShown = !this.isPreferencesDialogShown;
   }
 
-  @action toggleOpenDialog() {
-    this.isOpenDialogShown = !this.isOpenDialogShown;
+  @action toggleConnectionDialog() {
+    this.isConnectionDialogShown = !this.isConnectionDialogShown;
+  }
+
+  @action toggleStatisticsDialog() {
+    this.isStatisticsDialogShown = !this.isStatisticsDialogShown;
+  }
+
+  @action toggleAboutDialog() {
+    this.isAboutDialogShown = !this.isAboutDialogShown;
   }
 
   @action toggleInspector() {

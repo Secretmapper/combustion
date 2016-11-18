@@ -16,14 +16,6 @@
   padding: 3px 10px 3px 20px;
 }
 
-/* TODO: Remove this class */
-.torrentMenuItemNotCompleted {
-  margin: 0px;
-  color: rgb(170, 170, 170);
-  cursor: default;
-  padding: 3px 10px 3px 20px;
-}
-
 .torrentMenuItem:hover {
   color: rgb(255, 255, 255);
   background-color: rgb(34, 68, 238);

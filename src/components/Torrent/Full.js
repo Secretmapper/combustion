@@ -35,16 +35,17 @@ class Full extends Component {
   }
 
   @autobind toggleContextMenu(position) {
-    this.setState({showContextMenu: true, position});
+    this.props.view_store.toggleTorrentContextMenu();
+    this.setState({ position });
   }
 
   @autobind renderContextMenu() {
-    const { position, showContextMenu } = this.state;
+    const { position } = this.state;
 
     return (
       <div ref='target' style={{position: 'absolute', visibility: 'hidden', ...position, left: position.left + 50}}>
         <TorrentContextMenu
-          show={showContextMenu}
+          show={this.props.view_store.isTorrentContextMenuShown}
           container={this}
           target={() => findDOMNode(this.refs.target)}
           onHide={() => this.setState({showContextMenu: false})}

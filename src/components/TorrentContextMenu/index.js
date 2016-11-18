@@ -18,6 +18,10 @@ class TorrentContextMenu extends Component {
     this.props.view_store.selectTorrents([]);
   }
 
+  @autobind onToggleContextMenu() {
+    this.props.view_store.toggleTorrentContextMenu();
+  }
+
   render() {
     return (
       <ContextMenu
@@ -26,23 +30,23 @@ class TorrentContextMenu extends Component {
         target={this.props.target}
         onHide={this.props.onHide}
       >
-        <ul styleName='torrentMenu'>
-          <li styleName='torrentMenuItem'>Pause</li>
-          <li styleName='torrentMenuItem'>Resume</li>
-          <li styleName='torrentMenuItem'>Resume Now</li>
+        <ul styleName='torrentMenu' onClick={this.onToggleContextMenu}>
+          <li styleName='torrentMenuItemNotCompleted'>Pause</li>
+          <li styleName='torrentMenuItemNotCompleted'>Resume</li>
+          <li styleName='torrentMenuItemNotCompleted'>Resume Now</li>
           <li styleName='torrentMenuSeparator' />
-          <li styleName='torrentMenuItem'>Move to Top</li>
-          <li styleName='torrentMenuItem'>Move Up</li>
-          <li styleName='torrentMenuItem'>Move Down</li>
-          <li styleName='torrentMenuItem'>Move to Bottom</li>
+          <li styleName='torrentMenuItemNotCompleted'>Move to Top</li>
+          <li styleName='torrentMenuItemNotCompleted'>Move Up</li>
+          <li styleName='torrentMenuItemNotCompleted'>Move Down</li>
+          <li styleName='torrentMenuItemNotCompleted'>Move to Bottom</li>
           <li styleName='torrentMenuSeparator' />
-          <li styleName='torrentMenuItem'>Remove From List...</li>
-          <li styleName='torrentMenuItem'>Trash Data & Remove From List...</li>
+          <li styleName='torrentMenuItemNotCompleted'>Remove From List...</li>
+          <li styleName='torrentMenuItemNotCompleted'>Trash Data & Remove From List...</li>
           <li styleName='torrentMenuSeparator' />
-          <li styleName='torrentMenuItem'>Verify Local Data</li>
-          <li styleName='torrentMenuItem'>Set Location...</li>
+          <li styleName='torrentMenuItemNotCompleted'>Verify Local Data</li>
+          <li styleName='torrentMenuItemNotCompleted'>Set Location...</li>
           <li styleName='torrentMenuSeparator' />
-          <li styleName='torrentMenuItem'>Ask tracker for more peers</li>
+          <li styleName='torrentMenuItemNotCompleted'>Ask tracker for more peers</li>
           <li styleName='torrentMenuSeparator' />
           <li styleName='torrentMenuItem' onClick={this.onSelectAll}>Select All</li>
           <li styleName='torrentMenuItem' onClick={this.onDeselectAll}>Deselect All</li>
