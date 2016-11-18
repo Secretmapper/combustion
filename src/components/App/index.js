@@ -9,6 +9,9 @@ import ActionToolbar from 'components/ActionToolbar';
 import FilterToolbar from 'components/FilterToolbar';
 import StatusToolbar from 'components/StatusToolbar';
 
+import OpenDialog from 'components/OpenDialog';
+import PreferencesDialog from 'components/PreferencesDialog';
+
 import styles from './styles/index.css';
 
 function renderDevTools() {
@@ -55,6 +58,11 @@ class App extends Component {
         <footer>
           <StatusToolbar/>
         </footer>
+
+        // Dialogs
+        <OpenDialog />
+        <PreferencesDialog />
+
         {renderDevTools()}
       </div>
     )

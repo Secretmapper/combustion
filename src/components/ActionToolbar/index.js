@@ -11,8 +11,6 @@ import toolbarPauseAllImage from 'images/toolbar-pause-all.png';
 import toolbarStartAllImage from 'images/toolbar-start-all.png';
 import toolbarInfoImage from 'images/toolbar-info.png';
 
-import OpenDialog from 'components/OpenDialog';
-
 import styles from './styles/index.css';
 
 @inject('torrents_store', 'view_store')
@@ -80,8 +78,6 @@ class ActionToolbar extends Component {
         <button className={`${styles.button} ${styles.inspector}`} onClick={this.onToggleInspector}>
           <img src={toolbarInfoImage} title='Toggle inspector' alt='Toggle inspector'/>
         </button>
-
-        <OpenDialog />
       </div>
     );
   }
