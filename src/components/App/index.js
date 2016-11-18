@@ -19,7 +19,7 @@ function renderDevTools() {
 
   setLogEnabled(false);
 
-  return <DevTools position={{top: 0, right: 0}} />;
+  return <DevTools position={{bottom: 0, right: 0}} />;
 }
 
 /**
