@@ -28,6 +28,11 @@
   outline: none;
 }
 
+.inspector {
+  align-self: flex-end;
+  margin-left: auto;
+}
+
 .button:hover {
   cursor: pointer;
   background: #ddd;

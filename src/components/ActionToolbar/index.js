@@ -77,8 +77,7 @@ class ActionToolbar extends Component {
         <button styleName='button' onClick={this.onPauseAll}>
           <img src={toolbarPauseAllImage} title='Pause All Torrents' alt='Pause All Torrents'/>
         </button>
-
-        <button styleName='button' onClick={this.onToggleInspector}>
+        <button className={`${styles.button} ${styles.inspector}`} onClick={this.onToggleInspector}>
           <img src={toolbarInfoImage} title='Toggle inspector' alt='Toggle inspector'/>
         </button>
 
