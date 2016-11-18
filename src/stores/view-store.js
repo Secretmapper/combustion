@@ -6,8 +6,13 @@ class ViewStore {
   @observable selectedTorrents = [];
   @observable lastSelectedTorrent = null;
   @observable compact = false;
+  @observable isPreferencesDialogShown = false;
   @observable isOpenDialogShown = false;
   @observable isInspectorShown = false;
+
+  @action togglePreferencesDialog() {
+    this.isPreferencesDialogShown = !this.isPreferencesDialogShown;
+  }
 
   @action toggleOpenDialog() {
     this.isOpenDialogShown = !this.isOpenDialogShown;

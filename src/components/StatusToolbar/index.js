@@ -8,12 +8,18 @@ import preferencesImage from '../../images/wrench.png';
 import turtleImage from '../../images/turtle.png';
 import compactImage from '../../images/compact.png';
 
+import PreferencesDialog from 'components/PreferencesDialog';
+
 import styles from './styles/index.css';
 
 @inject('view_store', 'session_store')
 @observer
 @CSSModules(styles)
 class StatusToolbar extends Component {
+  @autobind onTogglePreferences() {
+    this.props.view_store.togglePreferencesDialog();
+  }
+
   @autobind onToggleCompact() {
     this.props.view_store.toggleCompact();
   }
@@ -35,7 +41,7 @@ class StatusToolbar extends Component {
         <button styleName='button'>
           <img src={settingsImage} alt='Settings'/>
         </button>
-        <button styleName='button'>
+        <button styleName='button' onClick={this.onTogglePreferences}>
           <img src={preferencesImage} alt='Preferences'/>
         </button>
         <button className={turtleClassName}>
@@ -44,6 +50,8 @@ class StatusToolbar extends Component {
         <button className={compactClassName} onClick={this.onToggleCompact}>
           <img src={compactImage} alt='Compact view'/>
         </button>
+
+        <PreferencesDialog />
       </div>
     );
   }

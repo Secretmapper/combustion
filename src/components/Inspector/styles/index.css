@@ -1,5 +1,6 @@
 .inspectorContainer {
   display: flex;
+  background: white;
 }
 
 .inspector {

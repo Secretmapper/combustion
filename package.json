@@ -60,7 +60,8 @@
     "react": "15.2.1",
     "react-css-modules": "3.7.10",
     "react-dom": "15.2.1",
-    "react-overlays": "0.6.10"
+    "react-overlays": "0.6.10",
+    "react-tabs": "^0.8.2"
   },
   "scripts": {
     "start": "node ./scripts/start.js",
