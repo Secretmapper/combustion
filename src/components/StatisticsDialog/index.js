@@ -7,7 +7,7 @@ import Dialog from '../Dialog'
 
 import styles from './styles/index.css';
 
-@inject('view_store')
+@inject('view_store', 'stats_store')
 @observer
 @CSSModules(styles)
 class StatisticsDialog extends Component {
@@ -17,6 +17,8 @@ class StatisticsDialog extends Component {
   }
 
   render() {
+    const cumulative = this.props.stats_store;
+
     return (
       <Dialog
         show={this.props.view_store.isStatisticsDialogShown}
@@ -24,6 +26,50 @@ class StatisticsDialog extends Component {
       >
         <div styleName='body'>
           <h2>Statistics</h2>
+
+          <div styleName='content'>
+            <h3>Current Session</h3>
+            <div styleName='row'>
+              <div styleName='key'>Uploaded:</div>
+              <div styleName='value'>9129.kb</div>
+            </div>
+            <div styleName='row'>
+              <div styleName='key'>Downloaded:</div>
+              <div styleName='value'>9129.kb</div>
+            </div>
+            <div styleName='row'>
+              <div styleName='key'>Ratio:</div>
+              <div styleName='value'>9129.kb</div>
+            </div>
+            <div styleName='row'>
+              <div styleName='key'>Running Time:</div>
+              <div styleName='value'>9129.kb</div>
+            </div>
+
+            <h3>Total</h3>
+            <div styleName='row'>
+              <div styleName='key'>Started:</div>
+              <div styleName='value'>{cumulative.sessionCount}</div>
+            </div>
+            <div styleName='row'>
+              <div styleName='key'>Uploaded:</div>
+              <div styleName='value'>9129.kb</div>
+            </div>
+            <div styleName='row'>
+              <div styleName='key'>Downloaded:</div>
+              <div styleName='value'>9129.kb</div>
+            </div>
+            <div styleName='row'>
+              <div styleName='key'>Ratio:</div>
+              <div styleName='value'>9129.kb</div>
+            </div>
+            <div styleName='row'>
+              <div styleName='key'>Running Time:</div>
+              <div styleName='value'>9129.kb</div>
+            </div>
+
+          </div>
+
         </div>
 
       </Dialog>
