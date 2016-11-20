@@ -3,6 +3,7 @@ import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
 
+import { speedBps } from 'util/formatters';
 import Torrent from 'stores/torrent';
 
 import arrowUpImage from '../../images/arrow-up.png';
@@ -71,11 +72,11 @@ class FilterToolbar extends Component {
         <div styleName='stats'>
           <span>
             <img src={arrowDownImage} alt='Download speed' title='Download speed'/>
-            {downloadSpeed} Kb/s
+            {speedBps(downloadSpeed)}
           </span>
           <span>
             <img src={arrowUpImage} alt='Upload speed' title='Upload speed'/>
-            {uploadSpeed} Kb/s
+            {speedBps(uploadSpeed)}
           </span>
         </div>
       </div>
