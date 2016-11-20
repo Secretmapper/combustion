@@ -1,19 +1,26 @@
 .body {
   display: flex;
-  padding: 20px;
+  flex-direction: column;
+  color: black;
 }
 
 .body h2 {
   font-size: 1.2em;
-  color: black;
+  padding: 10px;
+  background: #ddd;
+  color: #666;
+  margin: 0;
+}
+
+.content {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .logo {
   width: 64px;
   height: 64px;
   margin: 0px 20px;
-}
-
-.form {
-  flex: 1;
 }

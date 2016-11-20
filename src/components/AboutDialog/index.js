@@ -4,6 +4,7 @@ import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
 
 import Dialog from '../Dialog'
+import logoImage from '../../images/logo.png';
 
 import styles from './styles/index.css';
 
@@ -24,8 +25,17 @@ class AboutDialog extends Component {
       >
         <div styleName='body'>
           <h2>About</h2>
-        </div>
 
+          <div styleName='content'>
+            <div styleName='logo'>
+              <img src={logoImage} alt='logo'></img>
+            </div>
+
+            <h3>Transmission 2.84 (14307)</h3>
+            <p>A fast and easy BitTorrent client</p>
+            <p>Copyright (c) The Transmission Project</p>
+          </div>
+        </div>
       </Dialog>
     );
   }

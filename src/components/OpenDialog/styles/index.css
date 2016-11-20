@@ -1,6 +1,6 @@
 .body {
   display: flex;
-  padding: 20px;
+  background-color: #eee;
 }
 
 .body h2 {
@@ -24,5 +24,6 @@
 }
 
 .form {
+  padding: 20px;
   flex: 1;
 }
