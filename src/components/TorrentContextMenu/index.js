@@ -10,6 +10,22 @@ import styles from './styles/index.css';
 @inject('view_store', 'torrents_store')
 @CSSModules(styles)
 class TorrentContextMenu extends Component {
+  @autobind queueMoveTop() {
+    this.props.torrents_store.queueMoveTop(this.props.view_store.selectedTorrents);
+  }
+
+  @autobind queueMoveUp() {
+    this.props.torrents_store.queueMoveUp(this.props.view_store.selectedTorrents);
+  }
+
+  @autobind queueMoveDown() {
+    this.props.torrents_store.queueMoveDown(this.props.view_store.selectedTorrents);
+  }
+
+  @autobind queueMoveBottom() {
+    this.props.torrents_store.queueMoveBottom(this.props.view_store.selectedTorrents);
+  }
+
   @autobind onSelectAll() {
     this.props.view_store.selectTorrents(this.props.torrents_store.filteredTorrents.map((torrent) => torrent.id));
   }
@@ -35,10 +51,10 @@ class TorrentContextMenu extends Component {
           <li styleName='torrentMenuItemNotCompleted'>Resume</li>
           <li styleName='torrentMenuItemNotCompleted'>Resume Now</li>
           <li styleName='torrentMenuSeparator' />
-          <li styleName='torrentMenuItemNotCompleted'>Move to Top</li>
-          <li styleName='torrentMenuItemNotCompleted'>Move Up</li>
-          <li styleName='torrentMenuItemNotCompleted'>Move Down</li>
-          <li styleName='torrentMenuItemNotCompleted'>Move to Bottom</li>
+          <li styleName='torrentMenuItem' onClick={this.queueMoveTop}>Move to Top</li>
+          <li styleName='torrentMenuItem' onClick={this.queueMoveUp}>Move Up</li>
+          <li styleName='torrentMenuItem' onClick={this.queueMoveDown}>Move Down</li>
+          <li styleName='torrentMenuItem' onClick={this.queueMoveBottom}>Move to Bottom</li>
           <li styleName='torrentMenuSeparator' />
           <li styleName='torrentMenuItemNotCompleted'>Remove From List...</li>
           <li styleName='torrentMenuItemNotCompleted'>Trash Data & Remove From List...</li>
