@@ -7,9 +7,9 @@ class PeersTabPanel extends Component {
   render() {
     return (
       <div>
-        <h2>Connections</h2>
-        <h2>Options</h2>
-        <h2>Blocklist</h2>
+        <h3>Connections</h3>
+        <h3>Options</h3>
+        <h3>Blocklist</h3>
       </div>
     );
   }

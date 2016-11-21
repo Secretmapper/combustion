@@ -7,8 +7,8 @@ class NetworkTabPanel extends Component {
   render() {
     return (
       <div>
-        <h2>Listening port</h2>
-        <h2>Options</h2>
+        <h3>Listening port</h3>
+        <h3>Options</h3>
       </div>
     );
   }

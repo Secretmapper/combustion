@@ -7,8 +7,8 @@ class SpeedTabPanel extends Component {
   render() {
     return (
       <div>
-        <h2>Speed Limits</h2>
-        <h2>Alternative Speed Limits</h2>
+        <h3>Speed Limits</h3>
+        <h3>Alternative Speed Limits</h3>
       </div>
     );
   }

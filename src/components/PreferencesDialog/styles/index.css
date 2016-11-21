@@ -1,28 +1,21 @@
 .body {
   display: flex;
-  padding: 20px;
+  flex-direction: column;
+  color: black;
+  min-width: 400px;
+  min-height: 300px;
 }
 
 .body h2 {
   font-size: 1.2em;
-  color: black;
+  padding: 10px;
+  background: #ddd;
+  color: #666;
+  margin: 0;
 }
 
-.body label,
-.body input {
-  display: block;
-}
-
-.body input.inline {
-  display: inline-block;
-}
-
-.logo {
-  width: 64px;
-  height: 64px;
-  margin: 0px 20px;
-}
-
-.form {
-  flex: 1;
+.content {
+  padding: 10px 30px;
+  display: flex;
+  flex-direction: column;
 }

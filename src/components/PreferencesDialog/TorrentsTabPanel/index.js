@@ -7,9 +7,9 @@ class TorrentsTabPanel extends Component {
   render() {
     return (
       <div>
-        <h2>Downloading</h2>
+        <h3>Downloading</h3>
         <input type='text' data-field='download-dir'></input>
-        <h2>Seeding</h2>
+        <h3>Seeding</h3>
       </div>
     );
   }
