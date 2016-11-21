@@ -92,6 +92,21 @@ class TorrentStore {
     }));
   }
 
+  @action remove(torrentIds) {
+    const data = {
+      ids: torrentIds,
+    };
+
+    return this.rpc.sendRequest('torrent-remove', data).then(action((response) => {
+      response.json().then(action((result) => {
+        // TODO: Review!
+        if (result.result.success !== 'success') return;
+
+        this.getAll(torrentIds);
+      }));
+    }));
+  }
+
   @action queueMoveTop(torrentIds) {
     const data = {
       ids: torrentIds,

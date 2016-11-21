@@ -22,6 +22,21 @@ class TorrentContextMenu extends Component {
     this.props.torrents_store.startNow(this.props.view_store.selectedTorrents);
   }
 
+  @autobind remove() {
+    // TODO: Confirm dialog
+    this.props.torrents_store.remove(this.props.view_store.selectedTorrents);
+  }
+
+  @autobind setLocation() {
+    // TODO: Prompt Dialog
+    prompt('location');
+  }
+
+  @autobind rename() {
+    // TODO: Prompt Dialog
+    prompt('rename');
+  }
+
   @autobind queueMoveTop() {
     this.props.torrents_store.queueMoveTop(this.props.view_store.selectedTorrents);
   }
@@ -59,6 +74,9 @@ class TorrentContextMenu extends Component {
   }
 
   render() {
+    const selectedTorrents = this.props.view_store.selectedTorrents;
+    const noMultiple = selectedTorrents.length > 1 ? styles.torrentMenuItemNotCompleted : styles.torrentMenuItem;
+
     return (
       <ContextMenu
         show={this.props.show}
@@ -76,11 +94,12 @@ class TorrentContextMenu extends Component {
           <li styleName='torrentMenuItem' onClick={this.queueMoveDown}>Move Down</li>
           <li styleName='torrentMenuItem' onClick={this.queueMoveBottom}>Move to Bottom</li>
           <li styleName='torrentMenuSeparator' />
-          <li styleName='torrentMenuItemNotCompleted'>Remove From List...</li>
+          <li styleName='torrentMenuItem' onClick={this.remove}>Remove From List...</li>
           <li styleName='torrentMenuItemNotCompleted'>Trash Data & Remove From List...</li>
           <li styleName='torrentMenuSeparator' />
           <li styleName='torrentMenuItem' onClick={this.verify}>Verify Local Data</li>
-          <li styleName='torrentMenuItemNotCompleted'>Set Location...</li>
+          <li className={noMultiple} onClick={this.setLocation} >Set Location...</li>
+          <li className={noMultiple} onClick={this.rename}>Rename...</li>
           <li styleName='torrentMenuSeparator' />
           <li styleName='torrentMenuItem' onClick={this.askTrackerMorePeers}>Ask tracker for more peers</li>
           <li styleName='torrentMenuSeparator' />
