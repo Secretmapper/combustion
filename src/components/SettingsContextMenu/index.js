@@ -19,7 +19,8 @@ class TorrentContextMenu extends Component {
   }
 
   @autobind onToggleContextMenu() {
-    this.props.view_store.toggleSettingsContextMenu();
+    // TODO: Move it to ContextMenu component
+    this.props.view_store.toggleContextMenus();
   }
 
   render() {

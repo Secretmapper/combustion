@@ -17,11 +17,18 @@ class ViewStore {
   @observable isAboutDialogShown = false;
   @observable isInspectorShown = false;
 
+  @action toggleContextMenus() {
+    this.isSettingsContextMenuShown = false;
+    this.isTorrentContextMenuShown = false;
+  }
+
   @action toggleSettingsContextMenu() {
+    this.toggleContextMenus();
     this.isSettingsContextMenuShown = !this.isSettingsContextMenuShown;
   }
 
   @action toggleTorrentContextMenu() {
+    this.toggleContextMenus();
     this.isTorrentContextMenuShown = !this.isTorrentContextMenuShown;
   }
 

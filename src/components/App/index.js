@@ -2,6 +2,7 @@ import React, { Component} from 'react';
 import CSSModules from 'react-css-modules';
 import DevTools, { setLogEnabled } from 'mobx-react-devtools';
 import { inject, observer } from 'mobx-react';
+import autobind from 'autobind-decorator';
 
 import TorrentList from 'components/TorrentList';
 import Inspector from 'components/Inspector';
@@ -28,7 +29,7 @@ function renderDevTools() {
 /**
  * App component acts as the application layout.
  */
-@inject('torrents_store', 'stats_store', 'session_store')
+@inject('torrents_store', 'stats_store', 'session_store', 'view_store')
 @observer
 @CSSModules(styles)
 class App extends Component {
@@ -47,9 +48,13 @@ class App extends Component {
     clearInterval(this.interval);
   }
 
+  @autobind onToggleContextMenu() {
+    this.props.view_store.toggleContextMenus();
+  }
+
   render() {
     return (
-      <div styleName='container'>
+      <div styleName='container' onClick={this.onToggleContextMenu}>
         <header>
           <ActionToolbar/>
           <FilterToolbar/>

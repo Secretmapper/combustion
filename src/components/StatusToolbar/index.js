@@ -40,6 +40,8 @@ class StatusToolbar extends Component {
     const { clientX, clientY } = event;
 
     event.preventDefault();
+    event.stopPropagation();
+
     this.toggleContextMenu({left: clientX, top: clientY});
   }
 
