@@ -18,6 +18,12 @@ import styles from './styles/index.css';
 @observer
 @CSSModules(styles)
 class PreferencesDialog extends Component {
+  @autobind onBlur(event) {
+    const field = event.target.attributes['data-field'].value;
+
+    alert(`Data: ${field}`);
+  }
+
   @autobind onHide() {
     this.props.view_store.togglePreferencesDialog();
   }
@@ -33,7 +39,7 @@ class PreferencesDialog extends Component {
         onHide={this.onHide}
       >
         <div styleName='body'>
-          <Tabs onSelect={this.handleSelect}>
+          <Tabs onBlur={this.onBlur} onSelect={this.handleSelect}>
             <TabList>
               <Tab>Torrents</Tab>
               <Tab>Speed</Tab>
