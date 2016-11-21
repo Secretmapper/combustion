@@ -22,10 +22,9 @@ class AboutDialog extends Component {
       <Dialog
         show={this.props.view_store.isAboutDialogShown}
         onHide={this.onHide}
+        header='About'
       >
         <div styleName='body'>
-          <h2>About</h2>
-
           <div styleName='content'>
             <div styleName='logo'>
               <img src={logoImage} alt='logo'></img>

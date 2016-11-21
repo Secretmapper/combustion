@@ -1,0 +1,28 @@
+.header {
+  display: flex;
+  background: #ddd;
+  padding: 8px;
+  align-items: center;
+}
+
+.title {
+  flex: 1;
+  font-size: 1.2em;
+  padding: 0px;
+  color: #666;
+  margin: 0;
+}
+
+.close {
+  border-radius: 5px;
+  border: 1px solid #bbb;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  outline: none;
+}
+
+.close:hover {
+  border: 1px solid #888;
+  background: #e8e8e8;
+}

@@ -30,13 +30,13 @@ class OpenDialog extends Component {
       <Dialog
         show={this.props.view_store.isOpenDialogShown}
         onHide={this.onHide}
+        header='Upload Torrent Files'
       >
         <div styleName='body'>
           <div styleName='logo'>
             <img src={logoImage} alt='logo'></img>
           </div>
           <div styleName='form'>
-            <h2>Upload Torrent Files</h2>
             <form>
               <section style={{display: 'flex', flexDirection: 'column'}}>
                 <fieldset style={{flex: 1}}>

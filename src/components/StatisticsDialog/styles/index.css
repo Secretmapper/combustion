@@ -1,22 +1,10 @@
 .body {
   display: flex;
   flex-direction: column;
+  background-color: #fefefe;
   color: black;
   min-width: 300px;
-}
-
-.body h2 {
-  font-size: 1.2em;
-  padding: 10px;
-  background: #ddd;
-  color: #666;
-  margin: 0;
-}
-
-.content {
   padding: 10px 30px;
-  display: flex;
-  flex-direction: column;
 }
 
 .row {

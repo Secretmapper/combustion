@@ -1,11 +1,10 @@
 .body {
   display: flex;
-  background-color: #eee;
-}
-
-.body h2 {
-  font-size: 1.2em;
+  flex-direction: column;
+  background-color: #fefefe;
   color: black;
+  min-width: 300px;
+  padding: 10px 30px;
 }
 
 .body label,

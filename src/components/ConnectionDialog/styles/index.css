@@ -1,19 +1,14 @@
 .body {
   display: flex;
-  padding: 20px;
-}
-
-.body h2 {
-  font-size: 1.2em;
+  flex-direction: column;
+  background-color: #fefefe;
   color: black;
+  min-width: 300px;
+  padding: 10px 30px;
 }
 
 .logo {
   width: 64px;
   height: 64px;
   margin: 0px 20px;
-}
-
-.form {
-  flex: 1;
 }

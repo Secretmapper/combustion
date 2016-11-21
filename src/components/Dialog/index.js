@@ -3,6 +3,8 @@ import { Modal } from 'react-overlays';
 import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
 
+import Header from './Header'
+
 import styles from './styles/index.css';
 
 @inject('view_store')
@@ -27,6 +29,7 @@ class Dialog extends Component {
         onHide={this.props.onHide}
       >
         <div className={styles.dialogStyle}>
+          <Header title={this.props.header} onClose={this.props.onHide} />
           {this.props.children}
         </div>
       </Modal>

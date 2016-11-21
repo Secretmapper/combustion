@@ -27,20 +27,18 @@ class ConnectionDialog extends Component {
       <Dialog
         show={this.props.view_store.isConnectionDialogShown}
         onHide={this.onHide}
+        header='Connection Failed'
       >
         <div styleName='body'>
           <div styleName='logo'>
             <img src={logoImage} alt='logo'></img>
           </div>
-          <div styleName='form'>
-            <h2>Connection Failed</h2>
-            <span>
-              Could not connect to the server. You may need to reload the page to reconnect.
-            </span>
-            <section>
-              <button onClick={this.onDismiss}>Dismiss</button>
-            </section>
-          </div>
+          <span>
+            Could not connect to the server. You may need to reload the page to reconnect.
+          </span>
+          <section>
+            <button onClick={this.onDismiss}>Dismiss</button>
+          </section>
         </div>
 
       </Dialog>

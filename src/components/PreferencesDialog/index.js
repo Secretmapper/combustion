@@ -37,10 +37,9 @@ class PreferencesDialog extends Component {
       <Dialog
         show={this.props.view_store.isPreferencesDialogShown}
         onHide={this.onHide}
+        header='Preferences'
       >
         <div styleName='body'>
-          <h2>Preferences</h2>
-
           <div styleName='content'>
             <Tabs onBlur={this.onBlur} onSelect={this.handleSelect}>
               <TabList>
