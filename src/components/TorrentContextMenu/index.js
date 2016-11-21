@@ -26,6 +26,10 @@ class TorrentContextMenu extends Component {
     this.props.torrents_store.queueMoveBottom(this.props.view_store.selectedTorrents);
   }
 
+  @autobind verify() {
+    this.props.torrents_store.verify(this.props.view_store.selectedTorrents);
+  }
+
   @autobind askTrackerMorePeers() {
     this.props.torrents_store.askTrackerMorePeers(this.props.view_store.selectedTorrents);
   }
@@ -63,7 +67,7 @@ class TorrentContextMenu extends Component {
           <li styleName='torrentMenuItemNotCompleted'>Remove From List...</li>
           <li styleName='torrentMenuItemNotCompleted'>Trash Data & Remove From List...</li>
           <li styleName='torrentMenuSeparator' />
-          <li styleName='torrentMenuItemNotCompleted'>Verify Local Data</li>
+          <li styleName='torrentMenuItem' onClick={this.verify}>Verify Local Data</li>
           <li styleName='torrentMenuItemNotCompleted'>Set Location...</li>
           <li styleName='torrentMenuSeparator' />
           <li styleName='torrentMenuItem' onClick={this.askTrackerMorePeers}>Ask tracker for more peers</li>

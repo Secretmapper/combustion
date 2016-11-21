@@ -137,6 +137,21 @@ class TorrentStore {
     }));
   }
 
+  @action verify(torrentIds) {
+    const data = {
+      ids: torrentIds,
+    };
+
+    return this.rpc.sendRequest('torrent-verify', data).then(action((response) => {
+      response.json().then(action((result) => {
+        // TODO: Review!
+        if (result.result.success !== 'success') return;
+
+        this.getAll(torrentIds);
+      }));
+    }));
+  }
+
   @action askTrackerMorePeers(torrentIds) {
     const data = {
       ids: torrentIds,
