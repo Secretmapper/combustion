@@ -26,6 +26,10 @@ class TorrentContextMenu extends Component {
     this.props.torrents_store.queueMoveBottom(this.props.view_store.selectedTorrents);
   }
 
+  @autobind askTrackerMorePeers() {
+    this.props.torrents_store.askTrackerMorePeers(this.props.view_store.selectedTorrents);
+  }
+
   @autobind onSelectAll() {
     this.props.view_store.selectTorrents(this.props.torrents_store.filteredTorrents.map((torrent) => torrent.id));
   }
@@ -62,7 +66,7 @@ class TorrentContextMenu extends Component {
           <li styleName='torrentMenuItemNotCompleted'>Verify Local Data</li>
           <li styleName='torrentMenuItemNotCompleted'>Set Location...</li>
           <li styleName='torrentMenuSeparator' />
-          <li styleName='torrentMenuItemNotCompleted'>Ask tracker for more peers</li>
+          <li styleName='torrentMenuItem' onClick={this.askTrackerMorePeers}>Ask tracker for more peers</li>
           <li styleName='torrentMenuSeparator' />
           <li styleName='torrentMenuItem' onClick={this.onSelectAll}>Select All</li>
           <li styleName='torrentMenuItem' onClick={this.onDeselectAll}>Deselect All</li>

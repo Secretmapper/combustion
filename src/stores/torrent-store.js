@@ -137,6 +137,21 @@ class TorrentStore {
     }));
   }
 
+  @action askTrackerMorePeers(torrentIds) {
+    const data = {
+      ids: torrentIds,
+    };
+
+    return this.rpc.sendRequest('torrent-reannounce', data).then(action((response) => {
+      response.json().then(action((result) => {
+        // TODO: Review!
+        if (result.result.success !== 'success') return;
+
+        this.getAll(torrentIds);
+      }));
+    }));
+  }
+
   @computed get trackers() {
     const trackers = this.torrents.reduce((memo, torrent) => {
       memo = memo.concat(extractDomains(torrent));
