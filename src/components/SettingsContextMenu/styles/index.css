@@ -28,3 +28,11 @@
   margin: 5px 0;
   padding: 0px;
 }
+
+.torrentMenuItem a {
+  text-decoration: none;
+}
+
+.torrentMenuItem:hover a {
+  color: rgb(255, 255, 255);
+}

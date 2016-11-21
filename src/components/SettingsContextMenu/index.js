@@ -33,6 +33,17 @@ class TorrentContextMenu extends Component {
         <ul styleName='torrentMenu' onClick={this.onToggleContextMenu}>
           <li styleName='torrentMenuItem' onClick={this.onAbout}>About</li>
           <li styleName='torrentMenuSeparator' />
+          <li styleName='torrentMenuItem'>
+            <a href='http://transmissionbt.com/' target='_blank'>
+              Transmission Home page
+            </a>
+          </li>
+          <li styleName='torrentMenuItem'>
+            <a href='http://transmissionbt.com/donate/' target='_blank'>
+              Transmission Tip Jar
+            </a>
+          </li>
+          <li styleName='torrentMenuSeparator' />
           <li styleName='torrentMenuItem' onClick={this.onStatistics}>Statistics</li>
         </ul>
       </ContextMenu>
