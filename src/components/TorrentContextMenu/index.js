@@ -10,6 +10,18 @@ import styles from './styles/index.css';
 @inject('view_store', 'torrents_store')
 @CSSModules(styles)
 class TorrentContextMenu extends Component {
+  @autobind pause() {
+    this.props.torrents_store.stop(this.props.view_store.selectedTorrents);
+  }
+
+  @autobind resume() {
+    this.props.torrents_store.start(this.props.view_store.selectedTorrents);
+  }
+
+  @autobind resumeNow() {
+    this.props.torrents_store.startNow(this.props.view_store.selectedTorrents);
+  }
+
   @autobind queueMoveTop() {
     this.props.torrents_store.queueMoveTop(this.props.view_store.selectedTorrents);
   }
@@ -55,9 +67,9 @@ class TorrentContextMenu extends Component {
         onHide={this.props.onHide}
       >
         <ul styleName='torrentMenu' onClick={this.onToggleContextMenu}>
-          <li styleName='torrentMenuItemNotCompleted'>Pause</li>
-          <li styleName='torrentMenuItemNotCompleted'>Resume</li>
-          <li styleName='torrentMenuItemNotCompleted'>Resume Now</li>
+          <li styleName='torrentMenuItem' onClick={this.pause}>Pause</li>
+          <li styleName='torrentMenuItem' onClick={this.resume}>Resume</li>
+          <li styleName='torrentMenuItem' onClick={this.resumeNow}>Resume Now</li>
           <li styleName='torrentMenuSeparator' />
           <li styleName='torrentMenuItem' onClick={this.queueMoveTop}>Move to Top</li>
           <li styleName='torrentMenuItem' onClick={this.queueMoveUp}>Move Up</li>

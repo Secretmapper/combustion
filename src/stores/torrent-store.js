@@ -62,6 +62,21 @@ class TorrentStore {
     }));
   }
 
+  @action startNow(torrentIds) {
+    const data = {
+      ids: torrentIds,
+    };
+
+    return this.rpc.sendRequest('torrent-start-now', data).then(action((response) => {
+      response.json().then(action((result) => {
+        // TODO: Review!
+        if (result.result.success !== 'success') return;
+
+        this.getAll(torrentIds);
+      }));
+    }));
+  }
+
   @action stop(torrentIds) {
     const data = {
       ids: torrentIds,
