@@ -1,7 +1,7 @@
 .body {
   display: flex;
   padding: 20px;
-	background-color: #eee;
+  background-color: #eee;
   width: 380px;
   font-size: 1.1em;
 }

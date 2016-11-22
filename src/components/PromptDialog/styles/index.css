@@ -1,0 +1,30 @@
+.body {
+  display: flex;
+  flex-direction: row;
+  background-color: #fefefe;
+  color: black;
+  min-width: 300px;
+  padding: 20px;
+}
+
+.logo {
+  width: 64px;
+  height: 64px;
+  margin-right: 20px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.body section.buttons {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 10px;
+}
+
+.body section.buttons button {
+  margin-left: 10px;
+}

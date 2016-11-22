@@ -3,6 +3,8 @@
   background: #ddd;
   padding: 8px;
   align-items: center;
+  user-select: none;
+  cursor: default;
 }
 
 .title {

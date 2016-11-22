@@ -10,6 +10,10 @@ class ViewStore {
   @observable isSettingsContextMenuShown = false;
   @observable isTorrentContextMenuShown = false;
 
+  @observable isRenamePromptShown = false;
+  @observable isLocationPromptShown = false;
+
+  // TODO: find a better way to manage them
   @observable isOpenDialogShown = false;
   @observable isPreferencesDialogShown = false;
   @observable isConnectionDialogShown = false;
@@ -30,6 +34,14 @@ class ViewStore {
   @action toggleTorrentContextMenu() {
     this.toggleContextMenus();
     this.isTorrentContextMenuShown = !this.isTorrentContextMenuShown;
+  }
+
+  @action toggleRenamePrompt() {
+    this.isRenamePromptShown = !this.isRenamePromptShown;
+  }
+
+  @action toggleLocationPrompt() {
+    this.isLocationPromptShown = !this.isLocationPromptShown;
   }
 
   @action toggleOpenDialog() {

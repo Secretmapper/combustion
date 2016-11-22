@@ -15,6 +15,7 @@ import PreferencesDialog from 'components/PreferencesDialog';
 import ConnectionDialog from 'components/ConnectionDialog';
 import StatisticsDialog from 'components/StatisticsDialog';
 import AboutDialog from 'components/AboutDialog';
+import PromptDialog from 'components/PromptDialog';
 
 import styles from './styles/index.css';
 
@@ -80,6 +81,26 @@ class App extends Component {
         <ConnectionDialog />
         <StatisticsDialog />
         <AboutDialog />
+
+        <PromptDialog
+          header='Set location'
+          action='Apply'
+          placeholder='' /* TODO: To be defined when this promp is moved to torrent view */
+          question='Location'
+          toggle={this.props.view_store.isLocationPromptShown}
+          onToggle={() => this.props.view_store.toggleLocationPrompt()}
+          onSubmit={(value) => alert('location: ' + value)}
+        />
+
+        <PromptDialog
+          header='Rename torrent'
+          action='Rename'
+          question='Enter new name'
+          placeholder='' /* TODO: To be defined when this promp is moved to torrent view */
+          toggle={this.props.view_store.isRenamePromptShown}
+          onToggle={() => this.props.view_store.toggleRenamePrompt()}
+          onSubmit={(value) => alert('rename: ' + value)}
+        />
 
         {renderDevTools()}
       </div>
