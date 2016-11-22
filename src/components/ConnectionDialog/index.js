@@ -33,12 +33,11 @@ class ConnectionDialog extends Component {
           <div styleName='logo'>
             <img src={logoImage} alt='logo'></img>
           </div>
-          <span>
-            Could not connect to the server. You may need to reload the page to reconnect.
-          </span>
-          <section>
-            <button onClick={this.onDismiss}>Dismiss</button>
-          </section>
+          <div styleName='content'>
+            <p>
+              Could not connect to the server. You may need to reload the page to reconnect.
+            </p>
+          </div>
         </div>
 
       </Dialog>

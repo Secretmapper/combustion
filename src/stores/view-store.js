@@ -40,8 +40,8 @@ class ViewStore {
     this.isPreferencesDialogShown = !this.isPreferencesDialogShown;
   }
 
-  @action toggleConnectionDialog() {
-    this.isConnectionDialogShown = !this.isConnectionDialogShown;
+  @action toggleConnectionDialog(value) {
+    this.isConnectionDialogShown = value;
   }
 
   @action toggleStatisticsDialog() {

@@ -9,9 +9,13 @@ import SessionStore from './session-store';
 // Force strict mode so mutations are only allowed within actions.
 useStrict(true);
 
-const rpc = new RPC();
-
 export const view_store = new ViewStore();
+
+const onConnect = () => view_store.toggleConnectionDialog(false);
+const onDisconnect = () => view_store.toggleConnectionDialog(true);
+
+const rpc = new RPC(onConnect, onDisconnect);
+
 export const torrents_store = new TorrentStore(rpc);
 export const stats_store = new StatsStore(rpc);
 export const session_store = new SessionStore(rpc);
