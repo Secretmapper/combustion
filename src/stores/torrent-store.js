@@ -23,7 +23,7 @@ class TorrentStore {
     this.rpc = rpc;
   }
 
-  @action getAll(torrentIds) {
+  @action fetch(torrentIds) {
     const data = {
       fields: ['id', 'addedDate', 'name', 'totalSize', 'error', 'errorString',
         'eta', 'isFinished', 'isStalled', 'leftUntilDone', 'metadataPercentComplete',
@@ -47,6 +47,17 @@ class TorrentStore {
     }));
   }
 
+  @action add(torrentUpload) {
+    return this.rpc.sendRequest('torrent-add', torrentUpload).then(action((response) => {
+      response.json().then(action((result) => {
+        // TODO: Review!
+        if (result.result.success !== 'success') return;
+
+        this.fetch();
+      }));
+    }));
+  }
+
   @action start(torrentIds) {
     const data = {
       ids: torrentIds,
@@ -57,7 +68,7 @@ class TorrentStore {
         // TODO: Review!
         if (result.result.success !== 'success') return;
 
-        this.getAll(torrentIds);
+        this.fetch(torrentIds);
       }));
     }));
   }
@@ -72,7 +83,7 @@ class TorrentStore {
         // TODO: Review!
         if (result.result.success !== 'success') return;
 
-        this.getAll(torrentIds);
+        this.fetch(torrentIds);
       }));
     }));
   }
@@ -87,7 +98,7 @@ class TorrentStore {
         // TODO: Review!
         if (result.result.success !== 'success') return;
 
-        this.getAll(torrentIds);
+        this.fetch(torrentIds);
       }));
     }));
   }
@@ -102,7 +113,7 @@ class TorrentStore {
         // TODO: Review!
         if (result.result.success !== 'success') return;
 
-        this.getAll(torrentIds);
+        this.fetch(torrentIds);
       }));
     }));
   }
@@ -117,7 +128,7 @@ class TorrentStore {
         // TODO: Review!
         if (result.result.success !== 'success') return;
 
-        this.getAll(torrentIds);
+        this.fetch(torrentIds);
       }));
     }));
   }
@@ -132,7 +143,7 @@ class TorrentStore {
         // TODO: Review!
         if (result.result.success !== 'success') return;
 
-        this.getAll(torrentIds);
+        this.fetch(torrentIds);
       }));
     }));
   }
@@ -147,7 +158,7 @@ class TorrentStore {
         // TODO: Review!
         if (result.result.success !== 'success') return;
 
-        this.getAll(torrentIds);
+        this.fetch(torrentIds);
       }));
     }));
   }
@@ -162,7 +173,7 @@ class TorrentStore {
         // TODO: Review!
         if (result.result.success !== 'success') return;
 
-        this.getAll(torrentIds);
+        this.fetch(torrentIds);
       }));
     }));
   }
@@ -177,7 +188,7 @@ class TorrentStore {
         // TODO: Review!
         if (result.result.success !== 'success') return;
 
-        this.getAll(torrentIds);
+        this.fetch(torrentIds);
       }));
     }));
   }
@@ -192,7 +203,7 @@ class TorrentStore {
         // TODO: Review!
         if (result.result.success !== 'success') return;
 
-        this.getAll(torrentIds);
+        this.fetch(torrentIds);
       }));
     }));
   }

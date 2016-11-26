@@ -36,10 +36,10 @@ class App extends Component {
   componentDidMount() {
     this.props.session_store.getSession().then(() => {
       this.props.stats_store.getStats();
-      this.props.torrents_store.getAll();
+      this.props.torrents_store.fetch();
 
       this.interval = setInterval(() => {
-        this.props.torrents_store.getAll();
+        this.props.torrents_store.fetch();
       }, 5000);
     });
   }

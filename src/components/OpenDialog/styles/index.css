@@ -1,10 +1,14 @@
 .body {
   display: flex;
-  flex-direction: column;
-  background-color: #fefefe;
+  padding: 20px;
+	background-color: #eee;
+  width: 380px;
+  font-size: 1.1em;
+}
+
+.body h2 {
+  font-size: 1.2em;
   color: black;
-  min-width: 300px;
-  padding: 10px 30px;
 }
 
 .body label,
@@ -17,12 +21,66 @@
 }
 
 .logo {
+  flex-basis: 80px;
+  flex-shrink: 0;
+}
+
+.logo img {
   width: 64px;
   height: 64px;
-  margin: 0px 20px;
 }
 
 .form {
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   flex: 1;
+}
+
+.form h2 {
+  font-size: 1.2em;
+  margin: 0;
+  flex-basis: 40px;
+}
+
+.body section {
+  display: flex;
+  flex-direction: column;
+}
+
+.body fieldset {
+  border: none;
+  margin: 0 0 12px 0;
+  padding: 0;
+  flex-grow: 1;
+}
+
+.body fieldset label {
+  margin-bottom: 3px;
+}
+
+.body fieldset input {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.body fieldset label.inlineCheck {
+  display: flex;
+}
+
+.body fieldset label.inlineCheck input {
+  width: auto;
+}
+
+.body fieldset label.inlineCheck div {
+  margin-left: 6px;
+}
+
+.body section.buttons {
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.body section.buttons button {
+  margin-left: 10px;
 }
