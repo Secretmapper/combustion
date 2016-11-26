@@ -1,6 +1,5 @@
 import React, { Component} from 'react';
 import CSSModules from 'react-css-modules';
-import { observable, action } from 'mobx';
 import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
 
@@ -23,8 +22,9 @@ class OpenDialog extends Component {
 
   @autobind onUpload(event) {
     event.preventDefault();
-    this.torrentUpload.forEach((torrentUploadData) =>
-      this.props.torrents_store.add(torrentUploadData));
+    this.torrentUpload.serialize().then((torrents) => {
+      torrents.forEach((torrentData) => this.props.torrents_store.add(torrentData));
+    });
     this.props.view_store.toggleOpenDialog();
   }
 
@@ -37,13 +37,20 @@ class OpenDialog extends Component {
     this.props.view_store.toggleOpenDialog();
   }
 
-  @autobind onChange({ target }) {
-    const value = {
-      file: 'files',
-      checkbox: 'checked',
-    }[target.type] || 'value';
+  @autobind onChangeFiles({ target }) {
+    this.torrentUpload.setTorrentFiles(target.files);
+  }
 
-    this.torrentUpload.setData({[target.name]: target[value]});
+  @autobind onChangeUrl({ target }) {
+    this.torrentUpload.setTorrentUrl(target.value);
+  }
+
+  @autobind onChangeDownloadDirectory({ target }) {
+    this.torrentUpload.setDownloadDir(target.value);
+  }
+
+  @autobind onChangeStart({ target }) {
+    this.torrentUpload.setPaused(!target.checked);
   }
 
   render() {
@@ -62,22 +69,22 @@ class OpenDialog extends Component {
               <section>
                 <fieldset>
                   <label>Please select a torrent file to upload:</label>
-                  <input name="files" type="file" multiple="multiple" />
+                  <input name="files" type="file" multiple="multiple" onChange={this.onChangeFiles} />
                 </fieldset>
 
                 <fieldset>
                   <label>Or enter a URL:</label>
-                  <input name="filename" type="url" />
+                  <input name="filename" type="url" onChange={this.onChangeUrl} />
                 </fieldset>
 
                 <fieldset>
                   <label>Destination folder <i>(0 GB Free)</i>:</label>
-                  <input name="download-dir" type="text" />
+                  <input name="download-dir" type="text" onChange={this.onChangeDownloadDirectory} />
                 </fieldset>
 
                 <fieldset>
                 <label styleName='inlineCheck'>
-                  <input name="paused" type="checkbox" defaultChecked={true} />
+                  <input name="paused" type="checkbox" defaultChecked={true} onChange={this.onChangeStart} />
                   <div>Start when added</div>
                 </label>
                 </fieldset>
