@@ -22,7 +22,11 @@ class ActionToolbar extends Component {
   }
 
   @autobind onRemove(){
-    alert('remove');
+    const confirmRemove = confirm(`Once removed, continuing the transfer will require the torrent file. Are you sure you want to remove it?`);
+
+    if (!confirmRemove) return;
+
+    this.props.torrents_store.remove(this.props.view_store.selectedTorrents);
   }
 
   @autobind onPause(){

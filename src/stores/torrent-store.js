@@ -47,13 +47,31 @@ class TorrentStore {
     }));
   }
 
-  @action add(torrentUpload) {
-    return this.rpc.sendRequest('torrent-add', torrentUpload).then(action((response) => {
+  @action fetchIds(torrentIds) {
+    const data = {
+      fields: ['id']
+    };
+
+    if (torrentIds) {
+      data['ids'] = torrentIds;
+    }
+
+    return this.rpc.sendRequest('torrent-get', data).then(action((response) => {
+      response.json().then(action((result) => {
+        this.torrents.replace(
+          result.arguments.torrents.map((torrent) => new Torrent(torrent))
+        );
+      }));
+    }));
+  }
+
+  @action add(torrentUploads) {
+    return this.rpc.sendRequest('torrent-add', torrentUploads).then(action((response) => {
       response.json().then(action((result) => {
         // TODO: Review!
         if (result.result.success !== 'success') return;
 
-        this.fetch();
+        this.fetchIds();
       }));
     }));
   }
@@ -113,7 +131,7 @@ class TorrentStore {
         // TODO: Review!
         if (result.result.success !== 'success') return;
 
-        this.fetch(torrentIds);
+        this.fetchIds();
       }));
     }));
   }
