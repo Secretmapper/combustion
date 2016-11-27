@@ -5,6 +5,7 @@
   text-align: left;
   cursor: pointer;
   list-style-type: none;
+  overflow-y: auto;
 }
 
 .torrentRow {

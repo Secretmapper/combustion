@@ -55,7 +55,7 @@ class App extends Component {
   render() {
     return (
       <div styleName='container' onClick={this.onToggleContextMenu}>
-        <header>
+        <header styleName='header'>
           <ActionToolbar/>
           <FilterToolbar/>
         </header>
@@ -63,7 +63,7 @@ class App extends Component {
           <TorrentList />
           <Inspector />
         </main>
-        <footer>
+        <footer styleName='footer'>
           <StatusToolbar/>
         </footer>
 

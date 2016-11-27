@@ -1,6 +1,7 @@
 .inspectorContainer {
   display: flex;
   background: white;
+  overflow-y: auto;
 }
 
 .inspector {
