@@ -27,6 +27,13 @@ class TorrentContextMenu extends Component {
     this.props.torrents_store.remove(this.props.view_store.selectedTorrents);
   }
 
+  @autobind trashAndRemove() {
+    // TODO: Confirm dialog
+    this.props.torrents_store.remove(this.props.view_store.selectedTorrents, {
+      'delete-local-data': true
+    });
+  }
+
   @autobind setLocation() {
     // TODO: Prompt Dialog
     prompt('location');
@@ -76,7 +83,7 @@ class TorrentContextMenu extends Component {
 
   render() {
     const selectedTorrents = this.props.view_store.selectedTorrents;
-    const noMultiple = selectedTorrents.length > 1 ? styles.torrentMenuItemNotCompleted : styles.torrentMenuItem;
+    const noMultiple = selectedTorrents.length > 1 ? styles.torrentMenuItemDisabled : styles.torrentMenuItem;
 
     return (
       <ContextMenu
@@ -96,7 +103,7 @@ class TorrentContextMenu extends Component {
           <li styleName='torrentMenuItem' onClick={this.queueMoveBottom}>Move to Bottom</li>
           <li styleName='torrentMenuSeparator' />
           <li styleName='torrentMenuItem' onClick={this.remove}>Remove From List...</li>
-          <li styleName='torrentMenuItemNotCompleted'>Trash Data & Remove From List...</li>
+          <li styleName='torrentMenuItem' onClick={this.trashAndRemove}>Trash Data & Remove From List...</li>
           <li styleName='torrentMenuSeparator' />
           <li styleName='torrentMenuItem' onClick={this.verify}>Verify Local Data</li>
           <li className={noMultiple} onClick={this.setLocation} >Set Location...</li>

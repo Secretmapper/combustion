@@ -121,8 +121,9 @@ class TorrentStore {
     }));
   }
 
-  @action remove(torrentIds) {
+  @action remove(torrentIds, options = {}) {
     const data = {
+      ...options,
       ids: torrentIds,
     };
 
