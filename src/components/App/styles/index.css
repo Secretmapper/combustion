@@ -30,6 +30,7 @@
   flex-direction: row;
   background: #fffce8;
   align-items: stretch;
+  flex: 1;
 }
 
 .footer {
