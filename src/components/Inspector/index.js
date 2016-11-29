@@ -73,11 +73,10 @@ class Inspector extends Component {
 
   render() {
     const isInspectorShown = this.props.view_store.isInspectorShown;
-    return (
-      <div styleName='inspectorContainer'>
-        {isInspectorShown && this.renderInspector()}
-      </div>
-    );
+
+    if (!isInspectorShown) return null;
+
+    return this.renderInspector();
   }
 }
 

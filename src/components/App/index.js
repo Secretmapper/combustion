@@ -60,8 +60,12 @@ class App extends Component {
           <FilterToolbar/>
         </header>
         <main styleName='main' role='main'>
-          <TorrentList />
-          <Inspector />
+          <div styleName='list'>
+            <TorrentList />
+          </div>
+          <div styleName='details'>
+            <Inspector />
+          </div>
         </main>
         <footer styleName='footer'>
           <StatusToolbar/>

@@ -1,11 +1,8 @@
 .torrentList {
-  width: 100%;
   margin: 0;
   padding: 0;
   text-align: left;
-  cursor: pointer;
   list-style-type: none;
-  overflow-y: auto;
 }
 
 .torrentRow {
@@ -14,6 +11,7 @@
   background-color: white;
   user-select: none;
   align-items: center;
+  cursor: pointer;
 }
 
 .torrentRowEven {
