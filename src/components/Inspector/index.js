@@ -58,7 +58,7 @@ class Inspector extends Component {
     );
   }
 
-  @autobind renderInspector() {
+  render() {
     const torrentId = this.props.view_store.selectedTorrents[0]; //TODO: Fix no selection
     const torrent = this.props.torrents_store.torrents.find((torrent) => torrent.id === torrentId);
 
@@ -69,14 +69,6 @@ class Inspector extends Component {
         {this.renderDetails(torrent)}
       </div>
     );
-  }
-
-  render() {
-    const isInspectorShown = this.props.view_store.isInspectorShown;
-
-    if (!isInspectorShown) return null;
-
-    return this.renderInspector();
   }
 }
 

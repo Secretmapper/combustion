@@ -53,6 +53,8 @@ class App extends Component {
   }
 
   render() {
+    const isInspectorShown = this.props.view_store.isInspectorShown;
+
     return (
       <div styleName='container' onClick={this.onToggleContextMenu}>
         <header styleName='header'>
@@ -63,9 +65,11 @@ class App extends Component {
           <div styleName='list'>
             <TorrentList />
           </div>
-          <div styleName='details'>
-            <Inspector />
-          </div>
+          { isInspectorShown &&
+            <div styleName='details'>
+              <Inspector />
+            </div>
+          }
         </main>
         <footer styleName='footer'>
           <StatusToolbar/>
