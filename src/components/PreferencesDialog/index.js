@@ -14,14 +14,15 @@ import NetworkTabPanel from './NetworkTabPanel'
 
 import styles from './styles/index.css';
 
-@inject('view_store')
+@inject('view_store', 'session_store')
 @observer
 @CSSModules(styles)
 class PreferencesDialog extends Component {
   @autobind onBlur(event) {
-    const field = event.target.attributes['data-field'].value;
+    const id = event.target.attributes.id.value;
+    const value = event.target.value;
 
-    alert(`Data: ${field}`);
+    this.props.session_store.setPreference(id, value);
   }
 
   @autobind onHide() {

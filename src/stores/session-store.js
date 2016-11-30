@@ -16,6 +16,16 @@ class SessionStore {
         }));
     }));
   }
+
+  @action setPreference(id, value) {
+    const data = {
+      [id]: value
+    };
+
+    return this.rpc.sendRequest('session-set', data).then(action((response) => {
+      response.json().then(action((result) => {}));
+    }));
+  }
 }
 
 export default SessionStore;
