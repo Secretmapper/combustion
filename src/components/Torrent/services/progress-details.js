@@ -5,6 +5,7 @@ import {
   timeInterval,
 } from 'util/formatters';
 
+/*
 function formatProgressDone() {
 
 }
@@ -16,6 +17,7 @@ function formatProgressRemaining() {
 function formatProgressETA() {
 
 }
+*/
 
 function formatProgressMagnet(torrent) {
   let metaDataStatus = 'retrieving';

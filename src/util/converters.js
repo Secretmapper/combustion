@@ -4,7 +4,7 @@ export function fileToBase64(file) {
 
     reader.onload = () => {
       // Remove file type chunk
-      const [_, encodedData = ''] = reader.result.split('base64,');
+      const [, encodedData = ''] = reader.result.split('base64,');
 
       resolve(encodedData);
     };

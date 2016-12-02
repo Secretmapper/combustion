@@ -14,14 +14,7 @@ Math.ratio = function(numerator, denominator) {
 /**
  * Round a string of a number to a specified number of decimal places
  */
-Number.prototype.toTruncFixed = function(place) {
-  var ret = Math.floor(this * Math.pow (10, place)) / Math.pow(10, place);
+export function toTruncFixed (number, place) {
+  var ret = Math.floor(number * Math.pow (10, place)) / Math.pow(10, place);
   return ret.toFixed(place);
-}
-
-/*
- * Trim whitespace from a string
- */
-String.prototype.trim = function () {
-  return this.replace(/^\s*/, "").replace(/\s*$/, "");
 }

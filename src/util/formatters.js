@@ -1,4 +1,4 @@
-import './common';
+import { toTruncFixed } from './common';
 
 const speed_K = 1000;
 const speed_K_str = 'kB/s';
@@ -27,11 +27,11 @@ export function numberWithCommas(n) {
  */
 export function percentString(x) {
   if (x < 10.0) {
-    return x.toTruncFixed(2);
+    return toTruncFixed(x, 2);
   } else if (x < 100.0) {
-    return x.toTruncFixed(1);
+    return toTruncFixed(x, 1);
   } else {
-    return x.toTruncFixed(0);
+    return toTruncFixed(x, 0);
   }
 }
 
@@ -47,21 +47,21 @@ export function speed(KBps) {
   var speed = KBps;
 
   if (speed <= 999.95) { // 0 KBps to 999 K
-    return `${speed.toTruncFixed(0)} ${speed_K_str}`;
+    return `${toTruncFixed(speed, 0)} ${speed_K_str}`;
   }
 
   speed /= speed_K;
 
   if (speed <= 99.995) { // 1 M to 99.99 M
-    return `${speed.toTruncFixed(2)} ${speed_M_str}`;
+    return `${toTruncFixed(speed, 2)} ${speed_M_str}`;
   }
   if (speed <= 999.95) { // 100 M to 999.9 M
-    return `${speed.toTruncFixed(1)} ${speed_M_str}`;
+    return `${toTruncFixed(speed, 1)} ${speed_M_str}`;
   }
 
   // insane speeds
   speed /= speed_K;
-  return `${speed.toTruncFixed(2)} ${speed_G_str}`;
+  return `${toTruncFixed(speed, 2)} ${speed_G_str}`;
 }
 
 export function pluralString(msgid, msgid_plural, n) {
@@ -98,8 +98,8 @@ export function size(bytes) {
   // try to have at least 3 digits and at least 1 decimal
   return (
     convertedSize <= 9.995 ?
-    [convertedSize.toTruncFixed(2), unit].join(' ') :
-    [convertedSize.toTruncFixed(1), unit].join(' ')
+    [toTruncFixed(convertedSize, 2), unit].join(' ') :
+    [toTruncFixed(convertedSize, 1), unit].join(' ')
   );
 }
 
