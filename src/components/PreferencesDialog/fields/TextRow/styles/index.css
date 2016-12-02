@@ -1,0 +1,12 @@
+.row {
+ display: flex;
+ padding-bottom: 10px;
+}
+
+.key {
+ width: 180px;
+}
+
+.value {
+ flex: 1;
+}

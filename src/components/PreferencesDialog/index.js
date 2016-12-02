@@ -29,10 +29,6 @@ class PreferencesDialog extends Component {
     this.props.view_store.togglePreferencesDialog();
   }
 
-  @autobind handleSelect(index, last) {
-    console.log('Selected tab: ' + index + ', Last tab: ' + last);
-  }
-
   render() {
     return (
       <Dialog
@@ -42,7 +38,7 @@ class PreferencesDialog extends Component {
       >
         <div styleName='body'>
           <div styleName='content'>
-            <Tabs onBlur={this.onBlur} onSelect={this.handleSelect}>
+            <Tabs onBlur={this.onBlur}>
               <TabList>
                 <Tab>Torrents</Tab>
                 <Tab>Speed</Tab>

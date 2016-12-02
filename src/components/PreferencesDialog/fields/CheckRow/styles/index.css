@@ -1,0 +1,12 @@
+.row {
+ display: flex;
+ padding-bottom: 10px;
+}
+
+.row input {
+ margin-right: 5px;
+}
+
+.row label {
+ flex: 1;
+}

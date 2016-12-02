@@ -1,0 +1,21 @@
+.row {
+ display: flex;
+ padding-bottom: 10px;
+}
+
+.key {
+ width: 180px;
+ display: flex;
+}
+
+.key input {
+ margin-right: 5px;
+}
+
+.key label {
+ flex: 1;
+}
+
+.value {
+ flex: 1;
+}
