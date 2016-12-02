@@ -32,6 +32,7 @@
   outline: none;
   margin-right: 5px;
   height: 20px;
+  width: 40px;
 
   background-color: #dddddd;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#bbbbbb));
@@ -48,7 +49,21 @@
 }
 
 .buttonActive {
-  background-color: #e6e6ff;
+  background-image: -webkit-linear-gradient(top, #cdcdff, white);
+}
+
+.buttonTurtle {
+  composes: button;
+
+  background-image: url(images/turtle.png);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.turtleActive {
+  background-image: url(images/blue-turtle.png), -webkit-linear-gradient(top, #cdcdff, white);
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .filter {

@@ -6,7 +6,6 @@ import autobind from 'autobind-decorator';
 
 import settingsImage from '../../images/settings.png';
 import preferencesImage from '../../images/wrench.png';
-import turtleImage from '../../images/turtle.png';
 import compactImage from '../../images/compact.png';
 
 import SettingsContextMenu from 'components/SettingsContextMenu';
@@ -34,6 +33,10 @@ class StatusToolbar extends Component {
 
   @autobind onToggleCompact() {
     this.props.view_store.toggleCompact();
+  }
+
+  @autobind onToggleTurtle() {
+    this.props.session_store.togglePreference('alt-speed-enabled');
   }
 
   @autobind onToggleSettings(event) {
@@ -67,14 +70,14 @@ class StatusToolbar extends Component {
 
   render() {
     let compactClassName = styles.button;
-    let turtleClassName = styles.button;
+    let turtleClassName = styles.buttonTurtle;
 
     if (this.props.view_store.compact) {
       compactClassName += ` ${styles.buttonActive}`;
     }
 
-    if (this.props.session_store.altSpeedEnabled) {
-      turtleClassName += ` ${styles.buttonActive}`;
+    if (this.props.session_store.settings['alt-speed-enabled']) {
+      turtleClassName += ` ${styles.turtleActive}`;
     }
 
     return (
@@ -85,9 +88,7 @@ class StatusToolbar extends Component {
         <button styleName='button' onClick={this.onTogglePreferences}>
           <img src={preferencesImage} alt='Preferences'/>
         </button>
-        <button className={turtleClassName}>
-          <img src={turtleImage} alt='Speed limit'/>
-        </button>
+        <button className={turtleClassName} onClick={this.onToggleTurtle} title='Speed limit'></button>
         <button className={compactClassName} onClick={this.onToggleCompact}>
           <img src={compactImage} alt='Compact view'/>
         </button>
