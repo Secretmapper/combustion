@@ -48,6 +48,26 @@ class TorrentList extends Component {
     this.toggleContextMenu({left: clientX, top: clientY});
   }
 
+  @autobind onKeyDown(event) {
+    const { view_store, torrents_store } = this.props;
+    const code = event.nativeEvent.code;
+    const torrentIds = torrents_store.filteredTorrents.map((torrent) => torrent.id);
+    const position = torrentIds.indexOf(view_store.lastSelectedTorrent);
+    let newSelectedId;
+
+    if (code === 'ArrowUp') {
+      newSelectedId = torrentIds[position - 1];
+    }
+
+    if (code === 'ArrowDown') {
+      newSelectedId = torrentIds[position + 1];
+    }
+
+    if (newSelectedId) {
+      view_store.setSelected(newSelectedId);
+    }
+  }
+
   @autobind onClick(event, id) {
     if (event.ctrlKey) {
       this.props.view_store.toggleSelected(id);
@@ -90,7 +110,7 @@ class TorrentList extends Component {
 
   render() {
     return (
-      <ul styleName='torrentList'>
+      <ul styleName='torrentList' onKeyDown={this.onKeyDown}>
         {this.props.torrents_store.filteredTorrents.map((torrent, index) => {
           let className = styles.torrentRow;
 
@@ -114,6 +134,7 @@ class TorrentList extends Component {
               className={className}
               onClick={(event) => this.onClick(event, torrent.id)}
               onContextMenu={(event) => this.onContextMenu(event, torrent.id)}
+              tabIndex={0}
             >
               <Torrent torrent={torrent}/>
             </li>
