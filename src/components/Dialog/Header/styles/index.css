@@ -20,6 +20,7 @@
   height: 22px;
   cursor: pointer;
   outline: none;
+  font-weight: bold;
 }
 
 .close:hover {

@@ -12,7 +12,7 @@ class Header extends Component {
     return (
       <header styleName='header'>
         <h2 styleName='title'>{ this.props.title }</h2>
-        <button styleName='close' onClick={this.props.onClose} title='Close'> X </button>
+        <button styleName='close' onClick={this.props.onClose} title='Close'> ⨯ </button>
       </header>
     );
   }
