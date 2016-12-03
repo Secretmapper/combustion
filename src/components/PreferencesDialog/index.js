@@ -19,10 +19,23 @@ import styles from './styles/index.css';
 @CSSModules(styles)
 class PreferencesDialog extends Component {
   @autobind onBlur(event) {
+    const type = event.target.attributes.type.value;
     const id = event.target.attributes.id.value;
     const value = event.target.value;
 
-    this.props.session_store.setPreference(id, value);
+    if (type !== 'checkbox') {
+      this.props.session_store.setPreference(id, value);
+    }
+  }
+
+  @autobind onChange(event) {
+    const type = event.target.attributes.type.value;
+    const id = event.target.attributes.id.value;
+    const value = event.target.checked;
+
+    if (type === 'checkbox') {
+      this.props.session_store.setPreference(id, value);
+    }
   }
 
   @autobind onHide() {
@@ -38,7 +51,7 @@ class PreferencesDialog extends Component {
       >
         <div styleName='body'>
           <div styleName='content'>
-            <Tabs onBlur={this.onBlur}>
+            <Tabs onBlur={this.onBlur} onChange={this.onChange}>
               <TabList>
                 <Tab>Torrents</Tab>
                 <Tab>Speed</Tab>

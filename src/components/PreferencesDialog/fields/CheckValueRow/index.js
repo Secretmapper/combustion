@@ -19,7 +19,7 @@ class CheckValueRow extends Component {
           <label htmlFor={this.props.idCheck}>{this.props.label}</label>
         </div>
         <div styleName='value'>
-          <input type='number' min='0' id={this.props.idValue} defaultValue={value}/>
+          <input type='number' min='0' id={this.props.idValue} defaultValue={value} disabled={!check}/>
         </div>
       </div>
     );
