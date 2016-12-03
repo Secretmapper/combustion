@@ -13,8 +13,8 @@ class CheckRow extends Component {
 
     return (
       <div styleName='row'>
-        <input type='checkbox' id={this.props.id} title={this.props.tilte} defaultChecked={check}/>
-        <label htmlFor={this.props.id} title={this.props.tilte}>{this.props.label}</label>
+        <input type='checkbox' id={this.props.id} title={this.props.title} defaultChecked={check}/>
+        <label htmlFor={this.props.id} title={this.props.title}>{this.props.label}</label>
       </div>
     );
   }
