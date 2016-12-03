@@ -3,6 +3,7 @@ import { observable, action} from 'mobx';
 class SessionStore {
   @observable sessionId = null;
   @observable settings = {};
+  @observable freeSpace = -1; // TODO: Decide if this should be in TorrentUpload
 
   constructor(rpc) {
     this.rpc = rpc;
@@ -13,6 +14,19 @@ class SessionStore {
       .then(action((response) => {
         response.json().then(action((result) => {
           this.settings = result.arguments;
+        }));
+    }));
+  }
+
+  @action getFreeSpace(downloadDir) {
+    const data = {
+      path: downloadDir
+    };
+
+    return this.rpc.sendRequest('free-space', data)
+      .then(action((response) => {
+        response.json().then(action((result) => {
+          this.freeSpace = result.arguments['size-bytes'];
         }));
     }));
   }

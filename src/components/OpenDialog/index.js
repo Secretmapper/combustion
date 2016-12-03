@@ -2,6 +2,7 @@ import React, { Component} from 'react';
 import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
+import { size } from 'util/formatters';
 
 import Dialog from '../Dialog'
 import logoImage from '../../images/logo.png';
@@ -10,7 +11,7 @@ import TorrentUpload from 'stores/torrent-upload';
 
 import styles from './styles/index.css';
 
-@inject('view_store', 'torrents_store')
+@inject('view_store', 'torrents_store', 'session_store')
 @observer
 @CSSModules(styles)
 class OpenDialog extends Component {
@@ -18,6 +19,7 @@ class OpenDialog extends Component {
     super(props);
 
     this.torrentUpload = new TorrentUpload();
+    this.torrentUpload.setDownloadDir(this.props.session_store.settings['download-dir']);
   }
 
   @autobind onUpload(event) {
@@ -49,9 +51,26 @@ class OpenDialog extends Component {
     this.torrentUpload.setDownloadDir(target.value);
   }
 
+  @autobind onBlurDownloadDirectory({ target }) {
+    this.props.session_store.getFreeSpace(target.value);
+  }
+
   @autobind onChangeStart({ target }) {
     this.torrentUpload.setPaused(!target.checked);
   }
+
+  renderFreeSpace() {
+    const freeSpace = this.props.session_store.freeSpace;
+
+    if (freeSpace < 0) {
+      return null;
+    }
+
+    return (
+      <i> ({ size(freeSpace) } Free)</i>
+    );
+  }
+
 
   render() {
     return (
@@ -78,8 +97,8 @@ class OpenDialog extends Component {
                 </fieldset>
 
                 <fieldset>
-                  <label>Destination folder <i>(0 GB Free)</i>:</label>
-                  <input name="download-dir" type="text" onChange={this.onChangeDownloadDirectory} />
+                  <label>Destination folder{this.renderFreeSpace()}:</label>
+                  <input name="download-dir" type="text" onChange={this.onChangeDownloadDirectory} onBlur={this.onBlurDownloadDirectory} value={this.torrentUpload.downloadDir}/>
                 </fieldset>
 
                 <fieldset>
