@@ -2,24 +2,26 @@ import React, { Component} from 'react';
 import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
+import lodash from 'lodash';
 
+import { size } from 'util/formatters';
 import styles from './styles/index.css';
 
 @inject('view_store', 'torrents_store')
 @observer
 @CSSModules(styles)
 class Inspector extends Component {
-  @autobind renderActivity(torrent) {
+  @autobind renderActivity(info) {
     const activity = [
-      {value: torrent.totalSize, label: 'Have'},
-      {value: 12, label: 'Availability'},
-      {value: 13, label: 'Uploaded'},
-      {value: 14, label: 'Downloaded'},
-      {value: 55, label: 'State'},
-      {value: 55, label: 'Running Time'},
-      {value: 55, label: 'Remaining Time'},
-      {value: 55, label: 'Last Activity'},
-      {value: 55, label: 'Error'},
+      {value: 'have', label: 'Have'},
+      {value: 'availability', label: 'Availability'},
+      {value: 'upload', label: 'Uploaded'},
+      {value: 'download', label: 'Downloaded'},
+      {value: 'state', label: 'State'},
+      {value: 'running', label: 'Running Time'},
+      {value: 'remaining', label: 'Remaining Time'},
+      {value: 'last', label: 'Last Activity'},
+      {value: 'error', label: 'Error'},
     ];
 
     return (
@@ -28,7 +30,7 @@ class Inspector extends Component {
         {activity.map((activity, index) => (
           <div key={index} styleName='row'>
             <div styleName='key'>{activity.label}:</div>
-            <div styleName='value'>{activity.value}</div>
+            <div styleName='value'>{info[activity.value]}</div>
           </div>
         ))}
       </div>
@@ -58,15 +60,76 @@ class Inspector extends Component {
     );
   }
 
+  compact(values, format, mixed) {
+    if (values.length < 2) {
+      return format(values);
+    } else {
+      const numbers = lodash.every(values, (value) => lodash.isNumber(value));
+
+      if (numbers) {
+        return format(values);
+      } else {
+        return lodash.uniq(values).length > 0 ? mixed : format(values);
+      }
+    }
+  }
+
+  sumSize(values) {
+    return size(lodash.sum(values));
+  }
+
+  uniqText(values) {
+    const len = lodash.uniq(lodash.compact(values)).length;
+
+    if (len === 0) {
+      return 'None';
+    } else if (len === 1) {
+      return values[0];
+    } else {
+      return 'Mixed';
+    }
+  }
+
   render() {
-    const torrentId = this.props.view_store.selectedTorrents[0]; //TODO: Fix no selection
-    const torrent = this.props.torrents_store.torrents.find((torrent) => torrent.id === torrentId);
+    const selectedTorrentIds = this.props.view_store.selectedTorrents;
+    const torrents = this.props.torrents_store.torrents.filter((torrent) => selectedTorrentIds.includes(torrent.id));
+
+    const data = torrents.reduce( (memo, torrent) => {
+
+      memo.title.push(torrent.name);
+      memo.have.push(torrent.totalSize);
+      memo.upload.push(torrent.uploadedEver);
+      memo.state.push(torrent.status);
+      memo.error.push(torrent.errorString);
+
+      return memo;
+    }, {
+      title: [],
+      have: [],
+      availability: [],
+      upload: [],
+      download: [],
+      state: [],
+      running: [],
+      remaining: [],
+      last: [],
+      error: [],
+    });
+
+    const info = {
+      title: this.compact(data.title, (num) => num, `${torrents.length} Transfers Selected`),
+      have: this.compact(data.have, this.sumSize),
+      upload: this.compact(data.upload, this.sumSize),
+      download: this.compact(data.download, this.sumSize),
+      state: this.compact(data.download, this.uniqText),
+      error: this.compact(data.error, this.uniqText),
+    };
 
     return (
       <div styleName='inspector'>
-        <h1>{torrent.name}</h1>
-        {this.renderActivity(torrent)}
-        {this.renderDetails(torrent)}
+        <h1>{info.title}</h1>
+        {this.renderActivity(info)}
+        {/*this.renderDetails(torrent)*/}
       </div>
     );
   }
