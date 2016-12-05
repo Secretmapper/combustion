@@ -4,6 +4,8 @@
 
 React Transmission is an ongoing reimplementation of [Transmission](https://transmissionbt.com) web interface.
 
+![react-transmission](https://cloud.githubusercontent.com/assets/135988/20881507/fe5e60b8-badc-11e6-91b0-8bbe6636056d.png)
+
 You can find the original web interface source code [here](https://github.com/transmission/transmission/blob/master/web/)
 
 The official [Transmission repository](https://github.com/transmission/transmission)
