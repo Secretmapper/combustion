@@ -38,7 +38,7 @@
 }
 
 .list {
-  flex: 3;
+  flex: 2;
   overflow-y: auto;
   background: #fffce8;
 }

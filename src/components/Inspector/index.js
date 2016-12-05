@@ -4,7 +4,7 @@ import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
 import lodash from 'lodash';
 
-import { size } from 'util/formatters';
+import { size, speed } from 'util/formatters';
 import styles from './styles/index.css';
 
 @inject('view_store', 'torrents_store')
@@ -62,7 +62,41 @@ class Inspector extends Component {
     );
   }
 
+  @autobind renderPeers(info) {
+    if (info.peers.length > 1) return null;
+
+    const peers = info.peers[0];
+
+    return (
+      <div>
+        <h2>Peers</h2>
+        <table styleName='peers'>
+          <thead>
+            <th>Up</th>
+            <th>Down</th>
+            <th>%</th>
+            <th>Status</th>
+            <th>Address</th>
+            <th>Client</th>
+          </thead>
+        {peers.map((peer, index) => (
+          <tr key={peer.address}>
+            <td>{!peer.isDownloadingFrom && speed(peer.rateToClient)}</td>
+            <td>{peer.isDownloadingFrom && speed(peer.rateToClient)}</td>
+            <td>{peer.progress}</td>
+            <td>{peer.flagStr}</td>
+            <td>{peer.address}</td>
+            <td>{peer.clientName}</td>
+          </tr>
+        ))}
+        </table>
+      </div>
+    );
+  }
+
   @autobind renderTrackers(info) {
+    if (info.trackers.length > 1) return null;
+
     const trackers = info.trackers[0];
 
     return (
@@ -87,13 +121,15 @@ class Inspector extends Component {
         <h2>Files</h2>
         <ul styleName='files'>
         {files.map((file, index) => (
-          <li styleName='file'>
+          <li key={index} styleName='file'>
+            <input type='checkbox' disabled='disabled' checked={file.wanted}/>
             <div styleName='name'>{file.name}</div>
+            <span>P: {file.priority}</span>
 
             <div styleName='priority'>
-              <button onClick={() => this.onClickPriority(index, 'low')}>Low</button>
-              <button onClick={() => this.onClickPriority(index, 'normal')}>Normal</button>
-              <button onClick={() => this.onClickPriority(index, 'high')}>High</button>
+              <button onClick={() => this.onClickPriority(index, 'low')} title='Low Priority'>∨</button>
+              <button onClick={() => this.onClickPriority(index, 'normal')} title='Normal Priority'>-</button>
+              <button onClick={() => this.onClickPriority(index, 'high')} title='High Priority'>∧</button>
             </div>
           </li>
         ))}
@@ -102,8 +138,11 @@ class Inspector extends Component {
     );
   }
 
-  onClickPriority(index, priority) {
-    alert(`${index} ${priority}`);
+  onClickPriority(fileId, priority) {
+    const selectedTorrentIds = this.props.view_store.selectedTorrents;
+    const torrents = this.props.torrents_store.torrents.filter((torrent) => selectedTorrentIds.includes(torrent.id));
+
+    this.props.torrents_store.setPriority(torrents[0].id, priority, [fileId]);
   }
 
   compact(values, format, mixed) {
@@ -156,7 +195,13 @@ class Inspector extends Component {
       memo.pieceSize.push(torrent.pieceSize);
       memo.last.push(torrent.activityDate);
       memo.trackers.push(torrent.trackerStats);
-      memo.files.push(torrent.files);
+      memo.peers.push(torrent.peers);
+      memo.files.push(torrent.files.map((file, index) => {
+        return {
+          ...file,
+          ...torrent.fileStats[index],
+        };
+      }));
 
       return memo;
     }, {
@@ -180,6 +225,7 @@ class Inspector extends Component {
       pieceSize: [],
       trackers: [],
       files: [],
+      peers: [],
     });
 
     const info = {
@@ -200,6 +246,7 @@ class Inspector extends Component {
       last: this.uniqText(data.last),
       trackers: data.trackers,
       files: data.files,
+      peers: data.peers,
     };
 
     return (
@@ -207,6 +254,7 @@ class Inspector extends Component {
         <h1>{info.title}</h1>
         {this.renderActivity(info)}
         {this.renderDetails(info)}
+        {this.renderPeers(info)}
         {this.renderTrackers(info)}
         {this.renderFiles(info)}
       </div>
