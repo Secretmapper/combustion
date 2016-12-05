@@ -250,6 +250,14 @@ class TorrentStore {
     });
   }
 
+  @computed get totalUploadSpeed() {
+    return this.torrents.reduce((total, torrent) => total + torrent.rateUpload, 0);
+  }
+
+  @computed get totalDownloadSpeed() {
+    return this.torrents.reduce((total, torrent) => total + torrent.rateDownload, 0);
+  }
+
   @action setStatusFilter(statusFilter) {
     this.statusFilter = statusFilter;
   }

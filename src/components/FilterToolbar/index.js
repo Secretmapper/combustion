@@ -36,8 +36,6 @@ class FilterToolbar extends Component {
 
   render() {
     const torrentCount = this.props.stats_store.stats.torrentCount;
-    const downloadSpeed = this.props.stats_store.stats.downloadSpeed;
-    const uploadSpeed = this.props.stats_store.stats.uploadSpeed;
     const states = [
       {value: 11, label: 'Active'},
       {value: Torrent.STATUS_DOWNLOAD, label: 'Downloading'},
@@ -72,11 +70,11 @@ class FilterToolbar extends Component {
         <div styleName='stats'>
           <span>
             <img src={arrowDownImage} alt='Download speed' title='Download speed'/>
-            {speedBps(downloadSpeed)}
+            {speedBps(this.props.torrents_store.totalDownloadSpeed)}
           </span>
           <span>
             <img src={arrowUpImage} alt='Upload speed' title='Upload speed'/>
-            {speedBps(uploadSpeed)}
+            {speedBps(this.props.torrents_store.totalUploadSpeed)}
           </span>
         </div>
       </div>
