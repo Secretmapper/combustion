@@ -15,3 +15,24 @@
 .value {
  flex: 1;
 }
+
+.trackers {
+  list-style: none;
+  padding: 0;
+}
+
+.files {
+  list-style: none;
+  padding: 0;
+}
+
+.file {
+  display: flex;
+}
+
+.name {
+  flex: 1;
+}
+
+.priority {
+}

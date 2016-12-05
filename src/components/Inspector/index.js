@@ -37,14 +37,16 @@ class Inspector extends Component {
     );
   }
 
-  @autobind renderDetails(torrent) {
+  @autobind renderDetails(info) {
     const detail = [
-      {value: 11, label: 'Size'},
-      {value: torrent.downloadDir, label: 'Location'},
-      {value: 13, label: 'Hash'},
-      {value: 14, label: 'Privacy'},
-      {value: 55, label: 'Origin'},
-      {value: 55, label: 'Comment'},
+      {value: 'size', label: 'Size'},
+      {value: 'pieceCount', label: 'Piece count'},
+      {value: 'pieceSize', label: 'Piece size'},
+      {value: 'location', label: 'Location'},
+      {value: 'hash', label: 'Hash'},
+      {value: 'privacy', label: 'Privacy'},
+      {value: 'origin', label: 'Origin'},
+      {value: 'comment', label: 'Comment'},
     ];
 
     return (
@@ -53,25 +55,67 @@ class Inspector extends Component {
         {detail.map((detail, index) => (
           <div key={index} styleName='row'>
             <div styleName='key'>{detail.label}:</div>
-            <div styleName='value'>{detail.value}</div>
+            <div styleName='value'>{info[detail.value]}</div>
           </div>
         ))}
       </div>
     );
   }
 
+  @autobind renderTrackers(info) {
+    const trackers = info.trackers[0];
+
+    return (
+      <div>
+        <h2>Trackers</h2>
+        <ul styleName='trackers'>
+        {trackers.map((tracker, index) => (
+          <li>{tracker.host}</li>
+        ))}
+        </ul>
+      </div>
+    );
+  }
+
+  @autobind renderFiles(info) {
+    if (info.files.length > 1) return null;
+
+    const files = info.files[0];
+
+    return (
+      <div>
+        <h2>Files</h2>
+        <ul styleName='files'>
+        {files.map((file, index) => (
+          <li styleName='file'>
+            <div styleName='name'>{file.name}</div>
+
+            <div styleName='priority'>
+              <button onClick={() => this.onClickPriority(index, 'low')}>Low</button>
+              <button onClick={() => this.onClickPriority(index, 'normal')}>Normal</button>
+              <button onClick={() => this.onClickPriority(index, 'high')}>High</button>
+            </div>
+          </li>
+        ))}
+        </ul>
+      </div>
+    );
+  }
+
+  onClickPriority(index, priority) {
+    alert(`${index} ${priority}`);
+  }
+
   compact(values, format, mixed) {
     if (values.length < 2) {
       return format(values);
     } else {
-      const numbers = lodash.every(values, (value) => lodash.isNumber(value));
-
-      if (numbers) {
-        return format(values);
-      } else {
-        return lodash.uniq(values).length > 0 ? mixed : format(values);
-      }
+      return lodash.uniq(values).length > 0 ? mixed : format(values);
     }
+  }
+
+  sum(values) {
+    return lodash.sum(values);
   }
 
   sumSize(values) {
@@ -79,12 +123,13 @@ class Inspector extends Component {
   }
 
   uniqText(values) {
-    const len = lodash.uniq(lodash.compact(values)).length;
+    const uniqValues = lodash.uniq(values);
+    const len = uniqValues.length;
 
     if (len === 0) {
       return 'None';
     } else if (len === 1) {
-      return values[0];
+      return uniqValues[0];
     } else {
       return 'Mixed';
     }
@@ -102,6 +147,17 @@ class Inspector extends Component {
       memo.state.push(torrent.status);
       memo.error.push(torrent.errorString);
 
+      memo.origin.push(`Created by ${torrent.creator} on ${torrent.dateCreated}`);
+      memo.comment.push(torrent.comment);
+      memo.location.push(torrent.downloadDir);
+      memo.hash.push(torrent.hashString);
+      memo.privacy.push(torrent.isPrivate ? 'Private to this tracker -- DHT and PEX disabled' : 'Public torrent');
+      memo.pieceCount.push(torrent.pieceCount);
+      memo.pieceSize.push(torrent.pieceSize);
+      memo.last.push(torrent.activityDate);
+      memo.trackers.push(torrent.trackerStats);
+      memo.files.push(torrent.files);
+
       return memo;
     }, {
       title: [],
@@ -114,22 +170,45 @@ class Inspector extends Component {
       remaining: [],
       last: [],
       error: [],
+
+      origin: [],
+      comment: [],
+      location: [],
+      hash: [],
+      privacy: [],
+      pieceCount: [],
+      pieceSize: [],
+      trackers: [],
+      files: [],
     });
 
     const info = {
       title: this.compact(data.title, (num) => num, `${torrents.length} Transfers Selected`),
-      have: this.compact(data.have, this.sumSize),
-      upload: this.compact(data.upload, this.sumSize),
-      download: this.compact(data.download, this.sumSize),
-      state: this.compact(data.download, this.uniqText),
-      error: this.compact(data.error, this.uniqText),
+      have: this.sumSize(data.have),
+      upload: this.sumSize(data.upload),
+      download: this.sumSize(data.download),
+      state: this.uniqText(data.state),
+      error: this.uniqText(data.error),
+
+      origin: this.uniqText(data.origin),
+      comment: this.uniqText(data.comment),
+      location: this.uniqText(data.location),
+      hash: this.uniqText(data.hash),
+      privacy: this.uniqText(data.privacy),
+      pieceCount: this.sum(data.pieceCount),
+      pieceSize: this.sumSize(data.pieceSize),
+      last: this.uniqText(data.last),
+      trackers: data.trackers,
+      files: data.files,
     };
 
     return (
       <div styleName='inspector'>
         <h1>{info.title}</h1>
         {this.renderActivity(info)}
-        {/*this.renderDetails(torrent)*/}
+        {this.renderDetails(info)}
+        {this.renderTrackers(info)}
+        {this.renderFiles(info)}
       </div>
     );
   }
