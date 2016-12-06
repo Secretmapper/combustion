@@ -3,6 +3,22 @@
   padding: 15px;
 }
 
+.inspector :global .react-tabs [role=tablist] {
+  border: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.inspector :global .react-tabs [role=tab][aria-selected=true] {
+  border: none;
+}
+
+.inspector h1 {
+  font-weight: bold;
+  font-size: large;
+}
+
 .row {
  display: flex;
  padding-bottom: 10px;

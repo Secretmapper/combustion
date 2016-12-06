@@ -1,4 +1,5 @@
 import React, { Component} from 'react';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
@@ -255,12 +256,31 @@ class Inspector extends Component {
 
     return (
       <div styleName='inspector'>
-        <h1>{info.title}</h1>
-        {this.renderActivity(info)}
-        {this.renderDetails(info)}
-        {this.renderPeers(info)}
-        {this.renderTrackers(info)}
-        {this.renderFiles(info)}
+        <Tabs>
+          <TabList>
+            <Tab>Info</Tab>
+            <Tab>Peers</Tab>
+            <Tab>Trackers</Tab>
+            <Tab>Files</Tab>
+          </TabList>
+          <TabPanel>
+            <h1>{info.title}</h1>
+            {this.renderActivity(info)}
+            {this.renderDetails(info)}
+          </TabPanel>
+          <TabPanel>
+            <h1>{info.title}</h1>
+            {this.renderPeers(info)}
+          </TabPanel>
+          <TabPanel>
+            <h1>{info.title}</h1>
+            {this.renderTrackers(info)}
+          </TabPanel>
+          <TabPanel>
+            <h1>{info.title}</h1>
+            {this.renderFiles(info)}
+          </TabPanel>
+        </Tabs>
       </div>
     );
   }
