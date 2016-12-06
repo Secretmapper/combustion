@@ -5,6 +5,11 @@ import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
 import lodash from 'lodash';
 
+import infoImage from 'images/inspector-info.png';
+import peersImage from 'images/inspector-peers.png';
+import trackersImage from 'images/inspector-trackers.png';
+import filesImage from 'images/inspector-files.png';
+
 import { size, speed } from 'util/formatters';
 import styles from './styles/index.css';
 
@@ -258,10 +263,18 @@ class Inspector extends Component {
       <div styleName='inspector'>
         <Tabs>
           <TabList>
-            <Tab>Info</Tab>
-            <Tab>Peers</Tab>
-            <Tab>Trackers</Tab>
-            <Tab>Files</Tab>
+            <Tab>
+              <img src={infoImage} alt='Info' />
+            </Tab>
+            <Tab>
+              <img src={peersImage} alt='Peers' />
+            </Tab>
+            <Tab>
+              <img src={trackersImage} alt='Trackers' />
+            </Tab>
+            <Tab>
+              <img src={filesImage} alt='Files' />
+            </Tab>
           </TabList>
           <TabPanel>
             <h1>{info.title}</h1>
