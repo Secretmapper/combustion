@@ -72,23 +72,27 @@ class Inspector extends Component {
         <h2>Peers</h2>
         <table styleName='peers'>
           <thead>
-            <th>Up</th>
-            <th>Down</th>
-            <th>%</th>
-            <th>Status</th>
-            <th>Address</th>
-            <th>Client</th>
+            <tr>
+              <th>Up</th>
+              <th>Down</th>
+              <th>%</th>
+              <th>Status</th>
+              <th>Address</th>
+              <th>Client</th>
+            </tr>
           </thead>
-        {peers.map((peer, index) => (
-          <tr key={peer.address}>
-            <td>{!peer.isDownloadingFrom && speed(peer.rateToClient)}</td>
-            <td>{peer.isDownloadingFrom && speed(peer.rateToClient)}</td>
-            <td>{peer.progress}</td>
-            <td>{peer.flagStr}</td>
-            <td>{peer.address}</td>
-            <td>{peer.clientName}</td>
-          </tr>
-        ))}
+          <tbody>
+            {peers.map((peer, index) => (
+              <tr key={index}>
+                <td>{!peer.isDownloadingFrom && speed(peer.rateToClient)}</td>
+                <td>{peer.isDownloadingFrom && speed(peer.rateToClient)}</td>
+                <td>{peer.progress}</td>
+                <td>{peer.flagStr}</td>
+                <td>{peer.address}</td>
+                <td>{peer.clientName}</td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     );
@@ -104,7 +108,7 @@ class Inspector extends Component {
         <h2>Trackers</h2>
         <ul styleName='trackers'>
         {trackers.map((tracker, index) => (
-          <li>{tracker.host}</li>
+          <li key={index}>{tracker.host}</li>
         ))}
         </ul>
       </div>
@@ -176,7 +180,7 @@ class Inspector extends Component {
 
   render() {
     const selectedTorrentIds = this.props.view_store.selectedTorrents;
-    const torrents = this.props.torrents_store.torrents.filter((torrent) => selectedTorrentIds.includes(torrent.id));
+    const torrents = this.props.torrents_store.getByIds(selectedTorrentIds);
 
     const data = torrents.reduce( (memo, torrent) => {
 
