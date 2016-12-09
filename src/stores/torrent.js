@@ -75,10 +75,6 @@ class Torrent {
   @computed get have() {
     return this.haveValid + this.haveUnchecked;
   }
-
-  @computed get activity() {
-    return this.rateDownload + this.rateUpload;
-  }
 }
 
 export default Torrent;
