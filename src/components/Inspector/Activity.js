@@ -16,7 +16,7 @@ function Activity({ info }) {
       <ActivityRow label='Downloaded' value={info.download} />
       <ActivityRow label='State' value={info.state} />
       <ActivityRow label='Running Time' value={info.runningTime} />
-      <ActivityRow label='Remaining Time' value={info.remaining} />
+      <ActivityRow label='Remaining Time' value={info.remainingTime} />
       <ActivityRow label='Last Activity' value={info.last} />
       <ActivityRow label='Error' value={info.error} />
     </div>

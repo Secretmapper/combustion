@@ -62,13 +62,19 @@ export default class TorrentStats {
   }
 
   @computed get error() {
+    if (this.torrents.length === 0) {
+      return 'None';
+    }
+
     return formatError(this.torrents[0].error);
   }
 
   @computed get runningTime() {
-    const now = Date.now();
-    const baseline = this.torrents[0].startDate;
+    if (this.torrents.length === 0) {
+      return 'None';
+    }
 
+    const baseline = this.torrents[0].startDate;
     const allPaused = this.torrents.every((torrent) => torrent.isStopped);
     const multiBaseline = this.torrents.some((torrent) => torrent.startDate !== baseline);
 
@@ -80,6 +86,25 @@ export default class TorrentStats {
       return 'Mixed';
     }
 
-    return timeInterval(now / 1000 - baseline);
+    return timeInterval(Date.now() / 1000 - baseline);
+  }
+
+  @computed get remainingTime() {
+    if (this.torrents.length === 0) {
+      return 'None';
+    }
+
+    const baseline = this.torrents[0].eta;
+    const multiBaseline = this.torrents.some((torrent) => torrent.eta !== baseline);
+
+    if (multiBaseline) {
+      return 'Mixed';
+    }
+
+    if (baseline < 0) {
+      return 'Unknown';
+    }
+
+    return timeInterval(baseline);
   }
 }
