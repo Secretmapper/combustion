@@ -20,6 +20,7 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.json'],
     alias: {
+      images: path.join(paths.appSrc, 'images'),
       components: path.join(paths.appSrc, 'components'),
       stores: path.join(paths.appSrc, 'stores'),
       util: path.join(paths.appSrc, 'util')

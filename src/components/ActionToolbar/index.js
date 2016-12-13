@@ -21,7 +21,7 @@ class ActionToolbar extends Component {
     this.props.view_store.toggleOpenDialog();
   }
 
-  @autobind onRemove(){
+  @autobind onRemove() {
     const confirmRemove = confirm(`Once removed, continuing the transfer will require the torrent file. Are you sure you want to remove it?`);
 
     if (!confirmRemove) return;
@@ -29,7 +29,7 @@ class ActionToolbar extends Component {
     this.props.torrents_store.remove(this.props.view_store.selectedTorrents);
   }
 
-  @autobind onPause(){
+  @autobind onPause() {
     this.props.torrents_store.stop(this.props.view_store.selectedTorrents);
   }
 
@@ -37,15 +37,15 @@ class ActionToolbar extends Component {
     this.props.torrents_store.start(this.props.view_store.selectedTorrents);
   }
 
-  @autobind onPauseAll(){
+  @autobind onPauseAll() {
     this.props.torrents_store.stop(this.props.torrents_store.torrents.map((torrent) => torrent.id));
   }
 
-  @autobind onStartAll(){
+  @autobind onStartAll() {
     this.props.torrents_store.start(this.props.torrents_store.torrents.map((torrent) => torrent.id));
   }
 
-  @autobind onToggleInspector(){
+  @autobind onToggleInspector() {
     this.props.view_store.toggleInspector();
   }
 

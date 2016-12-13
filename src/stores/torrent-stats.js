@@ -48,7 +48,7 @@ export default class TorrentStats {
   }
 
   @computed get state() {
-    const states = [...new Set(this.torrents.map((torrent) => torrent.state))];
+    const states = [...new Set(this.torrents.map((torrent) => torrent.status))];
 
     if (states.length === 0) {
       return 'None';
