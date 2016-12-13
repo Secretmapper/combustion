@@ -62,11 +62,17 @@ export default class TorrentStats {
   }
 
   @computed get error() {
-    if (this.torrents.length === 0) {
+    const errors = [...new Set(this.torrents.map((torrent) => torrent.errorString))];
+
+    if (errors.length === 0) {
       return 'None';
     }
 
-    return formatError(this.torrents[0].error);
+    if (errors.length === 1) {
+      return errors[0];
+    }
+
+    return 'Mixed';
   }
 
   @computed get runningTime() {
@@ -106,5 +112,24 @@ export default class TorrentStats {
     }
 
     return timeInterval(baseline);
+  }
+
+  @computed get lastActivity() {
+    if (this.torrents.length === 0) {
+      return 'None';
+    }
+
+    const baseline = this.torrents.reduce((lastActivityDate, torrent) => lastActivityDate < torrent.activityDate ? torrent.activityDate : lastActivityDate, -1);
+    const elapsedSeconds = Date.now() / 1000 - baseline;
+
+    if (elapsedSeconds < 0) {
+      return 'None';
+    }
+
+    if (elapsedSeconds < 5) {
+      return 'Active now';
+    }
+
+    return `${timeInterval(elapsedSeconds)} ago`;
   }
 }
