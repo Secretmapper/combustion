@@ -62,7 +62,7 @@ export default class TorrentStats {
   }
 
   @computed get error() {
-    const errors = [...new Set(this.torrents.map((torrent) => torrent.errorString))];
+    const errors = [...new Set(this.torrents.map((torrent) => torrent.errorString).filter((errorString) => errorString.length > 0))];
 
     if (errors.length === 0) {
       return 'None';

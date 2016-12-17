@@ -12,8 +12,8 @@ function Activity({ info }) {
       <h2>Activity</h2>
       <ActivityRow label='Have' value={info.have} />
       <ActivityRow label='Availability' value={`${percentString((100.0 * info.available) / info.sizeWhenDone)}%`} />
-      <ActivityRow label='Uploaded' value={info.upload} />
       <ActivityRow label='Downloaded' value={info.download} />
+      <ActivityRow label='Uploaded' value={info.upload} />
       <ActivityRow label='State' value={info.state} />
       <ActivityRow label='Running Time' value={info.runningTime} />
       <ActivityRow label='Remaining Time' value={info.remainingTime} />
