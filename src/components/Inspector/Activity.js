@@ -4,8 +4,6 @@ import { percentString } from 'util/formatters';
 
 import ActivityRow from './Row';
 
-
-
 function Activity({ info }) {
   return (
     <div>

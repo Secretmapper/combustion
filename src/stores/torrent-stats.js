@@ -1,6 +1,12 @@
 import { computed } from 'mobx';
 
-import { size, timeInterval, formatStatus, formatError } from 'util/formatters';
+import { toStringWithCommas } from 'util/common';
+import {
+  size as formatSize,
+  mem as formatMem,
+  timeInterval,
+  formatStatus
+} from 'util/formatters';
 
 export default class TorrentStats {
   constructor(torrents) {
@@ -24,7 +30,7 @@ export default class TorrentStats {
 
   // TODO: Maybe rename to totalHave (same for others) for better understanding
   @computed get have() {
-    return size(this.torrents.reduce((totalSize, torrent) => totalSize + torrent.totalSize, 0));
+    return formatSize(this.torrents.reduce((totalSize, torrent) => totalSize + torrent.totalSize, 0));
   }
 
   @computed get available() {
@@ -40,11 +46,11 @@ export default class TorrentStats {
   }
 
   @computed get upload() {
-    return size(this.torrents.reduce((totalSize, torrent) => totalSize + torrent.uploadedEver, 0));
+    return formatSize(this.torrents.reduce((totalSize, torrent) => totalSize + torrent.uploadedEver, 0));
   }
 
   @computed get download() {
-    return size(this.torrents.reduce((totalSize, torrent) => totalSize + torrent.downloadedEver, 0));
+    return formatSize(this.torrents.reduce((totalSize, torrent) => totalSize + torrent.downloadedEver, 0));
   }
 
   @computed get state() {
@@ -61,6 +67,7 @@ export default class TorrentStats {
     return 'Mixed';
   }
 
+  // TODO: Review
   @computed get error() {
     const errors = [...new Set(this.torrents.map((torrent) => torrent.errorString).filter((errorString) => errorString.length > 0))];
 
@@ -131,5 +138,126 @@ export default class TorrentStats {
     }
 
     return `${timeInterval(elapsedSeconds)} ago`;
+  }
+
+  @computed get size() {
+    if (this.torrents.length === 0) {
+      return 'None';
+    }
+
+    const pieceSize = this.torrents[0].pieceSize;
+    const pieces = this.torrents.reduce((totalPieces, torrent) => totalPieces + torrent.pieceCount, 0);
+    const size = this.torrents.reduce((totalSize, torrent) => totalSize + torrent.totalSize, 0);
+    const multiPieceSize = this.torrents.some((torrent) => torrent.pieceSize !== pieceSize);
+
+    if (size === 0) {
+      return 'None';
+    }
+
+    if (!multiPieceSize) {
+      return `${formatSize(size)} (${toStringWithCommas(pieces)} pieces @ ${formatMem(pieceSize)})`;
+    }
+
+    return `${formatSize(size)} (${toStringWithCommas(pieces)} pieces)`;
+  }
+
+  @computed get hash() {
+    if (this.torrents.length === 0) {
+      return 'None';
+    }
+
+    const hashString = this.torrents[0].hashString;
+    const multiHash = this.torrents.some((torrent) => torrent.hashString !== hashString);
+
+    if (multiHash) {
+      return 'Mixed';
+    }
+
+    return hashString;
+  }
+
+  @computed get foldername() {
+    if (this.torrents.length === 0) {
+      return 'None';
+    }
+
+    const downloadDir = this.torrents[0].downloadDir;
+    const multiDownloadDir = this.torrents.some((torrent) => torrent.downloadDir !== downloadDir);
+
+    if (multiDownloadDir) {
+      return 'Mixed';
+    }
+
+    return downloadDir;
+  }
+
+  @computed get privacy() {
+    if (this.torrents.length === 0) {
+      return 'None';
+    }
+
+    const isPrivate = this.torrents[0].isPrivate;
+    const multiIsPrivate = this.torrents.some((torrent) => torrent.isPrivate !== isPrivate);
+
+    if (multiIsPrivate) {
+      return 'Mixed';
+    }
+
+    if (isPrivate) {
+      return 'Private to this tracker -- DHT and PEX disabled';
+    }
+
+    return 'Public torrent';
+  }
+
+  @computed get origin() {
+    if (this.torrents.length === 0) {
+      return 'None';
+    }
+
+    const creator = this.torrents[0].creator;
+    const dateCreated = this.torrents[0].dateCreated;
+    const mixedCreator = this.torrents.some((torrent) => torrent.creator !== creator);
+    const mixedDate = this.torrents.some((torrent) => torrent.dateCreated !== dateCreated);
+
+    const emptyCreator = !creator || !creator.length;
+    const emptyDateCreated = !dateCreated;
+
+    if (mixedCreator || mixedDate) {
+      return 'Mixed';
+    }
+
+    if (emptyCreator && emptyDateCreated) {
+      return 'Unknown';
+    }
+
+    if (emptyDateCreated && !emptyCreator) {
+      return `Created by ${creator}`;
+    }
+
+    if (emptyCreator && !emptyDateCreated) {
+      return `Created on ${(new Date(dateCreated * 1000)).toDateString()}`;
+    }
+
+    return `Created by ${creator} on ${(new Date(dateCreated * 1000)).toDateString()}`;
+  }
+
+  @computed get comment() {
+    if (this.torrents.length === 0) {
+      return 'None';
+    }
+
+    const comment = this.torrents[0].comment;
+    const multiComment = this.torrents.some((torrent) => torrent.comment !== comment);
+
+    if (!comment) {
+      return 'None';
+    }
+
+    if (multiComment) {
+      return 'Mixed';
+    }
+
+    return comment;
   }
 }
