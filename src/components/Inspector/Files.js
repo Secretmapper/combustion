@@ -4,7 +4,9 @@ import CSSModules from 'react-css-modules';
 import styles from './styles/index.css';
 
 function Files({ info }) {
-  const files = info.files[0];
+  if (info.torrents.length > 1) {
+    return null;
+  }
 
   return (
     <div>

@@ -6,7 +6,7 @@ import { speed } from 'util/formatters';
 import styles from './styles/index.css';
 
 function Peers({ info }) {
-  const peers = info.peers[0];
+  const peers = info.torrents[0].peers;
 
   return (
     <div>
@@ -23,8 +23,18 @@ function Peers({ info }) {
           </tr>
         </thead>
         <tbody>
-          {peers.map((peer, index) => (
-            <tr key={index}>
+          {peers.map((peer, index) => {
+            let className = '';
+
+            if (index % 2 === 1) { // Zero indexed. lololo
+              className = styles.peerRowEven;
+            }
+
+            return (
+            <tr
+              key={index}
+              className={className}
+            >
               <td>{!peer.isDownloadingFrom && speed(peer.rateToClient)}</td>
               <td>{peer.isDownloadingFrom && speed(peer.rateToClient)}</td>
               <td>{peer.progress}</td>
@@ -32,7 +42,8 @@ function Peers({ info }) {
               <td>{peer.address}</td>
               <td>{peer.clientName}</td>
             </tr>
-          ))}
+            );
+          })}
         </tbody>
       </table>
     </div>

@@ -4,7 +4,7 @@ import CSSModules from 'react-css-modules';
 import styles from './styles/index.css';
 
 function Trackers({ info }) {
-  const trackers = info.trackers[0];
+  const trackers = info.torrents[0].trackers;
 
   return (
     <div>
