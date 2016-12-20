@@ -1,15 +1,13 @@
 import React from 'react';
 
-import { percentString } from 'util/formatters';
-
 import ActivityRow from './Row';
 
 function Activity({ info }) {
   return (
     <div>
-      <h2>Activity</h2>
+      <h3>Activity</h3>
       <ActivityRow label='Have' value={info.have} />
-      <ActivityRow label='Availability' value={`${percentString((100.0 * info.available) / info.sizeWhenDone)}%`} />
+      <ActivityRow label='Availability' value={info.available} />
       <ActivityRow label='Downloaded' value={info.download} />
       <ActivityRow label='Uploaded' value={info.upload} />
       <ActivityRow label='State' value={info.state} />

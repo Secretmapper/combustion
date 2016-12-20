@@ -50,15 +50,15 @@ class Inspector extends Component {
           </TabPanel>
           <TabPanel>
             <h1>{info.title}</h1>
-            <Peers info={info} />
+            {info.peers.length > 0 && <Peers info={info} />}
           </TabPanel>
           <TabPanel>
             <h1>{info.title}</h1>
-            <Trackers info={info} />
+            {info.trackers.length > 0 && <Trackers info={info} />}
           </TabPanel>
           <TabPanel>
             <h1>{info.title}</h1>
-            <Files info={info} />
+            {info.files.length > 0 && <Files info={info} />}
           </TabPanel>
         </Tabs>
       </div>

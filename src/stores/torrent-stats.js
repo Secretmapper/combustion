@@ -5,13 +5,13 @@ import {
   size as formatSize,
   mem as formatMem,
   timeInterval,
-  formatStatus
+  formatStatus,
+  percentString,
 } from 'util/formatters';
 
 export default class TorrentStats {
   constructor(torrents) {
     this.torrents = torrents;
-    this.peers = [];
     this.trackers = [];
     this.files = [];
   }
@@ -22,7 +22,7 @@ export default class TorrentStats {
     }
 
     if (this.torrents.length === 1) {
-      return this.torrents[0].title;
+      return this.torrents[0].publicName;
     }
 
     return `${this.torrents.length} Transfers Selected`;
@@ -30,26 +30,41 @@ export default class TorrentStats {
 
   // TODO: Maybe rename to totalHave (same for others) for better understanding
   @computed get have() {
+    if (this.torrents.length === 0) {
+      return 'None';
+    }
+
     return formatSize(this.torrents.reduce((totalSize, torrent) => totalSize + torrent.totalSize, 0));
   }
 
   @computed get available() {
-    return this.torrents
+    if (this.torrents.length === 0) {
+      return 'None';
+    }
+
+    const available = this.torrents
       .filter((torrent) => !torrent.needsMetaData)
       .reduce((totalAvailable, torrent) => totalAvailable + torrent.have + torrent.desiredAvailable, 0);
-  }
-
-  @computed get sizeWhenDone() {
-    return this.torrents
+    const sizeWhenDone = this.torrents
       .filter((torrent) => !torrent.needsMetaData)
       .reduce((totalSize, torrent) => totalSize + torrent.sizeWhenDone, 0);
+
+    return `${percentString((100.0 * available) / sizeWhenDone)}%`;
   }
 
   @computed get upload() {
+    if (this.torrents.length === 0) {
+      return 'None';
+    }
+
     return formatSize(this.torrents.reduce((totalSize, torrent) => totalSize + torrent.uploadedEver, 0));
   }
 
   @computed get download() {
+    if (this.torrents.length === 0) {
+      return 'None';
+    }
+
     return formatSize(this.torrents.reduce((totalSize, torrent) => totalSize + torrent.downloadedEver, 0));
   }
 
@@ -259,5 +274,20 @@ export default class TorrentStats {
     }
 
     return comment;
+  }
+
+  @computed get peers() {
+    return this.torrents
+      .sort((torrentA, torrentB) => {
+        return torrentA.publicName.toLowerCase().localeCompare(torrentB.publicName.toLowerCase());
+      })
+      .reduce((allPeers, torrent) => {
+        allPeers.push({
+          name: torrent.publicName,
+          peers: torrent.peers,
+        });
+
+      return allPeers
+    }, []);
   }
 }

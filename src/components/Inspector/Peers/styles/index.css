@@ -1,0 +1,36 @@
+.peers {
+  width: 100%;
+}
+
+.encryptedCol {
+  width: 16px;
+}
+
+.upCol {
+  width: 70px;
+}
+
+.downCol {
+  width: 70px;
+}
+
+.percentCol {
+  width: 30px;
+  padding-right: 5px;
+  text-align: right;
+}
+
+.statusCol {
+  width: 40px;
+  padding-right: 5px;
+}
+
+.addressCol {
+  width: 180px;
+}
+
+.clientCol {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -21,7 +21,7 @@ function formatComment(comment) {
 function Details({ info }) {
   return (
     <div>
-      <h2>Details</h2>
+      <h3>Details</h3>
       <DetailsRow label='Size' value={info.size} />
       <DetailsRow label='Location' value={info.foldername} />
       <DetailsRow label='Hash' value={info.hash} />

@@ -22,7 +22,7 @@ class Torrent {
   // TODO: Find a better name for this (displayName, compareName, etc.)
   @computed get publicName() {
     if (!this.collatedName && this.name) {
-      return this.name.toLowerCase();
+      return this.name;
     }
 
     return this.collatedName || '';
