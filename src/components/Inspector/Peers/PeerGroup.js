@@ -11,7 +11,7 @@ function PeerGroup({ peers }) {
   return (
     <div>
       {peers.length > 0 &&
-        <table styleName='peers'>
+        <table styleName='peerList'>
           <thead>
             <tr>
               <th styleName='encryptedCol' />
@@ -25,7 +25,7 @@ function PeerGroup({ peers }) {
           </thead>
           <tbody>
             {peers.map((peer, index) => (
-              <tr key={index}>
+              <tr key={index} styleName='peerRow'>
                 <td>{peer.isEncrypted && <img src={lockIconImage} alt='Encrypted Connection' />}</td>
                 <td>{!peer.isDownloadingFrom && speed(peer.rateToClient)}</td>
                 <td>{peer.isDownloadingFrom && speed(peer.rateToClient)}</td>

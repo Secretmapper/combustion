@@ -1,5 +1,10 @@
-.peers {
+.peerList {
   width: 100%;
+  border-collapse: collapse;
+}
+
+.peerRow:nth-child(even) {
+  background-color: #EEEEEE;
 }
 
 .encryptedCol {

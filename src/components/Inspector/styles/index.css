@@ -36,10 +36,6 @@
   width: 100%;
 }
 
-.peerRowEven {
-  background-color: #F7F7F7;
-}
-
 .trackers {
   list-style: none;
   padding: 0;
