@@ -44,7 +44,7 @@
 }
 
 .details {
-  min-width: 400px;
+  min-width: 600px;
   flex: 1;
   overflow-y: auto;
   border-left: 1px solid #888;
