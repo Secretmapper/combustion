@@ -38,10 +38,12 @@
 }
 
 .magnet progress::-webkit-progress-bar {
+  box-shadow: inset 0px 0px 0px 1px #D47778;
   background-image: linear-gradient(to bottom, #ea8584 0%,#e38080 50%,#d37676 51%,#e78282 100%);
 }
 
 .magnet progress::-webkit-progress-value {
+  border: 1px solid #D47778;
   background-image: linear-gradient(to bottom, #efefef 0%,#e7e7e7 50%,#d1d1d1 51%,#ebebeb 100%);
 }
 

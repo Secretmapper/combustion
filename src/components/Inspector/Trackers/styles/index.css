@@ -1,0 +1,15 @@
+.trackerList {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.trackerRow {
+  padding: 5px;
+}
+
+.trackerRow:nth-child(even) {
+  background-color: #EEEEEE;
+}
