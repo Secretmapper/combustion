@@ -10,6 +10,8 @@ import ActionToolbar from 'components/ActionToolbar';
 import FilterToolbar from 'components/FilterToolbar';
 import StatusToolbar from 'components/StatusToolbar';
 
+import DropzonePanel from 'components/DropzonePanel';
+
 import OpenDialog from 'components/OpenDialog';
 import PreferencesDialog from 'components/PreferencesDialog';
 import ConnectionDialog from 'components/ConnectionDialog';
@@ -101,6 +103,8 @@ class App extends Component {
           onToggle={() => this.props.view_store.toggleRenamePrompt()}
           onSubmit={(value) => alert('rename: ' + value)}
         />
+
+        <DropzonePanel/>
 
         {renderDevTools()}
       </div>

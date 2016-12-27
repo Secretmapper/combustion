@@ -1,0 +1,29 @@
+.container {
+  position: absolute;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.75);
+  border: 0;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 100px;
+  border: 2px dashed rgb(100, 100, 100);
+  border-width: 3px;
+  border-style: dashed;
+  padding: 100px;
+}
+
+.description {
+  flex: 1;
+  font-size: 30px;
+  color: rgb(100, 100, 100);
+  margin-left: 10px;
+  max-width: 500px;
+}
