@@ -12,7 +12,6 @@ import {
 export default class TorrentStats {
   constructor(torrents) {
     this.torrents = torrents;
-    this.files = [];
   }
 
   @computed get title() {
@@ -302,6 +301,22 @@ export default class TorrentStats {
         });
 
       return allTrackers
+    }, []);
+  }
+
+  @computed get files() {
+    return this.torrents
+      .sort((torrentA, torrentB) => {
+        return torrentA.publicName.toLowerCase().localeCompare(torrentB.publicName.toLowerCase());
+      })
+      .reduce((allFiles, torrent) => {
+        allFiles.push({
+          name: torrent.publicName,
+          files: torrent.files,
+          fileStats: torrent.fileStats,
+        });
+
+      return allFiles
     }, []);
   }
 }

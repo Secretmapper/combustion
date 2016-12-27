@@ -22,11 +22,6 @@ import styles from './styles/index.css';
 @observer
 @CSSModules(styles)
 class Inspector extends Component {
-  onClickPriority(fileId, priority) {
-    const selectedTorrentIds = this.props.view_store.selectedTorrents;
-
-    this.props.torrents_store.setPriority(selectedTorrentIds[0], priority, [fileId]);
-  }
 
   render() {
     const selectedTorrentIds = this.props.view_store.selectedTorrents;
