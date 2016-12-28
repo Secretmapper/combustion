@@ -1,15 +1,22 @@
-.container {
-  position: absolute;
-  z-index: 1000;
+.container .dropzoneContainer {
+  visibility: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
   left: 0;
   top: 0;
-  right: 0;
-  height: 100vh;
-  background: rgba(255, 255, 255, 0.75);
-  border: 0;
 }
 
-.content {
+.container.activeContainer .dropzoneContainer {
+  z-index: 1000;
+  visibility: visible;
+}
+
+.container.activeContainer .childrenContainer {
+  opacity: 0.3;
+}
+
+.dropzoneContent {
   display: flex;
   align-items: center;
   justify-content: center;

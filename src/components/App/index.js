@@ -10,7 +10,7 @@ import ActionToolbar from 'components/ActionToolbar';
 import FilterToolbar from 'components/FilterToolbar';
 import StatusToolbar from 'components/StatusToolbar';
 
-import DropzonePanel from 'components/DropzonePanel';
+import DropzoneLayer from 'components/DropzoneLayer';
 
 import OpenDialog from 'components/OpenDialog';
 import PreferencesDialog from 'components/PreferencesDialog';
@@ -59,55 +59,55 @@ class App extends Component {
     const isInspectorShown = this.props.view_store.isInspectorShown;
 
     return (
-      <div styleName='container' onClick={this.onToggleContextMenu}>
-        <header styleName='header'>
-          <ActionToolbar/>
-          <FilterToolbar/>
-        </header>
-        <main styleName='main' role='main'>
-          <div styleName='list'>
-            <TorrentList />
-          </div>
-          { isInspectorShown &&
-            <div styleName='details'>
-              <Inspector />
-            </div>
-          }
-        </main>
-        <footer styleName='footer'>
-          <StatusToolbar/>
-        </footer>
+      <DropzoneLayer>
+        <div styleName='container' onClick={this.onToggleContextMenu}>
+            <header styleName='header'>
+              <ActionToolbar/>
+              <FilterToolbar/>
+            </header>
+            <main styleName='main' role='main'>
+              <div styleName='list'>
+                <TorrentList />
+              </div>
+              { isInspectorShown &&
+                <div styleName='details'>
+                  <Inspector />
+                </div>
+              }
+            </main>
+            <footer styleName='footer'>
+              <StatusToolbar/>
+            </footer>
 
-        <OpenDialog />
-        <PreferencesDialog />
-        <ConnectionDialog />
-        <StatisticsDialog />
-        <AboutDialog />
+            <OpenDialog />
+            <PreferencesDialog />
+            <ConnectionDialog />
+            <StatisticsDialog />
+            <AboutDialog />
 
-        <PromptDialog
-          header='Set location'
-          action='Apply'
-          placeholder='' /* TODO: To be defined when this promp is moved to torrent view */
-          question='Location'
-          toggle={this.props.view_store.isLocationPromptShown}
-          onToggle={() => this.props.view_store.toggleLocationPrompt()}
-          onSubmit={(value) => alert('location: ' + value)}
-        />
+            <PromptDialog
+              header='Set location'
+              action='Apply'
+              placeholder='' /* TODO: To be defined when this promp is moved to torrent view */
+              question='Location'
+              toggle={this.props.view_store.isLocationPromptShown}
+              onToggle={() => this.props.view_store.toggleLocationPrompt()}
+              onSubmit={(value) => alert('location: ' + value)}
+            />
 
-        <PromptDialog
-          header='Rename torrent'
-          action='Rename'
-          question='Enter new name'
-          placeholder='' /* TODO: To be defined when this promp is moved to torrent view */
-          toggle={this.props.view_store.isRenamePromptShown}
-          onToggle={() => this.props.view_store.toggleRenamePrompt()}
-          onSubmit={(value) => alert('rename: ' + value)}
-        />
+            <PromptDialog
+              header='Rename torrent'
+              action='Rename'
+              question='Enter new name'
+              placeholder='' /* TODO: To be defined when this promp is moved to torrent view */
+              toggle={this.props.view_store.isRenamePromptShown}
+              onToggle={() => this.props.view_store.toggleRenamePrompt()}
+              onSubmit={(value) => alert('rename: ' + value)}
+            />
 
-        <DropzonePanel/>
-
-        {renderDevTools()}
-      </div>
+            {renderDevTools()}
+        </div>
+      </DropzoneLayer>
     )
   };
 }
