@@ -9,6 +9,8 @@ import {
   percentString,
 } from 'util/formatters';
 
+import Tracker from 'stores/tracker';
+
 export default class TorrentStats {
   constructor(torrents) {
     this.torrents = torrents;
@@ -297,7 +299,7 @@ export default class TorrentStats {
       .reduce((allTrackers, torrent) => {
         allTrackers.push({
           name: torrent.publicName,
-          trackers: torrent.trackers,
+          trackers: torrent.trackerStats.map((trackerData) => new Tracker(trackerData)),
         });
 
       return allTrackers

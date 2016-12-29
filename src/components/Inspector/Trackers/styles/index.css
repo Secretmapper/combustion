@@ -6,10 +6,63 @@
   border-collapse: collapse;
 }
 
-.trackerRow {
-  padding: 5px;
+.tierRow {
 }
 
-.trackerRow:nth-child(even) {
+.trackerRow {
+  margin: 2px 0 8px 0;
+  padding: 3px 0 3px 2px;
+}
+
+.tierRow:nth-child(even) {
   background-color: #EEEEEE;
+}
+
+.trackerInfo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.trackerActivity {
+  color: #666;
+}
+
+.trackerActivityRow {
+  margin: 0;
+  padding: 2px;
+}
+
+.trackerHost {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #222;
+}
+
+.trackerTier {
+  margin: 0;
+  padding: 2px;
+  background-color: white;
+}
+
+.trackerStats {
+  color: #666;
+  width: 150px;
+  margin: 0;
+  padding-right: 3px;
+}
+
+.trackerStatsRow {
+  padding: 1px;
+  display: flex;
+}
+
+.trackerStatsTerm {
+  flex: 3;
+  font-weight: bold;
+  text-align: right;
+}
+
+.trackerStatsDescription {
+  flex: 1;
+  margin-left: 3px;
 }
