@@ -31,12 +31,39 @@ class SessionStore {
     }));
   }
 
+  @action setRateLimit(direction, value) {
+    let data;
+
+    if (value > 0) {
+      data = {
+        [`speed-limit-${direction}`]: value,
+        [`speed-limit-${direction}-enabled`]: true
+      };
+    } else {
+      data = {
+        [`speed-limit-${direction}-enabled`]: false
+      };
+    }
+
+    this.settings = {
+      ...this.settings,
+      ...data,
+    };
+
+    return this.rpc.sendRequest('session-set', data).then(action((response) => {
+      response.json().then(action((result) => {}));
+    }));
+  }
+
   @action setPreference(id, value) {
     const data = {
       [id]: value
     };
 
-    this.settings[id] = value;
+    this.settings = {
+      ...this.settings,
+      ...data,
+    };
 
     return this.rpc.sendRequest('session-set', data).then(action((response) => {
       response.json().then(action((result) => {}));

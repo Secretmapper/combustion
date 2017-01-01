@@ -10,6 +10,8 @@ class ViewStore {
   @observable isSettingsContextMenuShown = false;
   @observable isTorrentContextMenuShown = false;
   @observable isSortByContextMenuShown = false;
+  @observable isDownloadRateContextMenuShown = false;
+  @observable isUploadRateContextMenuShown = false;
 
   @observable isRenamePromptShown = false;
   @observable isLocationPromptShown = false;
@@ -26,6 +28,8 @@ class ViewStore {
     this.isSettingsContextMenuShown = false;
     this.isTorrentContextMenuShown = false;
     this.isSortByContextMenuShown = false;
+    this.isDownloadRateContextMenuShown = false;
+    this.isUploadRateContextMenuShown = false;
   }
 
   @action toggleSettingsContextMenu() {
@@ -40,6 +44,14 @@ class ViewStore {
 
   @action toggleSortByContextMenu() {
     this.isSortByContextMenuShown = !this.isSortByContextMenuShown;
+  }
+
+  @action toggleDownloadRateContextMenu() {
+    this.isDownloadRateContextMenuShown = !this.isDownloadRateContextMenuShown;
+  }
+
+  @action toggleUploadRateContextMenu() {
+    this.isUploadRateContextMenuShown = !this.isUploadRateContextMenuShown;
   }
 
   @action toggleRenamePrompt() {

@@ -6,6 +6,7 @@ import autobind from 'autobind-decorator';
 
 import ContextMenu from 'components/ContextMenu';
 import SortByContextMenu from 'components/SortByContextMenu';
+import RateContextMenu from 'components/RateContextMenu';
 
 import styles from './styles/index.css';
 
@@ -23,6 +24,14 @@ class TorrentContextMenu extends Component {
 
   @autobind onToggleSortByContextMenu() {
     this.props.view_store.toggleSortByContextMenu();
+  }
+
+  @autobind onToggleDownloadRateContextMenu() {
+    this.props.view_store.toggleDownloadRateContextMenu();
+  }
+
+  @autobind onToggleUploadRateContextMenu() {
+    this.props.view_store.toggleUploadRateContextMenu();
   }
 
   @autobind onToggleContextMenu() {
@@ -55,7 +64,38 @@ class TorrentContextMenu extends Component {
           <li styleName='torrentMenuItem' onClick={this.onStatistics}>Statistics</li>
           <li styleName='torrentMenuSeparator' />
           <li
-            ref='target'
+            ref='downloadRateTarget'
+            styleName={this.props.view_store.isDownloadRateContextMenuShown? 'torrentMenuSelected' : 'torrentMenuSubitem'}
+            onMouseEnter={this.onToggleDownloadRateContextMenu}
+            onMouseLeave={this.onToggleDownloadRateContextMenu}
+          >
+            Total Download rate
+            <RateContextMenu
+              direction='down'
+              show={this.props.view_store.isDownloadRateContextMenuShown}
+              container={this.props.container}
+              target={() => findDOMNode(this.refs.downloadRateTarget)}
+              onHide={this.props.onHide}
+            />
+          </li>
+          <li
+            ref='uploadRateTarget'
+            styleName={this.props.view_store.isUploadRateContextMenuShown ? 'torrentMenuSelected' : 'torrentMenuSubitem'}
+            onMouseEnter={this.onToggleUploadRateContextMenu}
+            onMouseLeave={this.onToggleUploadRateContextMenu}
+          >
+            Total Upload rate
+            <RateContextMenu
+              direction='up'
+              show={this.props.view_store.isUploadRateContextMenuShown}
+              container={this.props.container}
+              target={() => findDOMNode(this.refs.uploadRateTarget)}
+              onHide={this.props.onHide}
+            />
+          </li>
+          <li styleName='torrentMenuSeparator' />
+          <li
+            ref='sortByTarget'
             styleName={this.props.view_store.isSortByContextMenuShown ? 'torrentMenuSelected' : 'torrentMenuSubitem'}
             onMouseEnter={this.onToggleSortByContextMenu}
             onMouseLeave={this.onToggleSortByContextMenu}
@@ -64,7 +104,7 @@ class TorrentContextMenu extends Component {
             <SortByContextMenu
               show={this.props.view_store.isSortByContextMenuShown}
               container={this.props.container}
-              target={() => findDOMNode(this.refs.target)}
+              target={() => findDOMNode(this.refs.sortByTarget)}
               onHide={this.props.onHide}
             />
           </li>
