@@ -9,7 +9,7 @@ import styles from './styles/index.css';
 
 @inject('view_store', 'torrents_store')
 @CSSModules(styles)
-class TorrentContextMenu extends Component {
+class SortByContextMenu extends Component {
   @autobind onToggleSortByContextMenu() {
     this.props.view_store.toggleSortByContextMenu();
   }
@@ -55,4 +55,4 @@ class TorrentContextMenu extends Component {
   }
 }
 
-export default TorrentContextMenu;
+export default SortByContextMenu;
