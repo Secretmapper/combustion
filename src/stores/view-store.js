@@ -9,6 +9,7 @@ class ViewStore {
 
   @observable isSettingsContextMenuShown = false;
   @observable isTorrentContextMenuShown = false;
+  @observable isSortByContextMenuShown = false;
 
   @observable isRenamePromptShown = false;
   @observable isLocationPromptShown = false;
@@ -24,6 +25,7 @@ class ViewStore {
   @action toggleContextMenus() {
     this.isSettingsContextMenuShown = false;
     this.isTorrentContextMenuShown = false;
+    this.isSortByContextMenuShown = false;
   }
 
   @action toggleSettingsContextMenu() {
@@ -34,6 +36,10 @@ class ViewStore {
   @action toggleTorrentContextMenu() {
     this.toggleContextMenus();
     this.isTorrentContextMenuShown = !this.isTorrentContextMenuShown;
+  }
+
+  @action toggleSortByContextMenu() {
+    this.isSortByContextMenuShown = !this.isSortByContextMenuShown;
   }
 
   @action toggleRenamePrompt() {

@@ -16,21 +16,20 @@
   padding: 3px 10px 3px 20px;
 }
 
-.torrentMenuSubitem {
-  composes: torrentMenuItem;
-}
-
-.torrentMenuSubitem:after {
-  content: "►";
-  float: right;
-}
-
 .torrentMenuSelected {
   composes: torrentMenuItem;
 }
 
-.torrentMenuSelected:after {
-  content: none;
+.torrentMenuSelected:before {
+  content: "✔";
+  margin-left: -14px;
+  margin-right: 6px;
+}
+
+.torrentMenuItemDisabled {
+  composes: torrentMenuItem;
+  color: rgb(170, 170, 170);
+  pointer-events: none;
 }
 
 .torrentMenuItem:hover {
@@ -46,14 +45,6 @@
   padding: 0px;
 }
 
-.torrentMenuItem a {
-  text-decoration: none;
-}
-
-.torrentMenuItem a:visited {
-  color: rgb(0, 0, 0);
-}
-
-.torrentMenuItem:hover a {
-  color: rgb(255, 255, 255);
+.torrentMenuSeparator:before {
+  content: none;
 }
