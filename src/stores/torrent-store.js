@@ -1,6 +1,18 @@
 import {observable, action, computed} from 'mobx';
 
 import Torrent from 'stores/torrent';
+import * as comparators from 'util/comparators';
+
+const comparatorsMap = {
+  queue_order: comparators.compareByQueue,
+  activity: comparators.compareByActivity,
+  age: comparators.compareByAge,
+  name: comparators.compareByName,
+  percent_completed: comparators.compareByProgress,
+  ratio: comparators.compareByRatio,
+  size: comparators.compareBySize,
+  state: comparators.compareByState,
+};
 
 const domainRegExp = /([a-zA-Z0-9]+\.)?([a-zA-Z0-9][a-zA-Z0-9-]+)\.[a-zA-Z]{2,6}/i;
 
@@ -18,6 +30,8 @@ class TorrentStore {
   @observable statusFilter = 0;
   @observable trackerFilter = '';
   @observable textFilter = '';
+  @observable sortCriteria = 'name';
+  @observable sortDirection = '';
 
   constructor(rpc) {
     this.rpc = rpc;
@@ -212,6 +226,26 @@ class TorrentStore {
     }));
   }
 
+  @action setPriority(torrentId, priority, fileIds) {
+    const data = {
+      ids: [torrentId],
+      [`priority-${priority}`]: fileIds,
+    };
+
+    return this.rpc.sendRequest('torrent-set', data).then(action((response) => {
+      response.json().then(action((result) => {
+        // TODO: Review!
+        if (result.result.success !== 'success') return;
+
+        this.fetch(torrentId);
+      }));
+    }));
+  }
+
+  @action setSortCriteria(sortCriteria) {
+    this.sortCriteria = sortCriteria;
+  }
+
   @action askTrackerMorePeers(torrentIds) {
     const data = {
       ids: torrentIds,
@@ -245,9 +279,7 @@ class TorrentStore {
       if (this.textFilter && !regexp.test(torrent.name)) return false;
 
       return true;
-    }).sort((torrentA, torrentB) => {
-      return torrentA.publicName.localeCompare(torrentB.publicName);
-    });
+    }).sort(comparatorsMap[this.sortCriteria]);
   }
 
   @computed get totalUploadSpeed() {

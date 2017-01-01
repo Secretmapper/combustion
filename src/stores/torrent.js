@@ -71,6 +71,14 @@ class Torrent {
   @computed get needsMetaData() {
     return this.metadataPercentComplete < 1;
   }
+
+  @computed get have() {
+    return this.haveValid + this.haveUnchecked;
+  }
+
+  @computed get activity() {
+    return this.rateDownload + this.rateUpload;
+  }
 }
 
 export default Torrent;

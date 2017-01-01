@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
+import { findDOMNode } from 'react-dom';
 import CSSModules from 'react-css-modules';
-import { inject } from 'mobx-react';
+import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
 
 import ContextMenu from 'components/ContextMenu';
+import SortByContextMenu from 'components/SortByContextMenu';
 
 import styles from './styles/index.css';
 
-@inject('view_store', 'torrents_store')
+@inject('view_store')
+@observer
 @CSSModules(styles)
 class TorrentContextMenu extends Component {
   @autobind onAbout() {
@@ -16,6 +19,10 @@ class TorrentContextMenu extends Component {
 
   @autobind onStatistics() {
     this.props.view_store.toggleStatisticsDialog();
+  }
+
+  @autobind onToggleSortByContextMenu() {
+    this.props.view_store.toggleSortByContextMenu();
   }
 
   @autobind onToggleContextMenu() {
@@ -46,6 +53,22 @@ class TorrentContextMenu extends Component {
           </li>
           <li styleName='torrentMenuSeparator' />
           <li styleName='torrentMenuItem' onClick={this.onStatistics}>Statistics</li>
+          <li styleName='torrentMenuSeparator' />
+          <li
+            ref='target'
+            styleName='torrentMenuItem'
+            onMouseEnter={this.onToggleSortByContextMenu}
+            onMouseLeave={this.onToggleSortByContextMenu}
+          >
+            Sort Transfers By
+            {!this.props.view_store.isSortByContextMenuShown && <span>►</span>}
+            <SortByContextMenu
+              show={this.props.view_store.isSortByContextMenuShown}
+              container={this.props.container}
+              target={() => findDOMNode(this.refs.target)}
+              onHide={this.props.onHide}
+            />
+          </li>
         </ul>
       </ContextMenu>
     );
