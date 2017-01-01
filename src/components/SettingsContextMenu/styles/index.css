@@ -16,6 +16,23 @@
   padding: 3px 10px 3px 20px;
 }
 
+.torrentMenuSubitem {
+  composes: torrentMenuItem;
+}
+
+.torrentMenuSubitem:after {
+  content: "►";
+  float: right;
+}
+
+.torrentMenuSelected {
+  composes: torrentMenuItem;
+}
+
+.torrentMenuSelected:after {
+  content: none;
+}
+
 .torrentMenuItem:hover {
   color: rgb(255, 255, 255);
   background-color: rgb(34, 68, 238);

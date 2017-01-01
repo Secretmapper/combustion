@@ -56,12 +56,11 @@ class TorrentContextMenu extends Component {
           <li styleName='torrentMenuSeparator' />
           <li
             ref='target'
-            styleName='torrentMenuItem'
+            styleName={this.props.view_store.isSortByContextMenuShown ? 'torrentMenuSelected' : 'torrentMenuSubitem'}
             onMouseEnter={this.onToggleSortByContextMenu}
             onMouseLeave={this.onToggleSortByContextMenu}
           >
             Sort Transfers By
-            {!this.props.view_store.isSortByContextMenuShown && <span>►</span>}
             <SortByContextMenu
               show={this.props.view_store.isSortByContextMenuShown}
               container={this.props.container}

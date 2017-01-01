@@ -22,6 +22,7 @@
 
 .torrentMenuSelected:before {
   content: "✔";
+  margin-left: -14px;
   margin-right: 6px;
 }
 
