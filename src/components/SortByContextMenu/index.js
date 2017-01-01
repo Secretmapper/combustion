@@ -25,6 +25,16 @@ class SortByContextMenu extends Component {
 
   render() {
     const { sortCriteria, sortDirection } = this.props.torrents_store;
+    const criteriaList = {
+      queue_order: 'Queue Order',
+      activity: 'Activity',
+      age: 'Age',
+      name: 'Name',
+      percent_completed: 'Progress',
+      ratio: 'Ratio',
+      size: 'Size',
+      state: 'State',
+    };
 
     return (
       <ContextMenu
@@ -39,14 +49,10 @@ class SortByContextMenu extends Component {
           onMouseEnter={this.onToggleSortByContextMenu}
           onMouseLeave={this.onToggleSortByContextMenu}
         >
-          <li styleName={sortCriteria === 'queue_order' ? 'torrentMenuSelected' : 'torrentMenuItem'} onClick={this.onSetSortCriteria.bind(this, 'queue_order')}>Queue Order</li>
-          <li styleName={sortCriteria === 'activity' ? 'torrentMenuSelected' : 'torrentMenuItem'} onClick={this.onSetSortCriteria.bind(this, 'activity')}>Activity</li>
-          <li styleName={sortCriteria === 'age' ? 'torrentMenuSelected' : 'torrentMenuItem'} onClick={this.onSetSortCriteria.bind(this, 'age')}>Age</li>
-          <li styleName={sortCriteria === 'name' ? 'torrentMenuSelected' : 'torrentMenuItem'} onClick={this.onSetSortCriteria.bind(this, 'name')}>Name</li>
-          <li styleName={sortCriteria === 'percent_completed' ? 'torrentMenuSelected' : 'torrentMenuItem'} onClick={this.onSetSortCriteria.bind(this, 'percent_completed')}>Progress</li>
-          <li styleName={sortCriteria === 'ratio' ? 'torrentMenuSelected' : 'torrentMenuItem'} onClick={this.onSetSortCriteria.bind(this, 'ratio')}>Ratio</li>
-          <li styleName={sortCriteria === 'size' ? 'torrentMenuSelected' : 'torrentMenuItem'} onClick={this.onSetSortCriteria.bind(this, 'size')}>Size</li>
-          <li styleName={sortCriteria === 'state' ? 'torrentMenuSelected' : 'torrentMenuItem'} onClick={this.onSetSortCriteria.bind(this, 'state')}>State</li>
+          {Object.keys(criteriaList).map((key) => (
+            <li key={key} styleName={sortCriteria === key ? 'torrentMenuSelected' : 'torrentMenuItem'} onClick={this.onSetSortCriteria.bind(this, key)}>{criteriaList[key]}</li>
+          ))}
+
           <li styleName='torrentMenuSeparator' />
           <li styleName={sortDirection === 'ascending' ? 'torrentMenuSelected' : 'torrentMenuItem'}>Reverse Sort Order</li>
         </ul>
