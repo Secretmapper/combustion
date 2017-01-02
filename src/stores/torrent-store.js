@@ -228,7 +228,7 @@ class TorrentStore {
         // TODO: Review!
         if (result.result.success !== 'success') return;
 
-        this.fetch(torrentId);
+        this.fetch(torrentIds);
       }));
     }));
   }

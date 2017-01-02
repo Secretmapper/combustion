@@ -18,6 +18,15 @@ class SessionStore {
     }));
   }
 
+  @action testPort(port) {
+    return this.rpc.sendRequest('port-test')
+      .then(action((response) => {
+        return response.json().then(action((result) => {
+          return result.arguments['port-is-open'];
+        }));
+    }));
+  }
+
   @action getFreeSpace(downloadDir) {
     const data = {
       path: downloadDir

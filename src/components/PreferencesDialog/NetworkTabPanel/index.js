@@ -1,25 +1,21 @@
 import React, { Component} from 'react';
 import { inject, observer } from 'mobx-react';
 
+import TextRow from '../fields/TextRow';
+import PortTestRow from '../fields/PortTestRow';
 import CheckRow from '../fields/CheckRow';
 
-@inject('view_store')
+@inject('view_store', 'session_store')
 @observer
 class NetworkTabPanel extends Component {
+
   render() {
     return (
       <div>
         <h3>Listening port</h3>
 
-        <div className="row">
-          <div className="key"><label htmlFor="peer-port">Peer listening port:</label></div>
-          <div className="value"><input type="number" min="0" max="65535" id="peer-port"/></div>
-        </div>
-        <div className="row">
-          <div className="key">&nbsp;</div>
-          <div className="value"><span id="port-label">Status: Unknown</span></div>
-        </div>
-
+        <TextRow id='peer-port' label='Peer listening port'/>
+        <PortTestRow/>
         <CheckRow id='peer-port-random-on-start' label='Randomize port on launch'/>
         <CheckRow id='port-forwarding-enabled' label='Use port forwarding from my router'/>
 
