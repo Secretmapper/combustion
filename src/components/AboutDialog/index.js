@@ -8,7 +8,7 @@ import logoImage from '../../images/logo.png';
 
 import styles from './styles/index.css';
 
-@inject('view_store')
+@inject('view_store', 'session_store')
 @observer
 @CSSModules(styles)
 class AboutDialog extends Component {
@@ -30,7 +30,7 @@ class AboutDialog extends Component {
               <img src={logoImage} alt='logo'></img>
             </div>
 
-            <h3>Transmission 2.84 (14307)</h3>
+            <h3>Transmission {this.props.session_store.settings.version}</h3>
             <p>A fast and easy BitTorrent client</p>
             <p>Copyright (c) The Transmission Project</p>
           </div>
