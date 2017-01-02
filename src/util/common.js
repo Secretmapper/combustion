@@ -14,7 +14,11 @@ Math.ratio = function(numerator, denominator) {
 /**
  * Round a string of a number to a specified number of decimal places
  */
-export function toTruncFixed (number, place) {
+export function toTruncFixed(number, place) {
   var ret = Math.floor(number * Math.pow (10, place)) / Math.pow(10, place);
   return ret.toFixed(place);
 }
+
+export function toStringWithCommas(number) {
+  return number.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
+};

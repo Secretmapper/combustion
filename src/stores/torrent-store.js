@@ -44,7 +44,14 @@ class TorrentStore {
         'peersConnected', 'peersGettingFromUs', 'peersSendingToUs', 'percentDone',
         'queuePosition', 'rateDownload', 'rateUpload', 'recheckProgress',
         'seedRatioMode', 'seedRatioLimit', 'sizeWhenDone', 'status', 'trackers',
-        'downloadDir', 'uploadedEver', 'uploadRatio', 'webseedsSendingToUs'
+        'downloadDir', 'uploadedEver', 'uploadRatio', 'webseedsSendingToUs',
+
+
+        'activityDate', 'corruptEver', 'desiredAvailable', 'downloadedEver',
+        'fileStats', 'haveUnchecked', 'haveValid', 'peers', 'startDate',
+        'trackerStats', 'comment', 'creator', 'dateCreated', 'files',
+        'hashString', 'isPrivate', 'pieceCount', 'pieceSize'
+
       ]
     };
 
@@ -221,7 +228,7 @@ class TorrentStore {
         // TODO: Review!
         if (result.result.success !== 'success') return;
 
-        this.fetch(torrentIds);
+        this.fetch(torrentId);
       }));
     }));
   }

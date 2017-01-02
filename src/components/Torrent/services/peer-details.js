@@ -3,9 +3,9 @@ import {
   countString,
   percentString,
   ratioString,
+  formatStatus,
+  formatError,
 } from 'util/formatters';
-
-import Torrent from 'stores/torrent';
 
 function formatUL(torrent) {
   return `↑ ${speedBps(torrent.rateUpload)}`;
@@ -86,45 +86,6 @@ function formatChecking(torrent) {
     percentString(100.0 * torrent.recheckProgress),
     '% tested)'
   ].join('');
-}
-
-function formatStatus(torrent) {
-  switch (torrent.status) {
-  case Torrent.STATUS_STOPPED:
-    return torrent.isFinished ? 'Seeding complete' : 'Paused';
-  case Torrent.STATUS_CHECK_WAIT:
-    return 'Queued for verification';
-  case Torrent.STATUS_CHECK:
-    return 'Verifying local data';
-  case Torrent.STATUS_DOWNLOAD_WAIT:
-    return 'Queued for download';
-  case Torrent.STATUS_DOWNLOAD:
-    return 'Downloading';
-  case Torrent.STATUS_SEED_WAIT:
-    return 'Queued for seeding';
-  case Torrent.STATUS_SEED:
-    return 'Seeding';
-  case null:
-  case undefined:
-    return 'Unknown';
-  default:
-    return 'Error';
-  }
-}
-
-function formatError(torrent) {
-  const errorDescription = torrent.errorDescription;
-
-  switch (torrent.error) {
-  case Torrent.ERR_TRACKER_WARNING:
-    return `Tracker returned a warning: ${errorDescription}`;
-  case Torrent.ERR_TRACKER_ERROR:
-    return `Tracker returned an error: ${errorDescription}`;
-  case Torrent.ERR_LOCAL_ERROR:
-    return `Error: ${errorDescription}`;
-  default:
-    return null;
-  }
 }
 
 function formatSeedingShort(torrent) {

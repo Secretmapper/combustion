@@ -31,6 +31,12 @@
   margin-bottom: 2px;
 }
 
+.peerDetailsError {
+  composes: peerDetails;
+
+  color: #F00;
+}
+
 .detailsCompact {
   margin-right: 10px;
 }

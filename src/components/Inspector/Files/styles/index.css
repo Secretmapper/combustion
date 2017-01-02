@@ -1,0 +1,36 @@
+.fileList {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.fileRow {
+  display: flex;
+  align-items: center;
+  padding-bottom: 5px;
+}
+
+.name {
+  flex: 1;
+  padding-left: 5px;
+}
+
+.priority button {
+  border: 1px solid #aaa;
+  padding: 5px 10px;
+  font-weight: bold;
+}
+
+.priority button.selected {
+  background-image: -webkit-linear-gradient(top, #cdcdff, white);
+}
+
+.priority button:first-child {
+  border-radius: 5px 0px 0px 5px;
+}
+
+.priority button:last-child {
+  border-radius: 0px 5px 5px 0px;
+}

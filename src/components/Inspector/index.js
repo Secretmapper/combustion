@@ -1,7 +1,20 @@
 import React, { Component} from 'react';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
-import autobind from 'autobind-decorator';
+
+import TorrentStats from 'stores/torrent-stats';
+
+import infoImage from 'images/inspector-info.png';
+import peersImage from 'images/inspector-peers.png';
+import trackersImage from 'images/inspector-trackers.png';
+import filesImage from 'images/inspector-files.png';
+
+import Activity from './Activity';
+import Details from './Details';
+import Peers from './Peers';
+import Trackers from './Trackers';
+import Files from './Files';
 
 import styles from './styles/index.css';
 
@@ -9,64 +22,40 @@ import styles from './styles/index.css';
 @observer
 @CSSModules(styles)
 class Inspector extends Component {
-  @autobind renderActivity(torrent) {
-    const activity = [
-      {value: torrent.totalSize, label: 'Have'},
-      {value: 12, label: 'Availability'},
-      {value: 13, label: 'Uploaded'},
-      {value: 14, label: 'Downloaded'},
-      {value: 55, label: 'State'},
-      {value: 55, label: 'Running Time'},
-      {value: 55, label: 'Remaining Time'},
-      {value: 55, label: 'Last Activity'},
-      {value: 55, label: 'Error'},
-    ];
-
-    return (
-      <div>
-        <h2>Activity</h2>
-        {activity.map((activity, index) => (
-          <div key={index} styleName='row'>
-            <div styleName='key'>{activity.label}:</div>
-            <div styleName='value'>{activity.value}</div>
-          </div>
-        ))}
-      </div>
-    );
-  }
-
-  @autobind renderDetails(torrent) {
-    const detail = [
-      {value: 11, label: 'Size'},
-      {value: torrent.downloadDir, label: 'Location'},
-      {value: 13, label: 'Hash'},
-      {value: 14, label: 'Privacy'},
-      {value: 55, label: 'Origin'},
-      {value: 55, label: 'Comment'},
-    ];
-
-    return (
-      <div>
-        <h2>Details</h2>
-        {detail.map((detail, index) => (
-          <div key={index} styleName='row'>
-            <div styleName='key'>{detail.label}:</div>
-            <div styleName='value'>{detail.value}</div>
-          </div>
-        ))}
-      </div>
-    );
-  }
 
   render() {
-    const torrentId = this.props.view_store.selectedTorrents[0]; //TODO: Fix no selection
-    const torrent = this.props.torrents_store.torrents.find((torrent) => torrent.id === torrentId);
+    const selectedTorrentIds = this.props.view_store.selectedTorrents;
+    const torrents = this.props.torrents_store.getByIds(selectedTorrentIds);
+
+    const info = new TorrentStats(torrents);
 
     return (
       <div styleName='inspector'>
-        <h1>{torrent.name}</h1>
-        {this.renderActivity(torrent)}
-        {this.renderDetails(torrent)}
+        <Tabs>
+          <TabList>
+            <Tab><img src={infoImage} alt='Info' /></Tab>
+            <Tab><img src={peersImage} alt='Peers' /></Tab>
+            <Tab><img src={trackersImage} alt='Trackers' /></Tab>
+            <Tab><img src={filesImage} alt='Files' /></Tab>
+          </TabList>
+          <TabPanel>
+            <h1>{info.title}</h1>
+            <Activity info={info} />
+            <Details info={info} />
+          </TabPanel>
+          <TabPanel>
+            <h1>{info.title}</h1>
+            {info.peers.length > 0 && <Peers info={info} />}
+          </TabPanel>
+          <TabPanel>
+            <h1>{info.title}</h1>
+            {info.trackers.length > 0 && <Trackers info={info} />}
+          </TabPanel>
+          <TabPanel>
+            <h1>{info.title}</h1>
+            {info.files.length > 0 && <Files info={info} />}
+          </TabPanel>
+        </Tabs>
       </div>
     );
   }

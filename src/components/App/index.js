@@ -21,10 +21,10 @@ import PromptDialog from 'components/PromptDialog';
 
 import styles from './styles/index.css';
 
+setLogEnabled(false);
+
 function renderDevTools() {
   if (process.env.NODE_ENV !== 'development') return null;
-
-  setLogEnabled(false);
 
   return <DevTools position={{bottom: 0, right: 0}} />;
 }

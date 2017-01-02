@@ -9,6 +9,14 @@ import { getPeerDetails, getProgressDetails } from './services';
 
 import styles from './styles/index.css';
 
+function getPeerDetailsStyles(torrent) {
+  if (torrent.hasErrors) {
+    return `peerDetailsError`;
+  }
+
+  return 'peerDetails';
+}
+
 @inject('view_store')
 @observer
 @CSSModules(styles)
@@ -25,7 +33,7 @@ class Full extends Component {
         <div styleName='name'>
           {torrent.name}
         </div>
-        <div styleName='peerDetails'>
+        <div styleName={getPeerDetailsStyles(torrent)}>
           {getPeerDetails(torrent)}
         </div>
         <div styleName='progressBarRow'>

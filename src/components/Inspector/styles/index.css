@@ -3,6 +3,42 @@
   padding: 15px;
 }
 
+.inspector :global .react-tabs [role=tablist] {
+  border: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.inspector :global .react-tabs [role=tab] {
+  border-radius: 0px;
+  background-color: #dddddd;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#bbbbbb));
+  background-image: -webkit-linear-gradient(top, #ffffff, #bbbbbb);
+  background-image: -moz-linear-gradient(top, #ffffff, #bbbbbb);
+  background-image: -ms-linear-gradient(top, #ffffff, #bbbbbb);
+  background-image: -o-linear-gradient(top, #ffffff, #bbbbbb);
+  background-image: linear-gradient(top, #ffffff, #bbbbbb);
+}
+
+.inspector :global .react-tabs [role=tab][aria-selected=true] {
+  background-image: -webkit-linear-gradient(top, #cdcdff, white);
+}
+
+.inspector :global .react-tabs [role=tab]:first-child {
+  border-radius: 5px 0px 0px 5px;
+}
+
+.inspector :global .react-tabs [role=tab]:last-child {
+  border-radius: 0px 5px 5px 0px;
+}
+
+.inspector h1 {
+  font-weight: bold;
+  font-size: large;
+}
+
+/* Row */
 .row {
  display: flex;
  padding-bottom: 10px;

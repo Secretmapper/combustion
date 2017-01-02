@@ -38,13 +38,14 @@
 }
 
 .list {
-  flex: 1;
+  flex: 2;
   overflow-y: auto;
   background: #fffce8;
 }
 
 .details {
-  width: 400px;
+  min-width: 600px;
+  flex: 1;
   overflow-y: auto;
   border-left: 1px solid #888;
 }
