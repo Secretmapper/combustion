@@ -50,21 +50,6 @@
   flex: 1;
 }
 
-.progressBarRow button {
-  width: 14px;
-  height: 14px;
-  margin-left: 8px;
-  background: url(images/buttons/torrent_buttons.png);
-  border: 0;
-  padding: 0;
-  cursor: pointer;
-}
-
-.progressBarRow button:focus {
-  border: 0;
-  outline: none;
-}
-
 .progressBarRowCompact {
   width: 50px;
 }
