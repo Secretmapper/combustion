@@ -56,7 +56,10 @@ class App extends Component {
   }
 
   render() {
-    const isInspectorShown = this.props.view_store.isInspectorShown;
+    const {
+      selectedTorrents,
+      isInspectorShown,
+    } = this.props.view_store;
 
     return (
       <DropzoneLayer>
@@ -92,7 +95,7 @@ class App extends Component {
               question='Location'
               toggle={this.props.view_store.isLocationPromptShown}
               onToggle={() => this.props.view_store.toggleLocationPrompt()}
-              onSubmit={(value) => alert('location: ' + value)}
+              onSubmit={(value) => this.props.torrents_store.setLocation(selectedTorrents, value)}
             />
 
             <PromptDialog
