@@ -4,6 +4,7 @@ import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
 
 import ProgressBar from './ProgressBar';
+import StatusButton from './StatusButton';
 
 import { getPeerDetails, getProgressDetails } from './services';
 
@@ -17,12 +18,17 @@ function getPeerDetailsStyles(torrent) {
   return 'peerDetails';
 }
 
-@inject('view_store')
+@inject('view_store', 'torrents_store')
 @observer
 @CSSModules(styles)
 class Full extends Component {
-  @autobind onClickButton() {
-    alert('1');
+  @autobind onToggleTorrent(torrentId) {
+    if (this.props.torrent.isStopped) {
+      this.props.torrents_store.start(torrentId);
+      return;
+    }
+
+    this.props.torrents_store.stop(torrentId);
   }
 
   render() {
@@ -38,7 +44,7 @@ class Full extends Component {
         </div>
         <div styleName='progressBarRow'>
           <ProgressBar torrent={torrent} />
-          <button onClick={this.onClickButton}></button>
+          <StatusButton torrent={torrent} onToggle={this.onToggleTorrent} />
         </div>
         <div styleName='progressDetails'>
           {getProgressDetails(torrent)}

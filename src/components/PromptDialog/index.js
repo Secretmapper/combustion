@@ -21,7 +21,7 @@ class PromptDialog extends Component {
   }
 
   @autobind onChange(event) {
-    this.props.setState({
+    this.setState({
       value: event.target.value
     });
   }

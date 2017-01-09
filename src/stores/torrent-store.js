@@ -233,6 +233,23 @@ class TorrentStore {
     }));
   }
 
+  @action setLocation(torrentIds, location) {
+    const data = {
+      ids: torrentIds,
+      location,
+      move: true,
+    };
+
+    return this.rpc.sendRequest('torrent-set-location', data).then(action((response) => {
+      response.json().then(action((result) => {
+        // TODO: Review!
+        if (result.result.success !== 'success') return;
+
+        this.fetch(torrentIds);
+      }));
+    }));
+  }
+
   @action setPriority(torrentId, priority, fileIds) {
     const data = {
       ids: [torrentId],
