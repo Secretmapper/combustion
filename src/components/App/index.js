@@ -9,9 +9,7 @@ import Inspector from 'components/Inspector';
 import ActionToolbar from 'components/ActionToolbar';
 import FilterToolbar from 'components/FilterToolbar';
 import StatusToolbar from 'components/StatusToolbar';
-
 import DropzoneLayer from 'components/DropzoneLayer';
-
 import OpenDialog from 'components/OpenDialog';
 import PreferencesDialog from 'components/PreferencesDialog';
 import ConnectionDialog from 'components/ConnectionDialog';
@@ -75,6 +73,8 @@ class App extends Component {
       isInspectorShown,
     } = this.props.view_store;
 
+    const firstTorrent = this.props.torrents_store.getByIds(selectedTorrents)[0] || {};
+
     return (
       <DropzoneLayer>
         <div styleName='container' onClick={this.onToggleContextMenu}>
@@ -105,21 +105,21 @@ class App extends Component {
             <PromptDialog
               header='Set location'
               action='Apply'
-              placeholder='' /* TODO: To be defined when this promp is moved to torrent view */
+              placeholder={firstTorrent.downloadDir}
               question='Location'
               toggle={this.props.view_store.isLocationPromptShown}
               onToggle={() => this.props.view_store.toggleLocationPrompt()}
-              onSubmit={(value) => this.props.torrents_store.setLocation(selectedTorrents, value)}
+              onSubmit={(value) => this.props.torrents_store.setLocation([selectedTorrents[0]], value)}
             />
 
             <PromptDialog
               header='Rename torrent'
               action='Rename'
               question='Enter new name'
-              placeholder='' /* TODO: To be defined when this promp is moved to torrent view */
+              placeholder={firstTorrent.name}
               toggle={this.props.view_store.isRenamePromptShown}
               onToggle={() => this.props.view_store.toggleRenamePrompt()}
-              onSubmit={(value) => alert('rename: ' + value)}
+              onSubmit={(value) => this.props.torrents_store.rename([selectedTorrents[0]], firstTorrent.name, value)}
             />
 
             {renderDevTools()}

@@ -18,7 +18,7 @@ function getPeerDetailsStyles(torrent) {
   return 'peerDetails';
 }
 
-@inject('view_store', 'torrents_store')
+@inject('torrents_store')
 @observer
 @CSSModules(styles)
 class Full extends Component {

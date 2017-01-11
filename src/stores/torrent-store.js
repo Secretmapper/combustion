@@ -235,6 +235,23 @@ class TorrentStore {
     }));
   }
 
+  @action rename(torrentIds, path, name) {
+    const data = {
+      ids: torrentIds,
+      path,
+      name,
+    };
+
+    return this.rpc.sendRequest('torrent-rename-path', data).then(action((response) => {
+      response.json().then(action((result) => {
+        // TODO: Review!
+        if (result.result.success !== 'success') return;
+
+        this.fetch(torrentIds);
+      }));
+    }));
+  }
+
   @action setLocation(torrentIds, location) {
     const data = {
       ids: torrentIds,

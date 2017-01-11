@@ -1,6 +1,5 @@
 import React, { Component} from 'react';
 import CSSModules from 'react-css-modules';
-import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
 
 import Dialog from '../Dialog'
@@ -8,16 +7,18 @@ import logoImage from '../../images/logo.png';
 
 import styles from './styles/index.css';
 
-@inject('view_store')
-@observer
 @CSSModules(styles)
 class PromptDialog extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      value: props.placeholder,
-    };
+    this.state = {};
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.toggle !== this.props.toggle) {
+      this.setState({value: nextProps.placeholder});
+    }
   }
 
   @autobind onChange(event) {
@@ -33,7 +34,7 @@ class PromptDialog extends Component {
 
   @autobind onDismiss(event) {
     event.preventDefault();
-    this.props.onToggle();
+    this.onHide();
   }
 
   @autobind onHide() {
@@ -63,7 +64,6 @@ class PromptDialog extends Component {
             </section>
           </div>
         </div>
-
       </Dialog>
     );
   }
