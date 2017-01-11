@@ -26,6 +26,7 @@ const extractDomains = (torrent) => {
 };
 
 class TorrentStore {
+  @observable previousTorrents = [];
   @observable torrents = [];
   @observable statusFilter = 0;
   @observable trackerFilter = '';
@@ -61,6 +62,7 @@ class TorrentStore {
 
     return this.rpc.sendRequest('torrent-get', data).then(action((response) => {
       response.json().then(action((result) => {
+        this.previousTorrents = this.torrents.slice();
         this.torrents.replace(
           result.arguments.torrents.map((torrent) => new Torrent(torrent))
         );
@@ -304,6 +306,15 @@ class TorrentStore {
 
       return true;
     }).sort(comparatorsMap[this.sortCriteria]);
+  }
+
+  @computed get completedTorrents() {
+    return this.torrents.filter((torrent) => {
+      const previousTorrent = this.previousTorrents.find(({id}) => id === torrent.id);
+      const recentlyChanged = previousTorrent && previousTorrent.status !== torrent.status;
+
+      return recentlyChanged && torrent.isDone;
+    });
   }
 
   @computed get totalUploadSpeed() {

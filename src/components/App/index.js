@@ -37,6 +37,9 @@ function renderDevTools() {
 @CSSModules(styles)
 class App extends Component {
   componentDidMount() {
+    const PERMISSION_GRANTED = 'granted';
+    const PERMISSION_DENIED = 'denied';
+
     this.props.session_store.getSession().then(() => {
       this.props.stats_store.getStats();
       this.props.torrents_store.fetch();
@@ -45,6 +48,17 @@ class App extends Component {
         this.props.torrents_store.fetch();
       }, 5000);
     });
+
+    // Desktop notifications
+    if (window.Notification) {
+      if (window.Notification.permission === PERMISSION_GRANTED) {
+        this.props.view_store.toggleNotificationsEnabled(true);
+      } else if (Notification.permission !== PERMISSION_DENIED) {
+        window.Notification.requestPermission((permission) => {
+          this.props.view_store.toggleNotificationsEnabled(permission === PERMISSION_GRANTED);
+        });
+      }
+    }
   }
 
   componentWillUnmount() {

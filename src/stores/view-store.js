@@ -6,6 +6,7 @@ class ViewStore {
   @observable selectedTorrents = [];
   @observable lastSelectedTorrent = null;
   @observable compact = false;
+  @observable notificationsEnabled = false;
 
   @observable isSettingsContextMenuShown = false;
   @observable isTorrentContextMenuShown = false;
@@ -126,6 +127,10 @@ class ViewStore {
   // TorrentCollection
   isTorrentSelected(id) {
     return this.selectedTorrents.includes(id);
+  }
+
+  @action toggleNotificationsEnabled(enable) {
+    this.notificationsEnabled = enable;
   }
 }
 
