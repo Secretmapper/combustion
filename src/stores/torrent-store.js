@@ -308,6 +308,16 @@ class TorrentStore {
     }).sort(comparatorsMap[this.sortCriteria]);
   }
 
+  @computed get startedTorrents() {
+    return this.torrents.filter((torrent) => {
+      const addedTorrent = !this.previousTorrents.find(({id}) => id === torrent.id);
+      // TODO: Find a proper timeout
+      const recentlyAdded = (Date.now() - torrent.addedDate * 1000) < 5000;
+
+      return addedTorrent && recentlyAdded;
+    });
+  }
+
   @computed get completedTorrents() {
     return this.torrents.filter((torrent) => {
       const previousTorrent = this.previousTorrents.find(({id}) => id === torrent.id);
