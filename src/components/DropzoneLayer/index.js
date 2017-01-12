@@ -4,7 +4,7 @@ import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
 
-import logoImage from '../../images/logo.png';
+import logoImage from 'images/logo.png';
 
 import TorrentUpload from 'stores/torrent-upload';
 

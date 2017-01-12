@@ -6,16 +6,16 @@ import autobind from 'autobind-decorator';
 
 import TorrentList from 'components/TorrentList';
 import Inspector from 'components/Inspector';
-import ActionToolbar from 'components/ActionToolbar';
-import FilterToolbar from 'components/FilterToolbar';
-import StatusToolbar from 'components/StatusToolbar';
+import ActionToolbar from 'components/toolbars/ActionToolbar';
+import FilterToolbar from 'components/toolbars/FilterToolbar';
+import StatusToolbar from 'components/toolbars/StatusToolbar';
 import DropzoneLayer from 'components/DropzoneLayer';
-import OpenDialog from 'components/OpenDialog';
-import PreferencesDialog from 'components/PreferencesDialog';
-import ConnectionDialog from 'components/ConnectionDialog';
-import StatisticsDialog from 'components/StatisticsDialog';
-import AboutDialog from 'components/AboutDialog';
-import PromptDialog from 'components/PromptDialog';
+import OpenDialog from 'components/dialogs/OpenDialog';
+import PreferencesDialog from 'components/dialogs/PreferencesDialog';
+import ConnectionDialog from 'components/dialogs/ConnectionDialog';
+import StatisticsDialog from 'components/dialogs/StatisticsDialog';
+import AboutDialog from 'components/dialogs/AboutDialog';
+import PromptDialog from 'components/dialogs/PromptDialog';
 
 import styles from './styles/index.css';
 

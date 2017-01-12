@@ -6,8 +6,8 @@ import autobind from 'autobind-decorator';
 import { speedBps } from 'util/formatters';
 import Torrent from 'stores/torrent';
 
-import arrowUpImage from '../../images/arrow-up.png';
-import arrowDownImage from '../../images/arrow-down.png';
+import arrowUpImage from 'images/arrow-up.png';
+import arrowDownImage from 'images/arrow-down.png';
 
 import styles from './styles/index.css';
 

@@ -4,9 +4,9 @@ import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
 
-import ContextMenu from 'components/ContextMenu';
-import SortByContextMenu from 'components/SortByContextMenu';
-import RateContextMenu from 'components/RateContextMenu';
+import ContextMenu from 'components/menus/ContextMenu';
+import SortByContextMenu from 'components/menus/SortByContextMenu';
+import RateContextMenu from 'components/menus/RateContextMenu';
 
 import styles from './styles/index.css';
 

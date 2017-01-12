@@ -3,7 +3,7 @@ import CSSModules from 'react-css-modules';
 import autobind from 'autobind-decorator';
 
 import Dialog from '../Dialog'
-import logoImage from '../../images/logo.png';
+import logoImage from 'images/logo.png';
 
 import styles from './styles/index.css';
 
