@@ -5,7 +5,7 @@ import autobind from 'autobind-decorator';
 import { size } from 'util/formatters';
 
 import Dialog from '../Dialog'
-import logoImage from '../../images/logo.png';
+import logoImage from 'images/logo.png';
 
 import TorrentUpload from 'stores/torrent-upload';
 

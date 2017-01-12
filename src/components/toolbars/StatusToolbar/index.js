@@ -4,11 +4,11 @@ import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
 
-import settingsImage from '../../images/settings.png';
-import preferencesImage from '../../images/wrench.png';
-import compactImage from '../../images/compact.png';
+import settingsImage from 'images/settings.png';
+import preferencesImage from 'images/wrench.png';
+import compactImage from 'images/compact.png';
 
-import SettingsContextMenu from 'components/SettingsContextMenu';
+import SettingsContextMenu from 'components/menus/SettingsContextMenu';
 
 import styles from './styles/index.css';
 

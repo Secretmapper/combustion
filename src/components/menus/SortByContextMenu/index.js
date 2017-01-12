@@ -3,7 +3,7 @@ import CSSModules from 'react-css-modules';
 import { inject } from 'mobx-react';
 import autobind from 'autobind-decorator';
 
-import ContextMenu from 'components/ContextMenu';
+import ContextMenu from 'components/menus/ContextMenu';
 
 import styles from './styles/index.css';
 

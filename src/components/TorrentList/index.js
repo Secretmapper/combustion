@@ -5,7 +5,7 @@ import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
 
 import { Compact, Full } from 'components/Torrent';
-import TorrentContextMenu from 'components/TorrentContextMenu';
+import TorrentContextMenu from 'components/menus/TorrentContextMenu';
 
 import styles from './styles/index.css';
 

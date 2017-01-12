@@ -4,7 +4,7 @@ import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
 
 import Dialog from '../Dialog'
-import logoImage from '../../images/logo.png';
+import logoImage from 'images/logo.png';
 
 import styles from './styles/index.css';
 
