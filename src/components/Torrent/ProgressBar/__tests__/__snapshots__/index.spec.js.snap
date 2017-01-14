@@ -1,3 +1,21 @@
+exports[`test ProgressBar leeching 1`] = `
+<div
+  className="progressBar leeching">
+  <progress
+    max="100"
+    value={50} />
+</div>
+`;
+
+exports[`test ProgressBar magnet 1`] = `
+<div
+  className="progressBar magnet">
+  <progress
+    max="100"
+    value={50} />
+</div>
+`;
+
 exports[`test ProgressBar paused 1`] = `
 <div
   className="progressBar paused">
