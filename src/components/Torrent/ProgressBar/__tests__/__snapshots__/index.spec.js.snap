@@ -1,0 +1,8 @@
+exports[`test ProgressBar 1`] = `
+<div
+  className="undefined undefined">
+  <progress
+    max="100"
+    value={50} />
+</div>
+`;
