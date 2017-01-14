@@ -1,6 +1,15 @@
-exports[`test ProgressBar 1`] = `
+exports[`test ProgressBar paused 1`] = `
 <div
-  className="undefined undefined">
+  className="progressBar paused">
+  <progress
+    max="100"
+    value={50} />
+</div>
+`;
+
+exports[`test ProgressBar seeding 1`] = `
+<div
+  className="progressBar seeding">
   <progress
     max="100"
     value={50} />

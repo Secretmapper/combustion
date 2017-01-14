@@ -2,7 +2,15 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import ProgressBar from '../';
 
-test('ProgressBar', () => {
+test('ProgressBar seeding', () => {
+  const component = renderer.create(
+    <ProgressBar torrent={{isSeeding: true, percentDone: 0.5}} />
+  );
+
+  expect(component.toJSON()).toMatchSnapshot();
+});
+
+test('ProgressBar paused', () => {
   const component = renderer.create(
     <ProgressBar torrent={{isStopped: true, percentDone: 0.5}} />
   );
