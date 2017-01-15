@@ -1,0 +1,11 @@
+exports[`test StatusButton pause 1`] = `
+<button
+  className="statusPause"
+  onClick={[Function]} />
+`;
+
+exports[`test StatusButton resume 1`] = `
+<button
+  className="statusResume"
+  onClick={[Function]} />
+`;
