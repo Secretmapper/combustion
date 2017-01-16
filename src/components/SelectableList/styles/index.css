@@ -1,13 +1,12 @@
-.torrentList {
+.list {
   margin: 0;
   padding: 0;
   text-align: left;
   list-style-type: none;
 }
 
-.torrentRow {
+.row {
   border-bottom: 1px solid #ccc;
-  padding: 5px 10px;
   background-color: white;
   user-select: none;
   align-items: center;
@@ -15,14 +14,10 @@
   outline: none;
 }
 
-.torrentRowEven {
+.even {
   background-color: #F7F7F7;
 }
 
-.torrentRowCompact {
-  padding: 7px;
-}
-
-.torrentRowSelected {
+.selected {
   background-color: #cdcdff;
 }
