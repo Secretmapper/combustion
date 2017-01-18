@@ -1,9 +1,11 @@
 .torrent {
   color: #666;
+  padding: 5px 10px;
 }
 
 .torrentCompact {
   color: #666;
+  padding: 7px;
   display: flex;
   align-items: center;
 }

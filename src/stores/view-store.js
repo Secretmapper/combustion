@@ -8,8 +8,9 @@ class ViewStore {
   @observable compact = false;
   @observable notificationsEnabled = false;
 
+  @observable torrentContextMenuShown = null;
+
   @observable isSettingsContextMenuShown = false;
-  @observable isTorrentContextMenuShown = false;
   @observable isSortByContextMenuShown = false;
   @observable isDownloadRateContextMenuShown = false;
   @observable isUploadRateContextMenuShown = false;
@@ -38,9 +39,9 @@ class ViewStore {
     this.isSettingsContextMenuShown = !this.isSettingsContextMenuShown;
   }
 
-  @action toggleTorrentContextMenu() {
+  @action toggleTorrentContextMenu(id) {
     this.toggleContextMenus();
-    this.isTorrentContextMenuShown = !this.isTorrentContextMenuShown;
+    this.torrentContextMenuShown = id;
   }
 
   @action toggleSortByContextMenu() {
@@ -120,13 +121,6 @@ class ViewStore {
 
   @action selectTorrents(torrentIds) {
     this.selectedTorrents = torrentIds;
-  }
-
-  // TODO: Does this method belong to view store? If we're adding more logic to
-  // selectedTorrents array, maybe it's a good idea to create an observable
-  // TorrentCollection
-  isTorrentSelected(id) {
-    return this.selectedTorrents.includes(id);
   }
 
   @action toggleNotificationsEnabled(enable) {

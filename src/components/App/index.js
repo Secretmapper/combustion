@@ -4,7 +4,8 @@ import DevTools, { setLogEnabled } from 'mobx-react-devtools';
 import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
 
-import TorrentList from 'components/TorrentList';
+import Torrent from 'components/Torrent';
+import SelectableList from 'components/SelectableList';
 import Inspector from 'components/Inspector';
 import ActionToolbar from 'components/toolbars/ActionToolbar';
 import FilterToolbar from 'components/toolbars/FilterToolbar';
@@ -68,12 +69,14 @@ class App extends Component {
   }
 
   render() {
+    const { view_store, torrents_store } = this.props;
     const {
       selectedTorrents,
       isInspectorShown,
-    } = this.props.view_store;
+    } = view_store;
 
-    const firstTorrent = this.props.torrents_store.getByIds(selectedTorrents)[0] || {};
+    const firstTorrent = torrents_store.getByIds(selectedTorrents)[0] || {};
+    const filteredTorrents = torrents_store.filteredTorrents;
 
     return (
       <DropzoneLayer>
@@ -84,7 +87,20 @@ class App extends Component {
             </header>
             <main styleName='main' role='main'>
               <div styleName='list'>
-                <TorrentList />
+                <SelectableList
+                  selectedItemIds={view_store.selectedTorrents}
+                  lastSelectedItemId={view_store.lastSelectedTorrent}
+
+                  onSelectItem={(id) => view_store.setSelected(id)}
+                  onToggleSelectItem={(id) => view_store.toggleSelected(id)}
+                  onSelectRange={(id, selectedIds) => view_store.addSelectedRange(id, selectedIds)}
+                >
+                  {filteredTorrents.map((torrent, index) => (
+                    <SelectableList.Item key={index} id={torrent.id}>
+                      <Torrent torrent={torrent}/>
+                    </SelectableList.Item>
+                  ))}
+                </SelectableList>
               </div>
               { isInspectorShown &&
                 <div styleName='details'>
