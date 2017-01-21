@@ -82,7 +82,8 @@ module.exports = {
       images: path.join(paths.appSrc, 'images'),
       components: path.join(paths.appSrc, 'components'),
       stores: path.join(paths.appSrc, 'stores'),
-      util: path.join(paths.appSrc, 'util')
+      util: path.join(paths.appSrc, 'util'),
+      reactions: path.join(paths.appSrc, 'reactions')
     }
   },
 
