@@ -16,13 +16,8 @@ export default function (stores) {
     ([notificationsEnabled, startedTorrents, completedTorrents]) => {
       if (!notificationsEnabled) return;
 
-      if (startedTorrents.length > 0) {
-        startedTorrents.map(buildTorrentAddedNotification).forEach(showNotification);
-      }
-
-      if (completedTorrents.length > 0) {
-        completedTorrents.map(buildTorrentCompletedNotification).forEach(showNotification);
-      }
+      startedTorrents.map(buildTorrentAddedNotification).forEach(showNotification);
+      completedTorrents.map(buildTorrentCompletedNotification).forEach(showNotification);
     }
   );
 }
