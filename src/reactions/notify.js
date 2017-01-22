@@ -6,18 +6,19 @@ import {
   showNotification,
 } from 'util/notifications';
 
-export default function (stores) {
+export default function ({ view_store, torrents_store }) {
   reaction(
-    () => [
-      stores.view_store.notificationsEnabled,
-      stores.torrents_store.startedTorrents,
-      stores.torrents_store.completedTorrents
-    ],
-    ([notificationsEnabled, startedTorrents, completedTorrents]) => {
+    () => ({
+      notificationsEnabled: view_store.notificationsEnabled,
+      notifications: [
+        ...torrents_store.startedTorrents.map(buildTorrentAddedNotification),
+        ...torrents_store.completedTorrents.map(buildTorrentCompletedNotification)
+      ]
+    }),
+    ({ notificationsEnabled, notifications }) => {
       if (!notificationsEnabled) return;
 
-      startedTorrents.map(buildTorrentAddedNotification).forEach(showNotification);
-      completedTorrents.map(buildTorrentCompletedNotification).forEach(showNotification);
+      notifications.forEach(showNotification);
     }
   );
 }
