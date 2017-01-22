@@ -2,6 +2,7 @@ import {observable, action, computed} from 'mobx';
 
 import Torrent from 'stores/torrent';
 import * as comparators from 'util/comparators';
+import { parseUri } from 'util/uri';
 
 const comparatorsMap = {
   queue_order: comparators.compareByQueue,
@@ -14,15 +15,8 @@ const comparatorsMap = {
   state: comparators.compareByState,
 };
 
-const domainRegExp = /([a-zA-Z0-9]+\.)?([a-zA-Z0-9][a-zA-Z0-9-]+)\.[a-zA-Z]{2,6}/i;
-
-const extractDomain = (url) => {
-  const matches = url.match(domainRegExp);
-  return matches[2];
-};
-
 const extractDomains = (torrent) => {
-  return torrent.trackers.map((tracker) => extractDomain(tracker.announce));
+  return torrent.trackers.map((tracker) => parseUri(tracker.announce).host);
 };
 
 class TorrentStore {
