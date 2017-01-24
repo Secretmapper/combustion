@@ -45,8 +45,8 @@ To be able to build this project, execute:
 ```bash
 git clone https://github.com/fcsonline/react-transmission
 cd react-transmission
-npm install
-npm start
+yarn install
+yarn start
 ```
 
 Open Transmission daemon and then enable the web interface from the Settings window.
