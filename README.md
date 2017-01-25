@@ -36,7 +36,7 @@ The official [Transmission repository](https://github.com/transmission/transmiss
 ## Requirements
 
 - Node 4.5
-- Npm 3
+- Yarn 0.19
 
 ## Installation
 
