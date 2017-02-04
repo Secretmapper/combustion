@@ -21,3 +21,22 @@
 .dialogStyle:focus {
   outline: none;
 }
+.body {
+  display: flex;
+  flex-direction: column;
+  color: black;
+  min-width: 400px;
+  background-color: #fefefe;
+}
+.body h2 {
+  font-size: 1.2em;
+  padding: 10px;
+  background: #ddd;
+  color: #666;
+  margin: 0;
+}
+.logo {
+  width: 64px;
+  height: 64px;
+  margin: 020px;
+}

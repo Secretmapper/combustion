@@ -1,16 +1,10 @@
 .body {
-  display: flex;
-  flex-direction: row;
-  background-color: #fefefe;
-  color: black;
-  min-width: 300px;
+  composes: body from "../../Dialog/styles/index.css";
   padding: 20px;
 }
 
 .logo {
-  width: 64px;
-  height: 64px;
-  margin-right: 20px;
+  composes: logo from "../../Dialog/styles/index.css";
 }
 
 .content {

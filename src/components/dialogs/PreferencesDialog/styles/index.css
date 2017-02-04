@@ -1,17 +1,5 @@
 .body {
-  display: flex;
-  flex-direction: column;
-  color: black;
-  min-width: 400px;
-  min-height: 300px;
-}
-
-.body h2 {
-  font-size: 1.2em;
-  padding: 10px;
-  background: #ddd;
-  color: #666;
-  margin: 0;
+  composes: body from "../../Dialog/styles/index.css";
 }
 
 .content {
