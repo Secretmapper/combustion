@@ -1,19 +1,19 @@
 import React from 'react';
 import CSSModules from 'react-css-modules';
 
-import FileGroup from './FileGroup';
+import { generateTree } from './services/generate-tree';
+import FileRow from './FileRow';
 
 import styles from './styles/index.css';
 
 function Files({ info }) {
+  // TODO: Generate tree for each torrent files
+  const tree = generateTree(info.files[0].files);
+  const rootKey = Object.keys(tree)[0];
+
   return (
     <div>
-      {info.files.map(({ name, files, fileStats }, index) => (
-        <div key={index}>
-          {info.files.length > 1 && <p>{name}</p>}
-          <FileGroup files={files} fileStats={fileStats} />
-        </div>
-      ))}
+      <FileRow name={rootKey} entries={tree[rootKey].entries} />
     </div>
   );
 }
