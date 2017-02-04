@@ -1,9 +1,5 @@
 .body {
-  display: flex;
-  flex-direction: column;
-  background-color: #fefefe;
-  color: black;
-  min-width: 300px;
+  composes: body from "../../Dialog/styles/index.css";
   padding: 10px 30px;
 }
 
