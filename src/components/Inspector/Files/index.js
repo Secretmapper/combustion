@@ -13,7 +13,7 @@ function Files({ info }) {
 
   return (
     <div>
-      <FileRow name={rootKey} entries={tree[rootKey].entries} />
+      <FileRow name={rootKey} node={tree[rootKey]} />
     </div>
   );
 }

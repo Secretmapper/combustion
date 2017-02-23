@@ -6,15 +6,15 @@ import PriorityButton from './PriorityButton';
 
 import styles from './styles/index.css';
 
-function FileRow({ name, entries }) {
+function FileRow({ name, node }) {
   return (
     <div styleName='fileRowContainer'>
       <div styleName='fileRow'>
         <input type='checkbox' />
         <div styleName='name'>{name}</div>
-        <PriorityButton />
+        <PriorityButton priority={node.priority} />
       </div>
-      {entries && <FileList entries={entries} />}
+      {node.entries && <FileList entries={node.entries} />}
     </div>
   );
 }

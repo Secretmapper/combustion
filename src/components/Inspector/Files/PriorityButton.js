@@ -7,16 +7,16 @@ import highImage from 'images/file-priority-high.png';
 
 import styles from './styles/index.css';
 
-function PriorityButton() {
+function PriorityButton({ priority }) {
   return (
     <div styleName='priorityButton'>
-      <button title='Low Priority'>
+      <button title='Low Priority' className={priority === -1 ? styles.selected : ''}>
         <img src={lowImage} alt='Low Priority' />
       </button>
-      <button title='Normal Priority'>
+      <button title='Normal Priority' className={priority === 0 ? styles.selected : ''}>
         <img src={normalImage} alt='Normal Priority' />
       </button>
-      <button title='High Priority'>
+      <button title='High Priority' className={priority === 1 ? styles.selected : ''}>
         <img src={highImage} alt='High Priority' />
       </button>
     </div>

@@ -10,7 +10,7 @@ function FileList({ entries }) {
     <ul styleName='fileList'>
       {Object.keys(entries).map((key, index) => (
         <li key={index}>
-          <FileRow name={key} entries={entries[key].entries} />
+          <FileRow name={key} node={entries[key]} />
         </li>
       ))}
     </ul>
