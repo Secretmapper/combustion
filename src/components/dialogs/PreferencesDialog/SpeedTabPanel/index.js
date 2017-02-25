@@ -1,6 +1,6 @@
 import React, { Component} from 'react';
 import { inject, observer } from 'mobx-react';
-import lodash from 'lodash';
+import { range } from 'lodash';
 
 import TextRow from '../fields/TextRow';
 import CheckRow from '../fields/CheckRow';
@@ -11,7 +11,7 @@ import SelectRow from '../fields/SelectRow';
 @observer
 class SpeedTabPanel extends Component {
   render() {
-    const times = lodash.range(0, 1440, 15).reduce( (memo, item) => {
+    const times = range(0, 1440, 15).reduce( (memo, item) => {
       const hours = Math.round(item/60);
       const minutes = item % 60;
 

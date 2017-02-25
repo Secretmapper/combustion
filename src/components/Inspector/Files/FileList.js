@@ -5,12 +5,17 @@ import FileRow from './FileRow';
 
 import styles from './styles/index.css';
 
-function FileList({ entries }) {
+function FileList({ entries, setPriority, setWanted }) {
   return (
     <ul styleName='fileList'>
       {Object.keys(entries).map((key, index) => (
         <li key={index}>
-          <FileRow name={key} node={entries[key]} />
+          <FileRow
+            name={key}
+            node={entries[key]}
+            setPriority={setPriority}
+            setWanted={setWanted}
+          />
         </li>
       ))}
     </ul>

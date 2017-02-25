@@ -1,3 +1,5 @@
+import { isArray, isObject } from 'lodash';
+
 function buildEntryTree(entry, getEntryPath = (entry) => entry) {
   return getEntryPath(entry).split('/').reduceRight((partialTree, part) => {
     return {
@@ -10,7 +12,13 @@ function buildEntryTree(entry, getEntryPath = (entry) => entry) {
   }
 
 function mergeEntryTrees(tree = {}, otherTree = {}) {
-  if (typeof tree !== 'object' && typeof otherTree !== 'object') {
+  // Merge arrays
+  if (isArray(tree) && isArray(otherTree)) {
+    return [...tree, ...otherTree];
+  }
+
+  // Merge primitive types (number, string, ...)
+  if (!isObject(tree) && !isObject(otherTree)) {
     return tree;
   }
 
@@ -35,6 +43,6 @@ function mergeEntryTrees(tree = {}, otherTree = {}) {
 
 export function generateTree(entries) {
   return entries
-    .map((entry) => buildEntryTree(entry, ({ name }) => name))
+    .map((entry, entryIndex) => buildEntryTree({...entry, fileIds: [entryIndex]}, ({ name }) => name))
     .reduce(mergeEntryTrees, {});
 }
