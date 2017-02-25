@@ -1,23 +1,32 @@
 import React, { Component} from 'react';
 import { inject, observer } from 'mobx-react';
-import lodash from 'lodash';
 
 import TextRow from '../fields/TextRow';
 import CheckRow from '../fields/CheckRow';
 import CheckValueRow from '../fields/CheckValueRow';
 import SelectRow from '../fields/SelectRow';
 
+const generateTimes = () => {
+  const times = {};
+
+  for (let i = 0; i < 24 * 4; ++i) {
+    let hour = parseInt(i / 4, 10);
+    let mins = ((i % 4) * 15);
+    let value = i * 15;
+    let content = hour + ':' + (mins || '00');
+
+    times[value] = content;
+  }
+
+  return times;
+}
+
 @inject('view_store')
 @observer
 class SpeedTabPanel extends Component {
   render() {
-    const times = lodash.range(0, 1440, 15).reduce( (memo, item) => {
-      const hours = Math.round(item/60);
-      const minutes = item % 60;
+    const times = generateTimes();
 
-      memo[item] = `${hours}:${minutes}`;
-      return memo;
-    }, {});
     const days = {
       '127': 'Everyday',
       '62': 'Weekdays',
