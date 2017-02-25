@@ -1,0 +1,25 @@
+{
+  "presets": [
+    "react-app"
+  ],
+  "plugins": [
+    "react-hot-loader/babel",
+    "babel-plugin-transform-decorators-legacy",
+    "babel-plugin-transform-object-rest-spread",
+    "babel-plugin-syntax-trailing-function-commas",
+    "babel-plugin-transform-export-extensions",
+    [
+      "module-resolver",
+      {
+        "root": ["./src"],
+        "alias": {
+          "images": "./images",
+          "components": "./components",
+          "stores": "./stores",
+          "util": "./util",
+          "reactions": "./reactions"
+        }
+      }
+    ]
+  ]
+}
