@@ -6,6 +6,7 @@ var ManifestPlugin = require('webpack-manifest-plugin');
 var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 var url = require('url');
 var paths = require('./paths');
+var path = require('path');
 var getClientEnvironment = require('./env');
 
 
@@ -84,7 +85,12 @@ module.exports = {
     alias: {
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
-      'react-native': 'react-native-web'
+      'react-native': 'react-native-web',
+      images: path.join(paths.appSrc, 'images'),
+      components: path.join(paths.appSrc, 'components'),
+      stores: path.join(paths.appSrc, 'stores'),
+      util: path.join(paths.appSrc, 'util'),
+      reactions: path.join(paths.appSrc, 'reactions')
     }
   },
   
@@ -146,7 +152,7 @@ module.exports = {
       // in the main CSS file.
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css?importLoaders=1!postcss')
+        loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[local]___[hash:base64:5]')
         // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
       },
       // JSON is not enabled by default in Webpack but both Node and Browserify
