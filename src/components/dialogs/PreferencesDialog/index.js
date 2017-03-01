@@ -11,6 +11,7 @@ import TorrentsTabPanel from './TorrentsTabPanel'
 import SpeedTabPanel from './SpeedTabPanel'
 import PeersTabPanel from './PeersTabPanel'
 import NetworkTabPanel from './NetworkTabPanel'
+import { parseStringIfNumber } from 'util/common'
 
 import styles from './styles/index.css';
 
@@ -24,7 +25,7 @@ class PreferencesDialog extends Component {
     const value = event.target.value;
 
     if (type !== 'checkbox' && type !== 'radio') {
-      this.props.session_store.setPreference(id, parseAsNumberIfNumber(value));
+      this.props.session_store.setPreference(id, parseStringIfNumber(value));
     }
   }
 
@@ -76,15 +77,6 @@ class PreferencesDialog extends Component {
       </Dialog>
     );
   }
-}
-
-function parseAsNumberIfNumber (str) {
-    if (parseInt(str, 10).toString() === str) {
-      return parseInt(str, 10);
-    }
-    if (parseFloat(str).toString() === str) {
-      return parseFloat(str);
-    }
 }
 
 export default PreferencesDialog;
