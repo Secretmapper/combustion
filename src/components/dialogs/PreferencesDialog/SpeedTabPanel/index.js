@@ -5,7 +5,7 @@ import TextRow from '../fields/TextRow';
 import CheckRow from '../fields/CheckRow';
 import CheckValueRow from '../fields/CheckValueRow';
 import SelectRow from '../fields/SelectRow';
-import { times, days } from './schedule'
+import { times, days } from './schedule.fixture'
 
 @inject('view_store')
 @observer
