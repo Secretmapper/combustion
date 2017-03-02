@@ -57,27 +57,22 @@ class TorrentStore {
     return this.rpc.sendRequest('torrent-get', data).then(action((response) => {
       response.json().then(action((result) => {
         this.previousTorrents = this.torrents.slice();
-        this.torrents.replace(
-          result.arguments.torrents.map((torrent) => new Torrent(torrent))
-        );
-      }));
-    }));
-  }
+        const newTorrents = result.arguments.torrents;
 
-  @action fetchIds(torrentIds) {
-    const data = {
-      fields: ['id']
-    };
-
-    if (torrentIds) {
-      data['ids'] = torrentIds;
-    }
-
-    return this.rpc.sendRequest('torrent-get', data).then(action((response) => {
-      response.json().then(action((result) => {
-        this.torrents.replace(
-          result.arguments.torrents.map((torrent) => new Torrent(torrent))
-        );
+        if (torrentIds) {
+          // There are ids passed to fetch, edit cache of dirty torrents
+          // XXX: This is a potentially slow operation. Perhaps cache should be a map?
+          newTorrents.forEach(torrent => {
+            const i = this.torrents.findIndex(t => t.id === torrent.id);
+            if (i >= 0)
+              this.torrents[i] = new Torrent(torrent);
+          });
+        } else {
+          // No ids passed, just replace the whole cache
+          this.torrents.replace(
+            newTorrents.map((torrent) => new Torrent(torrent))
+          );
+        }
       }));
     }));
   }
@@ -86,9 +81,9 @@ class TorrentStore {
     return this.rpc.sendRequest('torrent-add', torrentUploads).then(action((response) => {
       response.json().then(action((result) => {
         // TODO: Review!
-        if (result.result.success !== 'success') return;
+        if (result.result !== 'success') return;
 
-        this.fetchIds();
+        this.fetch();
       }));
     }));
   }
@@ -101,7 +96,7 @@ class TorrentStore {
     return this.rpc.sendRequest('torrent-start', data).then(action((response) => {
       response.json().then(action((result) => {
         // TODO: Review!
-        if (result.result.success !== 'success') return;
+        if (result.result !== 'success') return;
 
         this.fetch(torrentIds);
       }));
@@ -116,7 +111,7 @@ class TorrentStore {
     return this.rpc.sendRequest('torrent-start-now', data).then(action((response) => {
       response.json().then(action((result) => {
         // TODO: Review!
-        if (result.result.success !== 'success') return;
+        if (result.result !== 'success') return;
 
         this.fetch(torrentIds);
       }));
@@ -131,7 +126,7 @@ class TorrentStore {
     return this.rpc.sendRequest('torrent-stop', data).then(action((response) => {
       response.json().then(action((result) => {
         // TODO: Review!
-        if (result.result.success !== 'success') return;
+        if (result.result !== 'success') return;
 
         this.fetch(torrentIds);
       }));
@@ -147,9 +142,9 @@ class TorrentStore {
     return this.rpc.sendRequest('torrent-remove', data).then(action((response) => {
       response.json().then(action((result) => {
         // TODO: Review!
-        if (result.result.success !== 'success') return;
+        if (result.result !== 'success') return;
 
-        this.fetchIds();
+        this.fetch();
       }));
     }));
   }
@@ -162,9 +157,9 @@ class TorrentStore {
     return this.rpc.sendRequest('queue-move-top', data).then(action((response) => {
       response.json().then(action((result) => {
         // TODO: Review!
-        if (result.result.success !== 'success') return;
+        if (result.result !== 'success') return;
 
-        this.fetch(torrentIds);
+        this.fetch();
       }));
     }));
   }
@@ -177,9 +172,9 @@ class TorrentStore {
     return this.rpc.sendRequest('queue-move-up', data).then(action((response) => {
       response.json().then(action((result) => {
         // TODO: Review!
-        if (result.result.success !== 'success') return;
+        if (result.result !== 'success') return;
 
-        this.fetch(torrentIds);
+        this.fetch();
       }));
     }));
   }
@@ -192,9 +187,9 @@ class TorrentStore {
     return this.rpc.sendRequest('queue-move-down', data).then(action((response) => {
       response.json().then(action((result) => {
         // TODO: Review!
-        if (result.result.success !== 'success') return;
+        if (result.result !== 'success') return;
 
-        this.fetch(torrentIds);
+        this.fetch();
       }));
     }));
   }
@@ -207,9 +202,9 @@ class TorrentStore {
     return this.rpc.sendRequest('queue-move-bottom', data).then(action((response) => {
       response.json().then(action((result) => {
         // TODO: Review!
-        if (result.result.success !== 'success') return;
+        if (result.result !== 'success') return;
 
-        this.fetch(torrentIds);
+        this.fetch();
       }));
     }));
   }
@@ -222,7 +217,7 @@ class TorrentStore {
     return this.rpc.sendRequest('torrent-verify', data).then(action((response) => {
       response.json().then(action((result) => {
         // TODO: Review!
-        if (result.result.success !== 'success') return;
+        if (result.result !== 'success') return;
 
         this.fetch(torrentIds);
       }));
@@ -239,7 +234,7 @@ class TorrentStore {
     return this.rpc.sendRequest('torrent-rename-path', data).then(action((response) => {
       response.json().then(action((result) => {
         // TODO: Review!
-        if (result.result.success !== 'success') return;
+        if (result.result !== 'success') return;
 
         this.fetch(torrentIds);
       }));
@@ -256,7 +251,7 @@ class TorrentStore {
     return this.rpc.sendRequest('torrent-set-location', data).then(action((response) => {
       response.json().then(action((result) => {
         // TODO: Review!
-        if (result.result.success !== 'success') return;
+        if (result.result !== 'success') return;
 
         this.fetch(torrentIds);
       }));
@@ -272,7 +267,7 @@ class TorrentStore {
     return this.rpc.sendRequest('torrent-set', data).then(action((response) => {
       response.json().then(action((result) => {
         // TODO: Review!
-        if (result.result.success !== 'success') return;
+        if (result.result !== 'success') return;
 
         this.fetch(torrentId);
       }));
@@ -291,7 +286,7 @@ class TorrentStore {
     return this.rpc.sendRequest('torrent-reannounce', data).then(action((response) => {
       response.json().then(action((result) => {
         // TODO: Review!
-        if (result.result.success !== 'success') return;
+        if (result.result !== 'success') return;
 
         this.fetch(torrentIds);
       }));
