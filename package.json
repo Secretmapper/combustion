@@ -112,18 +112,6 @@
       "babel-plugin-transform-export-extensions"
     ]
   },
-  "babel": {
-    "presets": [
-      "react-app"
-    ],
-    "plugins": [
-      "react-hot-loader/babel",
-      "babel-plugin-transform-decorators-legacy",
-      "babel-plugin-transform-object-rest-spread",
-      "babel-plugin-syntax-trailing-function-commas",
-      "babel-plugin-transform-export-extensions"
-    ]
-  },
   "eslintConfig": {
     "extends": "react-app"
   }
