@@ -22,13 +22,11 @@ const extractDomains = (torrent) => {
 class TorrentStore {
   @observable previousTorrents = [];
   @observable torrents = [];
-  @observable statusFilter = 0;
   @observable trackerFilter = '';
   @observable textFilter = '';
-  @observable sortCriteria = 'name';
-  @observable sortDirection = '';
 
-  constructor(rpc) {
+  constructor(rpc, prefs_store) {
+    this.prefs = prefs_store;
     this.rpc = rpc;
   }
 
@@ -279,10 +277,6 @@ class TorrentStore {
     }));
   }
 
-  @action setSortCriteria(sortCriteria) {
-    this.sortCriteria = sortCriteria;
-  }
-
   @action askTrackerMorePeers(torrentIds) {
     const data = {
       ids: torrentIds,
@@ -311,12 +305,12 @@ class TorrentStore {
     const regexp = new RegExp(this.textFilter, 'i'); // TODO: Escape!
 
     return this.torrents.filter((torrent) => {
-      if (this.statusFilter && this.statusFilter !== torrent.status) return false;
+      if (this.prefs.statusFilter && this.prefs.statusFilter !== torrent.status) return false;
       if (this.trackerFilter && !extractDomains(torrent).includes(this.trackerFilter)) return false;
       if (this.textFilter && !regexp.test(torrent.name)) return false;
 
       return true;
-    }).sort(comparatorsMap[this.sortCriteria]);
+    }).sort(comparatorsMap[this.prefs.sortCriteria]);
   }
 
   @computed get startedTorrents() {
@@ -344,10 +338,6 @@ class TorrentStore {
 
   @computed get totalDownloadSpeed() {
     return this.torrents.reduce((total, torrent) => total + torrent.rateDownload, 0);
-  }
-
-  @action setStatusFilter(statusFilter) {
-    this.statusFilter = statusFilter;
   }
 
   @action setTrackerFilter(trackerFilter) {

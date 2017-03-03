@@ -22,3 +22,8 @@ export function toTruncFixed(number, place) {
 export function toStringWithCommas(number) {
   return number.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
 };
+
+export function findByProperty(arr, key, value) {
+  return arr[arr.findIndex(o => o[key] === value)]
+}
+
