@@ -97,7 +97,10 @@
     "moduleNameMapper": {
       "^react-native$": "react-native-web",
       "\\.css$": "identity-obj-proxy"
-    }
+    },
+    "modulePaths": [
+      "<rootDir>/src"
+    ]
   },
   "babel": {
     "presets": [
