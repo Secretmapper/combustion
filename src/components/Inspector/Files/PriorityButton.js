@@ -12,21 +12,21 @@ function PriorityButton({ priority, fileIds, setPriority }) {
     <div styleName='priorityButton'>
       <button
         title='Low Priority'
-        className={priority === -1 ? styles.selected : ''}
+        className={priority.includes(-1) ? styles.selected : ''}
         onClick={() => setPriority({fileIds, priority: 'low'})}
       >
         <img src={lowImage} alt='Low Priority' />
       </button>
       <button
         title='Normal Priority'
-        className={priority === 0 ? styles.selected : ''}
+        className={priority.includes(0) ? styles.selected : ''}
         onClick={() => setPriority({fileIds, priority: 'normal'})}
       >
         <img src={normalImage} alt='Normal Priority' />
       </button>
       <button
         title='High Priority'
-        className={priority === 1 ? styles.selected : ''}
+        className={priority.includes(1) ? styles.selected : ''}
         onClick={() => setPriority({fileIds, priority: 'high'})}
       >
         <img src={highImage} alt='High Priority' />

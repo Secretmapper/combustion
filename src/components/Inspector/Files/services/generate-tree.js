@@ -14,7 +14,7 @@ function buildEntryTree(entry, getEntryPath = (entry) => entry) {
 function mergeEntryTrees(tree = {}, otherTree = {}) {
   // Merge arrays
   if (isArray(tree) && isArray(otherTree)) {
-    return [...tree, ...otherTree];
+    return [...new Set([...tree, ...otherTree])];
   }
 
   // Merge primitive types (number, string, ...)
@@ -43,6 +43,6 @@ function mergeEntryTrees(tree = {}, otherTree = {}) {
 
 export function generateTree(entries) {
   return entries
-    .map((entry, entryIndex) => buildEntryTree({...entry, fileIds: [entryIndex]}, ({ name }) => name))
+    .map((entry, entryIndex) => buildEntryTree({...entry, priority: [entry.priority], fileIds: [entryIndex]}, ({ name }) => name))
     .reduce(mergeEntryTrees, {});
 }
