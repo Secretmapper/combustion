@@ -1,4 +1,5 @@
 import { computed, extendObservable } from 'mobx';
+import { zip } from 'lodash';
 
 class Torrent {
   static STATUS_STOPPED = 0;
@@ -74,6 +75,13 @@ class Torrent {
 
   @computed get have() {
     return this.haveValid + this.haveUnchecked;
+  }
+
+  @computed get filesAndStats() {
+    return zip(this.files, this.fileStats).map(([file, fileStat]) => ({
+      ...file,
+      ...fileStat,
+    }));
   }
 }
 

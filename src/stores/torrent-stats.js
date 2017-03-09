@@ -314,8 +314,7 @@ export default class TorrentStats {
       .reduce((allFiles, torrent) => {
         allFiles.push({
           name: torrent.publicName,
-          files: torrent.files,
-          fileStats: torrent.fileStats,
+          files: torrent.filesAndStats,
         });
 
       return allFiles

@@ -1,21 +1,32 @@
 import React from 'react';
 import CSSModules from 'react-css-modules';
+import { inject } from 'mobx-react';
 
-import FileGroup from './FileGroup';
+import { generateTree } from './services/generate-tree';
+import FileRow from './FileRow';
 
 import styles from './styles/index.css';
 
-function Files({ info }) {
+function Files({ info, torrents_store }) {
+  // TODO: Generate tree for each torrent files
+  const torrentId = info.torrents[0].id;
+  const tree = generateTree(info.files[0].files);
+  const rootKey = Object.keys(tree)[0];
+
   return (
     <div>
-      {info.files.map(({ name, files, fileStats }, index) => (
-        <div key={index}>
-          {info.files.length > 1 && <p>{name}</p>}
-          <FileGroup files={files} fileStats={fileStats} />
-        </div>
-      ))}
+      <FileRow
+        name={rootKey}
+        node={tree[rootKey]}
+        setWanted={({ fileIds, wanted }) =>
+          torrents_store.setWanted(torrentId, wanted, fileIds)
+        }
+        setPriority={({ fileIds, priority }) =>
+          torrents_store.setPriority(torrentId, priority, fileIds)
+        }
+      />
     </div>
   );
 }
 
-export default CSSModules(styles)(Files);
+export default inject('torrents_store')(CSSModules(styles)(Files));
