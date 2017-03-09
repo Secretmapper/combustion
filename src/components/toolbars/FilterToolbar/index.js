@@ -37,6 +37,7 @@ class FilterToolbar extends Component {
   render() {
     const torrentCount = this.props.stats_store.stats.torrentCount;
     const states = [
+      {value: -1, label: 'All'},
       {value: 11, label: 'Active'},
       {value: Torrent.STATUS_DOWNLOAD, label: 'Downloading'},
       {value: Torrent.STATUS_SEED, label: 'Seeding'},
@@ -56,7 +57,6 @@ class FilterToolbar extends Component {
 
         <div styleName='filters'>
           <select onChange={this.onChangeFilterState}>
-            <option value=''>All</option>
             {states.map((state, index) => <option key={index} value={state.value}>{state.label}</option>)}
           </select>
           <select onChange={this.onChangeFilterTracker}>
