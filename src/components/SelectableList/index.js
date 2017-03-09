@@ -34,7 +34,7 @@ class SelectableList extends Component {
   }
 
   @autobind onClick(event, id) {
-    if (event.ctrlKey) {
+    if (event.ctrlKey || event.metaKey) {
       this.props.onToggleSelectItem(id);
       return;
     }
