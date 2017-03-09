@@ -266,7 +266,25 @@ class TorrentStore {
   @action setPriority(torrentId, priority, fileIds) {
     const data = {
       ids: [torrentId],
+      // low | normal | high
       [`priority-${priority}`]: fileIds,
+    };
+
+    return this.rpc.sendRequest('torrent-set', data).then(action((response) => {
+      response.json().then(action((result) => {
+        // TODO: Review!
+        if (result.result.success !== 'success') return;
+
+        this.fetch(torrentId);
+      }));
+    }));
+  }
+
+  @action setWanted(torrentId, wanted, fileIds) {
+    const data = {
+      ids: [torrentId],
+      // wanted | unwanted
+      [`files-${wanted}`]: fileIds,
     };
 
     return this.rpc.sendRequest('torrent-set', data).then(action((response) => {
