@@ -4,8 +4,9 @@ import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
 import { size } from 'util/formatters';
 
-import Dialog from '../Dialog'
-import logoImage from 'images/logo.png';
+import Dialog from 'react-toolbox/lib/dialog'
+import Checkbox from 'react-toolbox/lib/checkbox';
+import Input from 'react-toolbox/lib/input';
 
 import TorrentUpload from 'stores/torrent-upload';
 
@@ -20,6 +21,8 @@ class OpenDialog extends Component {
 
     this.torrentUpload = new TorrentUpload();
     this.torrentUpload.setDownloadDir(this.props.session_store.settings['download-dir']);
+
+    this.state = { shouldStart: true }
   }
 
   @autobind onUpload(event) {
@@ -55,34 +58,37 @@ class OpenDialog extends Component {
     this.props.session_store.getFreeSpace(target.value);
   }
 
-  @autobind onChangeStart({ target }) {
-    this.torrentUpload.setPaused(!target.checked);
+  @autobind onChangeStart() {
+    this.torrentUpload.setPaused(this.state.shouldStart);
+    this.setState({ shouldStart: !this.state.shouldStart })
   }
 
   renderFreeSpace() {
     const freeSpace = this.props.session_store.freeSpace;
 
     if (freeSpace < 0) {
-      return null;
+      return '';
     }
 
-    return (
-      <i> ({ size(freeSpace) } Free)</i>
-    );
+    return `(${ size(freeSpace) } Free)`;
   }
 
 
   render() {
+    const actions = [
+      { label: 'Cancel', onClick: this.onCancel },
+      { label: 'Upload', onClick: this.onUpload }
+    ]
+
     return (
       <Dialog
-        show={this.props.view_store.isOpenDialogShown}
-        onHide={this.onHide}
-        header='Upload Torrent Files'
+        actions={actions}
+        active={this.props.view_store.isOpenDialogShown}
+        onEscKeyDown={this.onHide}
+        onOverlayClick={this.onHide}
+        title='Upload Torrent Files'
       >
         <div styleName='body'>
-          <div styleName='logo'>
-            <img src={logoImage} alt='logo'></img>
-          </div>
           <div styleName='form'>
             <form onChange={this.onChange}>
               <section>
@@ -92,25 +98,30 @@ class OpenDialog extends Component {
                 </fieldset>
 
                 <fieldset>
-                  <label>Or enter a URL:</label>
-                  <input name="filename" type="url" onChange={this.onChangeUrl} />
+                  <Input label='Magnet Link' name="filename" type="url" onChange={this.onChangeUrl} />
                 </fieldset>
 
                 <fieldset>
-                  <label>Destination folder{this.renderFreeSpace()}:</label>
-                  <input name="download-dir" type="text" onChange={this.onChangeDownloadDirectory} onBlur={this.onBlurDownloadDirectory} value={this.torrentUpload.downloadDir}/>
+                  <Input
+                    label={`Destination folder ${this.renderFreeSpace()}`}
+                    name="download-dir"
+                    type="text"
+                    onChange={this.onChangeDownloadDirectory}
+                    onBlur={this.onBlurDownloadDirectory}
+                    value={this.torrentUpload.downloadDir}
+                  />
                 </fieldset>
 
                 <fieldset>
-                <label styleName='inlineCheck'>
-                  <input name="paused" type="checkbox" defaultChecked={true} onChange={this.onChangeStart} />
-                  <div>Start when added</div>
-                </label>
+                  <label styleName='inlineCheck'>
+                    <Checkbox
+                      name="paused"
+                      checked={this.state.shouldStart}
+                      label="Start when added"
+                      onChange={this.onChangeStart}
+                    />
+                  </label>
                 </fieldset>
-              </section>
-              <section styleName='buttons'>
-                <button onClick={this.onCancel}>Cancel</button>
-                <button onClick={this.onUpload}>Upload</button>
               </section>
             </form>
           </div>

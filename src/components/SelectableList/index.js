@@ -3,6 +3,7 @@ import CSSModules from 'react-css-modules';
 import autobind from 'autobind-decorator';
 
 import Item from './Item';
+import HoldListener from 'components/HoldListener'; 
 
 import styles from './styles/index.css';
 
@@ -59,6 +60,10 @@ class SelectableList extends Component {
     this.props.onSelectItem(id);
   }
 
+  onHold = (id) => _ =>  {
+    this.props.onToggleSelectItem(id);
+  }
+
   render() {
     const {selectedItemIds} = this.props;
 
@@ -71,15 +76,15 @@ class SelectableList extends Component {
           const className = `${styles.row} ${isSelected ? styles.selected : ''} ${isEven ? styles.even : ''}`;
 
           return (
-            <li
-              key={index}
-              className={className}
-              onClick={(event) => this.onClick(event, childId)}
-              onContextMenu={(event) => this.onContextMenu(event, childId)}
-              tabIndex={0}
-            >
-              {child}
-            </li>
+            <HoldListener key={index} onHold={this.onHold(childId)} onClick={(event) => this.onClick(event, childId)} >
+              <li
+                className={className}
+                onContextMenu={(event) => this.onContextMenu(event, childId)}
+                tabIndex={0}
+              >
+                {child}
+              </li>
+            </HoldListener>
           );
         })}
       </ul>

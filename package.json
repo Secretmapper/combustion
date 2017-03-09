@@ -68,18 +68,23 @@
     "mobx-react": "3.5.3",
     "mobx-react-devtools": "^4.2.11",
     "normalize.css": "^5.0.0",
+    "postcss-cssnext": "^2.9.0",
     "react": "^15.4.2",
     "react-css-modules": "3.7.10",
     "react-dom": "^15.4.2",
     "react-dropzone": "^3.8.0",
+    "react-icons": "^2.2.3",
     "react-overlays": "0.6.10",
-    "react-tabs": "^0.8.2"
+    "react-style-proptype": "^2.0.1",
+    "react-tabs": "^0.8.2",
+    "react-toolbox": "^2.0.0-beta.6"
   },
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node --harmony_proxies scripts/test.js --env=jsdom"
   },
+  "homepage": ".",
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}"

@@ -2,8 +2,9 @@ import React, { Component} from 'react';
 import CSSModules from 'react-css-modules';
 import autobind from 'autobind-decorator';
 
+import Input from 'react-toolbox/lib/input';
+
 import Dialog from '../Dialog'
-import logoImage from 'images/logo.png';
 
 import styles from './styles/index.css';
 
@@ -21,10 +22,8 @@ class PromptDialog extends Component {
     }
   }
 
-  @autobind onChange(event) {
-    this.setState({
-      value: event.target.value
-    });
+  @autobind onChange(value) {
+    this.setState({ value });
   }
 
   @autobind onSubmit() {
@@ -47,21 +46,14 @@ class PromptDialog extends Component {
         show={this.props.toggle}
         onHide={this.onHide}
         header={this.props.header}
+        actions={[
+          { label: 'Cancel', onClick: this.onHide },
+          { label: this.props.action || 'Ok', onClick: this.onSubmit, primary: true }
+        ]}
       >
         <div styleName='body'>
-          <div styleName='logo'>
-            <img src={logoImage} alt='logo'></img>
-          </div>
           <div styleName='content'>
-            { this.props.question &&
-              <p>{this.props.question}:</p>
-            }
-            <input type='text' onChange={this.onChange} value={this.state.value} />
-
-            <section styleName='buttons'>
-              <button onClick={this.onHide}>Cancel</button>
-              <button onClick={this.onSubmit}>{ this.props.action || 'Ok' }</button>
-            </section>
+            <Input type='text' label={this.props.question && this.props.question} onChange={this.onChange} value={this.state.value} />
           </div>
         </div>
       </Dialog>

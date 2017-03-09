@@ -18,7 +18,7 @@ function getPeerDetailsStyles(torrent) {
   return 'peerDetails';
 }
 
-@inject('torrents_store')
+@inject('view_store', 'torrents_store')
 @observer
 @CSSModules(styles)
 class Full extends Component {
@@ -35,19 +35,25 @@ class Full extends Component {
     const torrent = this.props.torrent;
 
     return (
-      <div styleName='torrent'>
-        <div styleName='name'>
-          {torrent.name}
-        </div>
-        <div styleName={getPeerDetailsStyles(torrent)}>
-          {getPeerDetails(torrent)}
-        </div>
-        <div styleName='progressBarRow'>
-          <ProgressBar torrent={torrent} />
-          <StatusButton torrent={torrent} onToggle={this.onToggleTorrent} />
-        </div>
-        <div styleName='progressDetails'>
-          {getProgressDetails(torrent)}
+      <div style={{flex: 1, width: '100%', overflow: 'hidden'}}>
+        <div styleName='torrent'>
+          <div styleName='torrent__main'>
+            <div styleName='name'>
+              {torrent.name}
+            </div>
+            <div styleName={getPeerDetailsStyles(torrent)}>
+              {getPeerDetails(torrent)}
+            </div>
+            <div styleName='progressBarRow'>
+              <ProgressBar torrent={torrent} />
+            </div>
+            <div styleName='progressDetails'>
+              {getProgressDetails(torrent)}
+            </div>
+          </div>
+          <div styleName='torrent__info'>
+            <StatusButton torrent={torrent} onToggle={this.onToggleTorrent} />
+          </div>
         </div>
       </div>
     );

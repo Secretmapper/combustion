@@ -4,9 +4,10 @@ import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
 
-import settingsImage from 'images/settings.png';
-import preferencesImage from 'images/wrench.png';
-import compactImage from 'images/compact.png';
+import CompactListIcon from 'react-icons/lib/md/list'
+import ListIcon from 'react-icons/lib/md/view-list'
+import FastIcon from 'react-icons/lib/md/signal-cellular-4-bar'
+import SlowIcon from 'react-icons/lib/md/signal-cellular-connected-no-internet-4-bar'
 
 import SettingsContextMenu from 'components/menus/SettingsContextMenu';
 
@@ -25,10 +26,6 @@ class StatusToolbar extends Component {
         top: 0,
       },
     };
-  }
-
-  @autobind onTogglePreferences() {
-    this.props.view_store.togglePreferencesDialog();
   }
 
   @autobind onToggleCompact() {
@@ -69,29 +66,22 @@ class StatusToolbar extends Component {
   }
 
   render() {
-    let compactClassName = styles.button;
-    let turtleClassName = styles.buttonTurtle;
-
-    if (this.props.prefs_store.compact) {
-      compactClassName += ` ${styles.buttonActive}`;
-    }
-
-    if (this.props.session_store.settings['alt-speed-enabled']) {
-      turtleClassName += ` ${styles.turtleActive}`;
-    }
+    const { view_store, session_store } = this.props
+    const { compact } = view_store
+    const turtle = session_store.settings['alt-speed-enabled'] 
 
     return (
       <div styleName='toolbar'>
-        <button styleName='button' onClick={this.onToggleSettings}>
-          <img src={settingsImage} alt='Settings'/>
-        </button>
-        <button styleName='button' onClick={this.onTogglePreferences}>
-          <img src={preferencesImage} alt='Preferences'/>
-        </button>
-        <button className={turtleClassName} onClick={this.onToggleTurtle} title='Speed limit'></button>
-        <button className={compactClassName} onClick={this.onToggleCompact}>
-          <img src={compactImage} alt='Compact view'/>
-        </button>
+        {
+          turtle
+            ? <SlowIcon styleName='button' onClick={this.onToggleTurtle} />
+            : <FastIcon styleName='button' onClick={this.onToggleTurtle} />
+        }
+        {
+          compact
+            ? <CompactListIcon styleName='button' onClick={this.onToggleCompact} />
+            : <ListIcon styleName='button' onClick={this.onToggleCompact} />
+        }
         {this.renderContextMenu()}
       </div>
     );

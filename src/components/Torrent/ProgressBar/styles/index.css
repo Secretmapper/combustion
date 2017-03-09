@@ -4,46 +4,38 @@
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 12px;
+  height: 3px;
 }
 
 .leeching progress::-webkit-progress-bar {
-  box-shadow: inset 0px 0px 0px 1px #CFCFCF;
-  background-image: linear-gradient(to bottom, #efefef 0%,#e7e7e7 50%,#d1d1d1 51%,#ebebeb 100%);
+  background-color: #313A3C;
 }
 
 .leeching progress::-webkit-progress-value {
-  border: 1px solid #3D9DEA;
-  background-image: linear-gradient(to bottom, #42a9fb 0%,#40a3f3 50%,#3a93db 51%,#41a6f6 100%);
+  background-color: #00FF99;
 }
 
 .paused progress::-webkit-progress-bar {
-  box-shadow: inset 0px 0px 0px 1px #989898;
   background-image: linear-gradient(to bottom, #efefef 0%,#e7e7e7 50%,#d1d1d1 51%,#ebebeb 100%);
 }
 
 .paused progress::-webkit-progress-value {
-  border: 1px solid #989898;
   background-image: linear-gradient(to bottom, #b0b0b0 0%,#aaaaaa 50%,#9a9a9a 51%,#adadad 100%);
 }
 
 .seeding progress::-webkit-progress-bar {
-  box-shadow: inset 0px 0px 0px 1px #29AD35;
   background-image: linear-gradient(to bottom, #47e75f 0%,#44de5b 50%,#3ec953 51%,#45e25d 100%);
 }
 
 .seeding progress::-webkit-progress-value {
-  border: 1px solid #29AD35;
   background-image: linear-gradient(to bottom, #3cc551 0%,#3abd4d 50%,#35ab47 51%,#3bc04f 100%);
 }
 
 .magnet progress::-webkit-progress-bar {
-  box-shadow: inset 0px 0px 0px 1px #D47778;
   background-image: linear-gradient(to bottom, #ea8584 0%,#e38080 50%,#d37676 51%,#e78282 100%);
 }
 
 .magnet progress::-webkit-progress-value {
-  border: 1px solid #D47778;
   background-image: linear-gradient(to bottom, #efefef 0%,#e7e7e7 50%,#d1d1d1 51%,#ebebeb 100%);
 }
 

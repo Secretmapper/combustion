@@ -15,6 +15,17 @@ export const comparatorsMap = {
   state: comparators.compareByState,
 };
 
+export const sortCriteria = [
+  { value: 'queue_order', label: 'Queue Order' },
+  { value: 'activity', label: 'Activity' },
+  { value: 'age', label: 'Age' },
+  { value: 'name', label: 'Name' },
+  { value: 'percent_completed', label: 'Progress' },
+  { value: 'ratio', label: 'Ratio' },
+  { value: 'size', label: 'Size' },
+  { value: 'state', label: 'State' }
+]
+
 export const extractDomains = (torrent) => {
   return torrent.trackers.map((tracker) => parseUri(tracker.announce).host);
 };
@@ -242,6 +253,41 @@ class TorrentStore {
     }, []);
 
     return [...new Set(trackers)]; // Unique
+  }
+
+  getFilteredCount(statusFilter = this.statusFilter) {
+    const regexp = new RegExp(this.textFilter, 'i'); // TODO: Escape!
+
+    return this.torrents.filter((torrent) => {
+      if (statusFilter !== -1 && statusFilter !== torrent.status) return false;
+      if (this.trackerFilter && !extractDomains(torrent).includes(this.trackerFilter)) return false;
+      if (this.textFilter && !regexp.test(torrent.name)) return false;
+
+      return true;
+    }).length;
+  }
+
+  @computed get statesWithCount() {
+    return [
+      {count: this.getFilteredCount(-1), value: -1, label: 'All'},
+      {count: this.getFilteredCount(11), value: 11, label: 'Active'},
+      {
+        count: this.getFilteredCount(Torrent.STATUS_DOWNLOAD),
+        value: Torrent.STATUS_DOWNLOAD,
+        label: 'Downloading'
+      },
+      {
+        count: this.getFilteredCount(Torrent.STATUS_SEED),
+        value: Torrent.STATUS_SEED,
+        label: 'Seeding'
+      },
+      {
+        count: this.getFilteredCount(Torrent.STATUS_STOPPED),
+        value: Torrent.STATUS_STOPPED,
+        label: 'Paused'
+      },
+      {count: this.getFilteredCount(55), value: 55, label: 'Finished'},
+    ];
   }
 
   @computed get startedTorrents() {

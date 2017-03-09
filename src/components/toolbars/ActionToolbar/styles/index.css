@@ -1,41 +1,26 @@
 .toolbar {
-  background: #ccc;
-
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-
-  align-items: center;
-
-  border-bottom: 1px solid #AAA;
-  background-color: #cccccc;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#dddddd), to(#bbbbbb));
-  background-image: -webkit-linear-gradient(top, #dddddd, #bbbbbb);
-  background-image: -moz-linear-gradient(top, #dddddd, #bbbbbb);
-  background-image: -ms-linear-gradient(top, #dddddd, #bbbbbb);
-  background-image: -o-linear-gradient(top, #dddddd, #bbbbbb);
-  background-image: linear-gradient(top, #dddddd, #bbbbbb);
+  /* background-color: black; */
+  color: white;
+  font-size: 3em;
+  margin: 0 auto;
+  flex: 1;
 }
-
-.button {
-  border: 0px;
-  background: transparent;
-  padding: 3px 5px;
-  outline: none;
-}
-
 .inspector {
   align-self: flex-end;
   margin-left: auto;
 }
 
+.button>svg {
+  margin-left: 0.2rem;
+  margin-right: 0.2rem;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: white;
+}
+
 .button:hover {
   cursor: pointer;
-  background: #ddd;
+  background: #222;
 }
 
 .button:disabled {

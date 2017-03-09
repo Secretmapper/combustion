@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import CSSModules from 'react-css-modules';
 import { observer } from 'mobx-react';
 
+import PlayIcon from 'react-icons/lib/md/play-circle-outline';
+import PauseIcon from 'react-icons/lib/md/pause-circle-outline';
+
 import styles from './styles/index.css';
 
 @observer
@@ -12,12 +15,11 @@ class StatusButton extends Component {
   }
 
   render() {
-    return (
-      <button
-        styleName={this.props.torrent.isStopped ? 'statusResume' : 'statusPause'}
-        onClick={this.props.onToggle.bind(this, this.props.torrent.id)}
-      />
-    );
+    if (this.props.torrent.isStopped) {
+      return <PlayIcon onClick={this.props.onToggle.bind(this, this.props.torrent.id)} />
+    } else {
+      return <PauseIcon onClick={this.props.onToggle.bind(this, this.props.torrent.id)} />
+    }
   }
 }
 

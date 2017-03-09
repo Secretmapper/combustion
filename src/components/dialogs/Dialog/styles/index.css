@@ -1,42 +1,5 @@
-.modalStyle {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 1040;
-}
-
-.dialogStyle {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 1px solid #e5e5e5;
-  background-color: #fff;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-  border-radius: 3px;
-}
-
-.dialogStyle:focus {
-  outline: none;
-}
 .body {
   display: flex;
-  flex-direction: column;
-  color: black;
-  min-width: 400px;
-  background-color: #fefefe;
 }
 .body h2 {
-  font-size: 1.2em;
-  padding: 10px;
-  background: #ddd;
-  color: #666;
-  margin: 0;
-}
-.logo {
-  width: 64px;
-  height: 64px;
-  margin: 020px;
 }

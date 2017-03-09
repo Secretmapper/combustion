@@ -1,9 +1,7 @@
 .toolbar {
-  background: #ccc;
+  color: white;
   padding: 2px;
 
-  display: -ms-flexbox;
-  display: -webkit-flex;
   display: flex;
 
   -ms-flex-align: center;
@@ -11,36 +9,18 @@
   -webkit-box-align: center;
 
   align-items: center;
-
-  border-bottom: 1px solid #AAA;
-  background-color: #cccccc;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#dddddd), to(#bbbbbb));
-  background-image: -webkit-linear-gradient(top, #dddddd, #bbbbbb);
-  background-image: -moz-linear-gradient(top, #dddddd, #bbbbbb);
-  background-image: -ms-linear-gradient(top, #dddddd, #bbbbbb);
-  background-image: -o-linear-gradient(top, #dddddd, #bbbbbb);
-  background-image: linear-gradient(top, #dddddd, #bbbbbb);
-
-  border-top: 1px solid #666;
+  height: 30px;
 }
 
 .button {
-  border: 1px solid #888;
-  border-radius: 5px;
+  color: black;
+
   background: transparent;
   padding: 2px 10px;
   outline: none;
   margin-right: 5px;
   height: 20px;
-  width: 40px;
-
-  background-color: #dddddd;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#bbbbbb));
-  background-image: -webkit-linear-gradient(top, #ffffff, #bbbbbb);
-  background-image: -moz-linear-gradient(top, #ffffff, #bbbbbb);
-  background-image: -ms-linear-gradient(top, #ffffff, #bbbbbb);
-  background-image: -o-linear-gradient(top, #ffffff, #bbbbbb);
-  background-image: linear-gradient(top, #ffffff, #bbbbbb);
+  width: 50%;
 }
 
 .button:hover {
@@ -49,23 +29,5 @@
 }
 
 .buttonActive {
-  background-image: -webkit-linear-gradient(top, #cdcdff, white);
-}
-
-.buttonTurtle {
-  composes: button;
-
-  background-image: url(images/turtle.png);
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.turtleActive {
-  background-image: url(images/blue-turtle.png), -webkit-linear-gradient(top, #cdcdff, white);
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.filter {
-  border-radius: 5px;
+  background: #333;
 }

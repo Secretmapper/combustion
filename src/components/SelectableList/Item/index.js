@@ -3,7 +3,7 @@ import React, { Component} from 'react';
 class Item extends Component {
   render() {
     return (
-      <div>
+      <div style={{ flex: 1 }}>
         {this.props.children}
       </div>
     );

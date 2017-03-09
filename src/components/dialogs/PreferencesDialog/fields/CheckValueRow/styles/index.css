@@ -1,10 +1,18 @@
 .row {
  display: flex;
+ flex: 1;
  padding-bottom: 10px;
 }
 
+.rowHalf {
+ width: 49%;
+ margin-right: 1%;
+ display: inline-block;
+}
+
 .key {
- width: 180px;
+ width: 50px;
+ align-items: center;
  display: flex;
 }
 
@@ -18,4 +26,12 @@
 
 .value {
  flex: 1;
+}
+
+.minput {
+  padding-bottom:0;
+}
+
+.mswitch {
+  margin-bottom: 0;
 }

@@ -1,8 +1,5 @@
 .body {
   display: flex;
-  padding: 20px;
-  background-color: #eee;
-  width: 380px;
   font-size: 1.1em;
 }
 
@@ -18,16 +15,6 @@
 
 .body input.inline {
   display: inline-block;
-}
-
-.logo {
-  flex-basis: 80px;
-  flex-shrink: 0;
-}
-
-.logo img {
-  width: 64px;
-  height: 64px;
 }
 
 .form {
@@ -74,13 +61,4 @@
 
 .body fieldset label.inlineCheck div {
   margin-left: 6px;
-}
-
-.body section.buttons {
-  flex-direction: row;
-  justify-content: flex-end;
-}
-
-.body section.buttons button {
-  margin-left: 10px;
 }

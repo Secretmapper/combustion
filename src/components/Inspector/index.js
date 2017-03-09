@@ -1,14 +1,17 @@
 import React, { Component} from 'react';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
+import autobind from 'autobind-decorator';
 
 import TorrentStats from 'stores/torrent-stats';
 
-import infoImage from 'images/inspector-info.png';
-import peersImage from 'images/inspector-peers.png';
-import trackersImage from 'images/inspector-trackers.png';
-import filesImage from 'images/inspector-files.png';
+import { Tab, Tabs } from 'react-toolbox/lib/tabs';
+
+import { Button } from 'react-toolbox/lib/button'
+import InfoIcon from 'react-icons/lib/md/info';
+import PeersIcon from 'react-icons/lib/md/device-hub';
+import TrackersIcon from 'react-icons/lib/md/track-changes';
+import FilesIcon from 'react-icons/lib/md/insert-drive-file';
 
 import Activity from './Activity';
 import Details from './Details';
@@ -22,6 +25,17 @@ import styles from './styles/index.css';
 @observer
 @CSSModules(styles)
 class Inspector extends Component {
+  state = {
+    index: 0
+  }
+
+  @autobind handleTabChange(index) {
+    this.setState({index})
+  }
+
+  @autobind onToggleInspector() {
+    this.props.view_store.toggleInspector();
+  }
 
   render() {
     const selectedTorrentIds = this.props.view_store.selectedTorrents;
@@ -31,30 +45,35 @@ class Inspector extends Component {
 
     return (
       <div styleName='inspector'>
-        <Tabs>
-          <TabList>
-            <Tab><img src={infoImage} alt='Info' /></Tab>
-            <Tab><img src={peersImage} alt='Peers' /></Tab>
-            <Tab><img src={trackersImage} alt='Trackers' /></Tab>
-            <Tab><img src={filesImage} alt='Files' /></Tab>
-          </TabList>
-          <TabPanel>
-            <h1>{info.title}</h1>
-            <Activity info={info} />
-            <Details info={info} />
-          </TabPanel>
-          <TabPanel>
-            <h1>{info.title}</h1>
-            {info.peers.length > 0 && <Peers info={info} />}
-          </TabPanel>
-          <TabPanel>
-            <h1>{info.title}</h1>
-            {info.trackers.length > 0 && <Trackers info={info} />}
-          </TabPanel>
-          <TabPanel>
-            <h1>{info.title}</h1>
-            {info.files.length > 0 && <Files info={info} />}
-          </TabPanel>
+        <div styleName='inspectorCloseButton'>
+          <Button icon='chevron_right' label='Close Inspector' onMouseUp={this.onToggleInspector} raised primary />
+        </div>
+        <Tabs index={this.state.index} onChange={this.handleTabChange} fixed>
+          <Tab label='Info' icon={<InfoIcon />}>
+            <div>
+              <h1>{info.title}</h1>
+              <Activity info={info} />
+              <Details info={info} />
+            </div>
+          </Tab>
+          <Tab label='Peers' icon={<PeersIcon />}>
+            <div>
+              <h1>{info.title}</h1>
+              {info.peers.length > 0 && <Peers info={info} />}
+            </div>
+          </Tab>
+          <Tab label='Trackers' icon={<TrackersIcon />}>
+            <div>
+              <h1>{info.title}</h1>
+              {info.trackers.length > 0 && <Trackers info={info} />}
+            </div>
+          </Tab>
+          <Tab label='Files' icon={<FilesIcon />}>
+            <div>
+              <h1>{info.title}</h1>
+              {info.files.length > 0 && <Files info={info} />}
+            </div>
+          </Tab>
         </Tabs>
       </div>
     );

@@ -1,5 +1,8 @@
 import React, { Component} from 'react';
+import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
+
+import styles from '../styles/index.css';
 
 import TextRow from '../fields/TextRow';
 import CheckRow from '../fields/CheckRow';
@@ -8,6 +11,7 @@ import SelectRow from '../fields/SelectRow';
 
 @inject('view_store')
 @observer
+@CSSModules(styles)
 class PeersTabPanel extends Component {
   render() {
     const encryption = {
@@ -19,8 +23,10 @@ class PeersTabPanel extends Component {
     return (
       <div>
         <h3>Connections</h3>
-        <TextRow id='peer-limit-per-torrent' label='Max peers per torrent'/>
-        <TextRow id='peer-limit-global' label='Max peers overall'/>
+        <div>
+          <TextRow id='peer-limit-per-torrent' label='Max peers per torrent' half />
+          <TextRow id='peer-limit-global' label='Max peers overall' half />
+        </div>
 
         <h3>Options</h3>
 

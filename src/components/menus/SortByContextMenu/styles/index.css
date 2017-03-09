@@ -1,50 +1,6 @@
-.torrentMenu {
-  bottom: 18px;
-  min-width: 210px;
-  background-color: white;
-  padding: 5px 0;
-  text-align: left;
-  list-style: none;
-  -webkit-border-radius: 5px;
-  -webkit-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-}
-
 .torrentMenuItem {
-  margin: 0px;
-  color: rgb(0, 0, 0);
-  cursor: default;
-  padding: 3px 10px 3px 20px;
 }
 
 .torrentMenuSelected {
-  composes: torrentMenuItem;
-}
-
-.torrentMenuSelected:before {
-  content: "✔";
-  margin-left: -14px;
-  margin-right: 6px;
-}
-
-.torrentMenuItemDisabled {
-  composes: torrentMenuItem;
-  color: rgb(170, 170, 170);
-  pointer-events: none;
-}
-
-.torrentMenuItem:hover {
-  color: rgb(255, 255, 255);
-  background-color: rgb(34, 68, 238);
-}
-
-.torrentMenuSeparator {
-  composes: torrentMenuItem;
-
-  border-top: 1px solid #ddd;
-  margin: 5px 0;
-  padding: 0px;
-}
-
-.torrentMenuSeparator:before {
-  content: none;
+  font-weight: 600;
 }

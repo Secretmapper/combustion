@@ -1,0 +1,26 @@
+.stats {
+  color: white;
+  font-size: 10px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.stats span:not(:first-child) {
+  margin-left: 5px;
+}
+
+.stats span:last-child {
+  margin-right: 5px;
+}
+
+.stats svg {
+  font-size: 20px;
+}
+
+.down {
+  color: #EC334E;
+}
+
+.up {
+  color: #FFB96F;
+}

@@ -1,0 +1,23 @@
+.drawer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.aside {
+  flex: 1;
+}
+
+.list_item {
+  margin-left: 16px;
+  padding-right: 16px;
+}
+
+.footer {
+  padding: 15px;
+  border-top: 1px solid #e0e0e0;
+  font-size: 0.75rem;
+  &>span {
+    display: block;
+  }
+}

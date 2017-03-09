@@ -5,13 +5,16 @@ import { inject, observer } from 'mobx-react';
 import getFilteredTorrents from 'stores/util/getFilteredTorrents';
 import autobind from 'autobind-decorator';
 
+import { Layout, NavDrawer, Panel } from 'react-toolbox';
+
+import WithAside from 'components/WithAside';
 import Torrent from 'components/Torrent';
 import SelectableList from 'components/SelectableList';
 import Inspector from 'components/Inspector';
-import ActionToolbar from 'components/toolbars/ActionToolbar';
-import FilterToolbar from 'components/toolbars/FilterToolbar';
+import Header from 'components/Header';
 import StatusToolbar from 'components/toolbars/StatusToolbar';
 import DropzoneLayer from 'components/DropzoneLayer';
+import DrawerMenu from 'components/DrawerMenu';
 import OpenDialog from 'components/dialogs/OpenDialog';
 import PreferencesDialog from 'components/dialogs/PreferencesDialog';
 import ConnectionDialog from 'components/dialogs/ConnectionDialog';
@@ -36,6 +39,10 @@ function renderDevTools() {
 @observer
 @CSSModules(styles)
 class App extends Component {
+  state = {
+    showDrawer: false
+  }
+
   componentDidMount() {
     const PERMISSION_GRANTED = 'granted';
     const PERMISSION_DENIED = 'denied';
@@ -65,6 +72,14 @@ class App extends Component {
     clearInterval(this.interval);
   }
 
+  @autobind onToggleDrawer() {
+    this.setState({ showDrawer: !this.state.showDrawer })
+  }
+
+  @autobind onHideDrawer() {
+    this.setState({ showDrawer: false })
+  }
+
   @autobind onToggleContextMenu() {
     this.props.view_store.toggleContextMenus();
   }
@@ -81,66 +96,75 @@ class App extends Component {
 
     return (
       <DropzoneLayer>
-        <div styleName='container' onClick={this.onToggleContextMenu}>
-            <header styleName='header'>
-              <ActionToolbar/>
-              <FilterToolbar/>
-            </header>
-            <main styleName='main' role='main'>
-              <div styleName='list'>
-                <SelectableList
-                  selectedItemIds={view_store.selectedTorrents}
-                  lastSelectedItemId={view_store.lastSelectedTorrent}
+        <Layout styleName='layout'>
+          <NavDrawer
+            active={this.state.showDrawer}
+            onOverlayClick={this.onHideDrawer}
+            styleName='nav_drawer'
+          >
+            <DrawerMenu />
+          </NavDrawer>
+          <Panel>
+            <div styleName='container' onClick={this.onToggleContextMenu}>
+              <Header onToggleDrawer={this.onToggleDrawer} />
+              <WithAside
+                aside={<Inspector />}
+                showAside={isInspectorShown}
+                styleName='container__inner'
+              >
+                <main styleName='main' role='main'>
+                  <div styleName='list'>
+                    <SelectableList
+                      selectedItemIds={view_store.selectedTorrents}
+                      lastSelectedItemId={view_store.lastSelectedTorrent}
 
-                  onSelectItem={(id) => view_store.setSelected(id)}
-                  onToggleSelectItem={(id) => view_store.toggleSelected(id)}
-                  onSelectRange={(id, selectedIds) => view_store.addSelectedRange(id, selectedIds)}
-                >
-                  {filteredTorrents.map((torrent, index) => (
-                    <SelectableList.Item key={index} id={torrent.id}>
-                      <Torrent torrent={torrent}/>
-                    </SelectableList.Item>
-                  ))}
-                </SelectableList>
-              </div>
-              { isInspectorShown &&
-                <div styleName='details'>
-                  <Inspector />
-                </div>
-              }
-            </main>
-            <footer styleName='footer'>
-              <StatusToolbar/>
-            </footer>
+                      onSelectItem={(id) => view_store.setSelected(id)}
+                      onToggleSelectItem={(id) => view_store.toggleSelected(id)}
+                      onSelectRange={(id, selectedIds) => view_store.addSelectedRange(id, selectedIds)}
+                    >
+                      {filteredTorrents.map((torrent, index) => (
+                        <SelectableList.Item key={index} id={torrent.id}>
+                          <Torrent torrent={torrent}/>
+                        </SelectableList.Item>
+                      ))}
+                    </SelectableList>
+                  </div>
+                </main>
+              </WithAside>
+              <footer styleName='footer'>
+                <StatusToolbar/>
+              </footer>
 
-            <OpenDialog />
-            <PreferencesDialog />
-            <ConnectionDialog />
-            <StatisticsDialog />
-            <AboutDialog />
+              <OpenDialog />
+              <PreferencesDialog />
+              <ConnectionDialog />
+              <StatisticsDialog />
+              <AboutDialog />
 
-            <PromptDialog
-              header='Set location'
-              action='Apply'
-              placeholder={firstTorrent.downloadDir}
-              question='Location'
-              toggle={this.props.view_store.isLocationPromptShown}
-              onToggle={() => this.props.view_store.toggleLocationPrompt()}
-              onSubmit={(value) => this.props.torrents_store.setLocation([selectedTorrents[0]], value)}
-            />
+              <PromptDialog
+                header='Set location'
+                action='Apply'
+                placeholder={firstTorrent.downloadDir}
+                question='Location'
+                toggle={this.props.view_store.isLocationPromptShown}
+                onToggle={() => this.props.view_store.toggleLocationPrompt()}
+                onSubmit={(value) => this.props.torrents_store.setLocation([selectedTorrents[0]], value)}
+              />
 
-            <PromptDialog
-              header='Rename torrent'
-              action='Rename'
-              question='Enter new name'
-              placeholder={firstTorrent.name}
-              toggle={this.props.view_store.isRenamePromptShown}
-              onToggle={() => this.props.view_store.toggleRenamePrompt()}
-              onSubmit={(value) => this.props.torrents_store.rename([selectedTorrents[0]], firstTorrent.name, value)}
-            />
+              <PromptDialog
+                header='Rename torrent'
+                action='Rename'
+                question='Enter new name'
+                placeholder={firstTorrent.name}
+                toggle={this.props.view_store.isRenamePromptShown}
+                onToggle={() => this.props.view_store.toggleRenamePrompt()}
+                onSubmit={(value) => this.props.torrents_store.rename([selectedTorrents[0]], firstTorrent.name, value)}
+              />
 
-            {renderDevTools()}
-        </div>
+              {renderDevTools()}
+            </div>
+          </Panel>
+        </Layout>
       </DropzoneLayer>
     )
   };

@@ -1,16 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,600');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import "normalize.css";
 
 :global body {
   margin: 0px;
   padding: 0px;
 
-  font: 62.5% "lucida grande", Tahoma, Verdana, Arial, Helvetica, sans-serif;
+  font: 62.5% "Roboto", "Helvetica Neue",Helvetica,Arial,sans-serif;
+
   height: 100vh;
 }
 
 
 :global #root {
   height: 100vh;
+}
+
+.layout {
+  display: block;
 }
 
 .container {
@@ -20,9 +27,9 @@
   height: 100vh;
 }
 
-.header {
-  flex-shrink: 0;
-  flex-basis: auto;
+.container__inner {
+  display: flex;
+  height: 100vh;
 }
 
 .main {
@@ -30,6 +37,7 @@
   flex-direction: row;
   align-items: stretch;
   flex: 1;
+  width: 100%;
 }
 
 .footer {
@@ -37,10 +45,15 @@
   flex-basis: auto;
 }
 
+.nav_drawer {
+  display: flex;
+  flex: 1;
+}
+
 .list {
   flex: 2;
   overflow-y: auto;
-  background: #fffce8;
+  background: black;
 }
 
 .details {

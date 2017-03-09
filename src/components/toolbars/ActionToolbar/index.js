@@ -3,13 +3,17 @@ import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
 
-import toolbarFolderImage from 'images/toolbar-folder.png';
-import toolbarCloseImage from 'images/toolbar-close.png';
-import toolbarPauseImage from 'images/toolbar-pause.png';
-import toolbarStartImage from 'images/toolbar-start.png';
-import toolbarPauseAllImage from 'images/toolbar-pause-all.png';
-import toolbarStartAllImage from 'images/toolbar-start-all.png';
-import toolbarInfoImage from 'images/toolbar-info.png';
+import { IconButton } from 'react-toolbox/lib/button';
+import AddIcon from 'react-icons/lib/md/add-circle';
+import DeleteIcon from 'react-icons/lib/md/delete-forever';
+
+import PlayIcon from 'react-icons/lib/md/play-circle-outline';
+import PauseIcon from 'react-icons/lib/md/pause-circle-outline';
+
+import PlayAllIcon from 'react-icons/lib/md/play-circle-filled';
+import PauseAllIcon from 'react-icons/lib/md/pause-circle-filled';
+
+import InfoIcon from 'react-icons/lib/md/info';
 
 import styles from './styles/index.css';
 
@@ -59,29 +63,27 @@ class ActionToolbar extends Component {
 
     return (
       <div styleName='toolbar'>
-        <button styleName='button' onClick={this.onOpen}>
-          <img src={toolbarFolderImage} title='Open Torrent' alt='Open Torrent'/>
-        </button>
-        <button styleName='button' onClick={this.onRemove} disabled={!isAnySelected}>
-          <img src={toolbarCloseImage} title='Remove Selected Torrents' alt='Remove Selected Torrents'/>
-        </button>
-        <span styleName='separator'></span>
-        <button styleName='button' onClick={this.onStart} disabled={!isAnyPaused}>
-          <img src={toolbarStartImage} title='Start Selected Torrents' alt='Start Selected Torrents'/>
-        </button>
-        <button styleName='button' onClick={this.onPause} disabled={!isAnyStarted}>
-          <img src={toolbarPauseImage} title='Pause Selected Torrents' alt='Pause Selected Torrents'/>
-        </button>
-        <span styleName='separator'></span>
-        <button styleName='button' onClick={this.onStartAll}>
-          <img src={toolbarStartAllImage} title='Start All Torrents' alt='Start All Torrents'/>
-        </button>
-        <button styleName='button' onClick={this.onPauseAll}>
-          <img src={toolbarPauseAllImage} title='Pause All Torrents' alt='Pause All Torrents'/>
-        </button>
-        <button className={`${styles.button} ${styles.inspector}`} onClick={this.onToggleInspector}>
-          <img src={toolbarInfoImage} title='Toggle inspector' alt='Toggle inspector'/>
-        </button>
+        <IconButton styleName='button' title='Open Torrent' onClick={this.onOpen} >
+          <AddIcon/>
+        </IconButton>
+        <IconButton styleName='button' disabled={!isAnySelected} title='Remove Selected Torrents' onClick={this.onRemove}>
+          <DeleteIcon/>
+        </IconButton>
+        <IconButton styleName='button' disabled={!isAnyPaused} title='Start Selected Torrents' onClick={this.onStart} >
+          <PlayIcon />
+        </IconButton>
+        <IconButton styleName='button' disabled={!isAnyStarted} title='Pause Selected Torrents' onClick={this.onPause} >
+          <PauseIcon />
+        </IconButton>
+        <IconButton styleName='button' title='Start All Torrents' onClick={this.onStartAll} >
+          <PlayAllIcon />
+        </IconButton>
+        <IconButton styleName='button' title='Pause All Torrents' onClick={this.onPauseAll} >
+          <PauseAllIcon />
+        </IconButton>
+        <IconButton styleName='button' title='Toggle inspector' onClick={this.onToggleInspector} >
+          <InfoIcon />
+        </IconButton>
       </div>
     );
   }

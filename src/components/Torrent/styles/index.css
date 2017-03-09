@@ -1,22 +1,40 @@
 .torrent {
-  color: #666;
-  padding: 5px 10px;
+  color: white;
+  padding: 15px 25px;
+  display: flex;
+  flex-direction: row;
+
+  font-family: 'Roboto';
+}
+
+.torrent__main {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.torrent__info {
+  white-space: nowrap;
+  overflow: hidden;
+
+  font-size: 30px;
+  line-height: 60px;
+  padding-left: 15px;
 }
 
 .torrentCompact {
-  color: #666;
+  color: white;
   padding: 7px;
   display: flex;
   align-items: center;
 }
 
 .name {
-  font-size: 1.3em;
-  font-weight: bold;
+  font-size: 1.5em;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #222;
   margin-top: 2px;
   margin-bottom: 2px;
 }

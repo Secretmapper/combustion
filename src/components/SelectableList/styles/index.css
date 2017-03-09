@@ -6,8 +6,6 @@
 }
 
 .row {
-  border-bottom: 1px solid #ccc;
-  background-color: white;
   user-select: none;
   align-items: center;
   cursor: pointer;
@@ -15,9 +13,8 @@
 }
 
 .even {
-  background-color: #F7F7F7;
 }
 
 .selected {
-  background-color: #cdcdff;
+  background-color: #333333;
 }

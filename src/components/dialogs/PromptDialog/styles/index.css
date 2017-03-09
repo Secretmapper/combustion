@@ -1,25 +1,10 @@
 .body {
 	composes: body from "../../Dialog/styles/index.css";
   flex-direction: row;
-  padding: 20px;
-}
-
-.logo {
-  composes: logo from "../../Dialog/styles/index.css";
 }
 
 .content {
   display: flex;
   flex-direction: column;
   flex: 1;
-}
-
-.body section.buttons {
-  display: flex;
-  justify-content: flex-end;
-  padding-top: 10px;
-}
-
-.body section.buttons button {
-  margin-left: 10px;
 }

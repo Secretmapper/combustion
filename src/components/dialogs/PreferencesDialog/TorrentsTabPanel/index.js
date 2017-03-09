@@ -15,9 +15,14 @@ class TorrentsTabPanel extends Component {
   render() {
     return (
       <div>
-        <h3>Downloading</h3>
         <TextRow id='download-dir' label='Download to'/>
         <CheckRow id='start-added-torrents' label='Start when added'/>
+        <CheckValueRow
+          idCheck='incomplete-dir-enabled'
+          idValue='incomplete-dir'
+          label='Directory for Incomplete Files'
+          type='text'
+        />
         <CheckRow id='rename-partial-files' label='Append ".part" to incomplete files'/>
 
         <h3>Seeding</h3>

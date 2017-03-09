@@ -1,0 +1,38 @@
+.container {
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  flex: 1;
+  max-width: 100%;
+  transition: max-width 0.25s cubic-bezier(.4,0,.2,1);
+}
+
+.main--aside {
+  max-width: 0;
+}
+
+.aside {
+  overflow: auto;
+  width: 0;
+  transition: width 0.25s cubic-bezier(.4,0,.2,1);
+  &>div {
+    flex: 1;
+  }
+}
+
+.aside--active {
+  width: 100%;
+}
+
+@media screen and (min-width: 480px) {
+  .main--aside {
+    max-width: 40%;
+  }
+
+  .aside--active {
+    width: 60%;
+  }
+}

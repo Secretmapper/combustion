@@ -1,9 +1,8 @@
 import React, { Component} from 'react';
-import { Modal } from 'react-overlays';
 import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
 
-import Header from './Header'
+import MDialog from 'react-toolbox/lib/dialog'
 
 import styles from './styles/index.css';
 
@@ -12,27 +11,16 @@ import styles from './styles/index.css';
 @CSSModules(styles)
 class Dialog extends Component {
   render() {
-    // TODO; try to investigate how to move this to css module
-    const backdropStyle = {
-      position: 'fixed',
-      top: 0, bottom: 0, left: 0, right: 0,
-      zIndex: 'auto',
-      backgroundColor: '#000',
-      opacity: 0.2
-    };
-
     return (
-      <Modal
-        className={styles.modalStyle}
-        backdropStyle={backdropStyle}
-        show={this.props.show}
-        onHide={this.props.onHide}
+      <MDialog
+        actions={this.props.actions}
+        active={this.props.show}
+        onEscKeyDown={this.props.onHide}
+        onOverlayClick={this.props.onHide}
+        title={this.props.header}
       >
-        <div className={styles.dialogStyle}>
-          <Header title={this.props.header} onClose={this.props.onHide} />
-          {this.props.children}
-        </div>
-      </Modal>
+        {this.props.children}
+      </MDialog>
     );
   }
 }

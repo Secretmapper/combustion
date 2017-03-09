@@ -3,22 +3,13 @@ import CSSModules from 'react-css-modules';
 import { inject } from 'mobx-react';
 import autobind from 'autobind-decorator';
 
-import ContextMenu from 'components/menus/ContextMenu';
+import { Menu, MenuItem, MenuDivider } from 'react-toolbox/lib/menu';
 
 import styles from './styles/index.css';
 
 @inject('prefs_store', 'view_store', 'torrents_store')
 @CSSModules(styles)
 class SortByContextMenu extends Component {
-  @autobind onToggleSortByContextMenu() {
-    this.props.view_store.toggleSortByContextMenu();
-  }
-
-  @autobind onToggleContextMenu() {
-    // TODO: Move it to ContextMenu component
-    this.props.view_store.toggleContextMenus();
-  }
-
   @autobind onSetSortCriteria(sortCriteria) {
     this.props.prefs_store.setSortCriteria(sortCriteria)
   }
@@ -37,26 +28,27 @@ class SortByContextMenu extends Component {
     };
 
     return (
-      <ContextMenu
-        show={this.props.show}
-        container={this.props.container}
-        target={this.props.target}
+      <Menu
+      selectable
+        position='auto'
+        active={this.props.active}
         onHide={this.props.onHide}
       >
-        <ul
-          styleName='torrentMenu'
-          onClick={this.onToggleContextMenu}
-          onMouseEnter={this.onToggleSortByContextMenu}
-          onMouseLeave={this.onToggleSortByContextMenu}
-        >
-          {Object.keys(criteriaList).map((key) => (
-            <li key={key} styleName={sortCriteria === key ? 'torrentMenuSelected' : 'torrentMenuItem'} onClick={this.onSetSortCriteria.bind(this, key)}>{criteriaList[key]}</li>
-          ))}
-
-          <li styleName='torrentMenuSeparator' />
-          <li styleName={sortDirection === 'ascending' ? 'torrentMenuItem' : 'torrentMenuSelected'}>Reverse Sort Order</li>
-        </ul>
-      </ContextMenu>
+        {Object.keys(criteriaList).map((key) => (
+          <MenuItem
+            key={key}
+            caption={criteriaList[key]}
+            onClick={this.onSetSortCriteria.bind(this, key)}
+            styleName={sortCriteria === key ? 'torrentMenuSelected' : 'torrentMenuItem'}
+          />
+        ))}
+        <MenuDivider/>
+        <MenuItem
+          selected={true}
+          caption='Reverse Sort Order'
+          styleName={sortDirection === 'ascending' ? 'torrentMenuSelected' : 'torrentMenuItem'}
+        />
+      </Menu>
     );
   }
 }

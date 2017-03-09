@@ -46,14 +46,10 @@
   line-height: 16px;
 }
 
-.stats span {
-  margin-left: 5px;
-}
-
-.stats img {
-  margin-right: 2px;
-}
-
 .counter {
   margin-left: 5px;
+}
+
+.menuSelected {
+  font-weight: 600;
 }
