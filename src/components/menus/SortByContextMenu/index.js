@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CSSModules from 'react-css-modules';
 import { inject } from 'mobx-react';
 import autobind from 'autobind-decorator';
+import { criteriaList } from 'stores/torrent-store';
 
 import { Menu, MenuItem, MenuDivider } from 'react-toolbox/lib/menu';
 
@@ -16,16 +17,6 @@ class SortByContextMenu extends Component {
 
   render() {
     const { sortCriteria, sortDirection } = this.props.prefs_store;
-    const criteriaList = {
-      queue_order: 'Queue Order',
-      activity: 'Activity',
-      age: 'Age',
-      name: 'Name',
-      percent_completed: 'Progress',
-      ratio: 'Ratio',
-      size: 'Size',
-      state: 'State',
-    };
 
     return (
       <Menu

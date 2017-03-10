@@ -3,10 +3,12 @@
 }
 
 .list {
+  background-color: white;
   margin: 0;
   padding: 0;
   text-align: left;
   list-style-type: none;
+  z-index: 2;
 }
 
 .row {
@@ -14,6 +16,7 @@
   align-items: center;
   cursor: pointer;
   outline: none;
+  border-bottom: 1px solid #cecece;
 }
 
 .listItem {

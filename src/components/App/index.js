@@ -9,6 +9,7 @@ import { Layout, NavDrawer, Panel } from 'react-toolbox';
 
 import WithAside from 'components/WithAside';
 import Torrent from 'components/Torrent';
+import ListInfo from 'components/Torrent/ListInfo';
 import SelectableList from 'components/SelectableList';
 import Inspector from 'components/Inspector';
 import Header from 'components/Header';
@@ -129,6 +130,7 @@ class App extends Component {
                         </SelectableList.Item>
                       ))}
                     </SelectableList>
+                    <ListInfo />
                   </div>
                 </main>
               </WithAside>

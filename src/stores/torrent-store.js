@@ -26,6 +26,17 @@ export const sortCriteria = [
   { value: 'state', label: 'State' }
 ]
 
+export const criteriaList = {
+  queue_order: 'Queue Order',
+  activity: 'Activity',
+  age: 'Age',
+  name: 'Name',
+  percent_completed: 'Progress',
+  ratio: 'Ratio',
+  size: 'Size',
+  state: 'State',
+};
+
 export const extractDomains = (torrent) => {
   return torrent.trackers.map((tracker) => parseUri(tracker.announce).host);
 };
