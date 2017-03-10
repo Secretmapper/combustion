@@ -191,7 +191,19 @@ module.exports = {
   // We use PostCSS for autoprefixing only.
   postcss: function() {
     return [
-      require('postcss-cssnext')
+      require('postcss-cssnext')({
+        features: {
+          customProperties: {
+            variables: {
+              'color-text': '#444548',
+              /* Note that you can use global colors and variables */
+              'color-primary': '#212121',
+              'color-primary-dark': '#000000',
+              'button-height': '30px',
+            }
+          },
+        }
+      })
     ];
   },
   plugins: [

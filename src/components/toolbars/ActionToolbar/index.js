@@ -26,11 +26,7 @@ class ActionToolbar extends Component {
   }
 
   @autobind onRemove() {
-    const confirmRemove = confirm(`Once removed, continuing the transfer will require the torrent file. Are you sure you want to remove it?`);
-
-    if (!confirmRemove) return;
-
-    this.props.torrents_store.remove(this.props.view_store.selectedTorrents);
+    this.props.view_store.toggleDeleteDialog();
   }
 
   @autobind onPause() {
@@ -66,21 +62,27 @@ class ActionToolbar extends Component {
         <IconButton styleName='button' title='Open Torrent' onClick={this.onOpen} >
           <AddIcon/>
         </IconButton>
-        <IconButton styleName='button' disabled={!isAnySelected} title='Remove Selected Torrents' onClick={this.onRemove}>
-          <DeleteIcon/>
-        </IconButton>
-        <IconButton styleName='button' disabled={!isAnyPaused} title='Start Selected Torrents' onClick={this.onStart} >
-          <PlayIcon />
-        </IconButton>
-        <IconButton styleName='button' disabled={!isAnyStarted} title='Pause Selected Torrents' onClick={this.onPause} >
-          <PauseIcon />
-        </IconButton>
-        <IconButton styleName='button' title='Start All Torrents' onClick={this.onStartAll} >
-          <PlayAllIcon />
-        </IconButton>
-        <IconButton styleName='button' title='Pause All Torrents' onClick={this.onPauseAll} >
-          <PauseAllIcon />
-        </IconButton>
+        {isAnySelected
+          ? <div styleName='inline'>
+            <IconButton styleName='button' disabled={!isAnySelected} title='Remove Selected Torrents' onClick={this.onRemove}>
+              <DeleteIcon/>
+            </IconButton>
+            <IconButton styleName='button' disabled={!isAnyPaused} title='Start Selected Torrents' onClick={this.onStart} >
+              <PlayIcon />
+            </IconButton>
+            <IconButton styleName='button' disabled={!isAnyStarted} title='Pause Selected Torrents' onClick={this.onPause} >
+              <PauseIcon />
+            </IconButton>
+          </div>
+          : <div styleName='inline'>
+            <IconButton styleName='button' title='Start All Torrents' onClick={this.onStartAll} >
+              <PlayAllIcon />
+            </IconButton>
+            <IconButton styleName='button' title='Pause All Torrents' onClick={this.onPauseAll} >
+              <PauseAllIcon />
+            </IconButton>
+          </div>
+        }
         <IconButton styleName='button' title='Toggle inspector' onClick={this.onToggleInspector} >
           <InfoIcon />
         </IconButton>

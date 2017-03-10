@@ -53,7 +53,7 @@
 .list {
   flex: 2;
   overflow-y: auto;
-  background: black;
+  background: #FAFAFA;
 }
 
 .details {

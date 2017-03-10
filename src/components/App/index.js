@@ -16,6 +16,7 @@ import StatusToolbar from 'components/toolbars/StatusToolbar';
 import DropzoneLayer from 'components/DropzoneLayer';
 import DrawerMenu from 'components/DrawerMenu';
 import OpenDialog from 'components/dialogs/OpenDialog';
+import DeleteDialog from 'components/dialogs/DeleteDialog';
 import PreferencesDialog from 'components/dialogs/PreferencesDialog';
 import ConnectionDialog from 'components/dialogs/ConnectionDialog';
 import StatisticsDialog from 'components/dialogs/StatisticsDialog';
@@ -136,6 +137,7 @@ class App extends Component {
               </footer>
 
               <OpenDialog />
+              <DeleteDialog />
               <PreferencesDialog />
               <ConnectionDialog />
               <StatisticsDialog />

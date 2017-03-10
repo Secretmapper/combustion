@@ -5,9 +5,14 @@
   margin: 0 auto;
   flex: 1;
 }
+
 .inspector {
   align-self: flex-end;
   margin-left: auto;
+}
+
+.inline {
+  display: inline;
 }
 
 .button>svg {
@@ -20,7 +25,6 @@
 
 .button:hover {
   cursor: pointer;
-  background: #222;
 }
 
 .button:disabled {

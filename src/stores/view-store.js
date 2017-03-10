@@ -19,6 +19,7 @@ class ViewStore {
 
   // TODO: find a better way to manage them
   @observable isOpenDialogShown = false;
+  @observable isDeleteDialogShown = false;
   @observable isPreferencesDialogShown = false;
   @observable isConnectionDialogShown = false;
   @observable isStatisticsDialogShown = false;
@@ -65,6 +66,10 @@ class ViewStore {
 
   @action toggleOpenDialog() {
     this.isOpenDialogShown = !this.isOpenDialogShown;
+  }
+
+  @action toggleDeleteDialog() {
+    this.isDeleteDialogShown = !this.isDeleteDialogShown;
   }
 
   @action togglePreferencesDialog() {

@@ -1,17 +1,35 @@
+:root {
+  --color-bg: black;
+  --color-bg--accent: #4E342E;
+}
+
 .header {
-  background-color: black;
+  background-color: var(--color-bg);
+  transition: background-color 0.5s cubic-bezier(.4,0,.2,1);
+}
+
+.header--accent {
+  background-color: var(--color-bg--accent);
 }
 
 .header__inner {
-  padding-top: 7px;
   padding-left: 18px;
   padding-right: 18px;
-  flex-direction: column;
+  flex-direction: row;
   display: flex;
 }
 
-.header__inner_top, .header__inner_bottom {
+.header__inner_sub {
+  align-items: center;
   display: flex;
+  height: auto;
+  min-height:100%;
+}
+
+.header__inner_top, .header__inner_bottom {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .header__icon {

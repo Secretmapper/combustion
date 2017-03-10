@@ -1,3 +1,7 @@
+:root {
+  --main-color: black;
+}
+
 .list {
   margin: 0;
   padding: 0;
@@ -24,11 +28,11 @@
 }
 
 .selected {
-  background-color: #333333;
+  background-color: #E0E0E0;
 }
 
 .rippleActive {
-  background-color: #cccccc;
+  background-color: var(--main-color);
 }
 
 .radioButton {
@@ -43,12 +47,12 @@
 }
 
 .radioButton [data-react-toolbox="radio"] {
-  border: 2px solid white;
+  border: 2px solid var(--main-color);
   &::before {
-    background-color: white;
+    background-color: var(--main-color);
   }
 }
 
 .radioButton [data-react-toolbox="ripple"] span {
-  background-color:white;
+  background-color: var(--main-color);
 }
