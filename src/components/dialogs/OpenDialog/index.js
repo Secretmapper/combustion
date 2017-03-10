@@ -46,12 +46,12 @@ class OpenDialog extends Component {
     this.torrentUpload.setTorrentFiles(target.files);
   }
 
-  @autobind onChangeUrl({ target }) {
-    this.torrentUpload.setTorrentUrl(target.value);
+  @autobind onChangeUrl(value) {
+    this.torrentUpload.setTorrentUrl(value);
   }
 
-  @autobind onChangeDownloadDirectory({ target }) {
-    this.torrentUpload.setDownloadDir(target.value);
+  @autobind onChangeDownloadDirectory(value) {
+    this.torrentUpload.setDownloadDir(value);
   }
 
   @autobind onBlurDownloadDirectory({ target }) {
