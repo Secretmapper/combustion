@@ -1,11 +1,33 @@
 import React, { Component} from 'react';
+import cx from 'classnames';
 import CSSModules from 'react-css-modules';
 import autobind from 'autobind-decorator';
 
 import Item from './Item';
+import { RadioButton } from 'react-toolbox/lib/radio';
+import Ripple from 'react-toolbox/lib/ripple';
 import HoldListener from 'components/HoldListener'; 
 
 import styles from './styles/index.css';
+
+function Li({ children, style, className, onClick, tabIndex, onMouseDown, onTouchStart }) {
+  return (
+    <li
+      className={className}
+      onMouseDown={onMouseDown}
+      onTouchStart={onTouchStart}
+      tabIndex={tabIndex}
+      style={{ position: 'relative', overflow: 'hidden' }}
+    >
+    <div 
+      onClick={onClick}
+    >
+      {children}
+      </div>
+    </li>
+  )
+}
+const RippledLi = Ripple({ spread: 3 })(Li)
 
 @CSSModules(styles)
 class SelectableList extends Component {
@@ -38,10 +60,14 @@ class SelectableList extends Component {
     }
   }
 
+  @autobind onRadio(id) {
+    console.log(id)
+  }
+
   @autobind onClick(event, id) {
-    if (event.ctrlKey || event.metaKey) {
+    if (event.nativeEvent.target.hasAttribute('data-react-toolbox') || event.ctrlKey || event.metaKey) {
       this.props.onToggleSelectItem(id);
-      return;
+      return true;
     }
 
     if (event.shiftKey) {
@@ -54,10 +80,11 @@ class SelectableList extends Component {
       const selectedIds = childIds.filter((_, index) => index >= lower && index <= upper);
 
       this.props.onSelectRange(id, selectedIds);
-      return;
+      return true;
     }
 
     this.props.onSelectItem(id);
+    return true;
   }
 
   onHold = (id) => _ =>  {
@@ -77,13 +104,23 @@ class SelectableList extends Component {
 
           return (
             <HoldListener key={index} onHold={this.onHold(childId)} onClick={(event) => this.onClick(event, childId)} >
-              <li
+              <RippledLi
                 className={className}
                 onContextMenu={(event) => this.onContextMenu(event, childId)}
                 tabIndex={0}
+                theme={{
+                  ripple: styles.rippleActive,
+                  rippleActive: styles.rippleActive
+                }}
               >
-                {child}
-              </li>
+                <div styleName='listItem'>
+                  <RadioButton
+                    className={cx(styles.radioButton)}
+                    checked={selectedItemIds.includes(childId)}
+                  />
+                  {child}
+                </div>
+              </RippledLi>
             </HoldListener>
           );
         })}

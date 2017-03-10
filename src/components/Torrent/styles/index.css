@@ -1,6 +1,7 @@
 .torrent {
   color: white;
-  padding: 15px 25px;
+  margin: 15px 25px;
+  margin-left: 0px;
   display: flex;
   flex-direction: row;
 

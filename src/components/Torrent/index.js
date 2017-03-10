@@ -3,6 +3,7 @@ import { findDOMNode } from 'react-dom'
 import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
 
+import { isRightClick } from 'util/common';
 import TorrentContextMenu from 'components/menus/TorrentContextMenu';
 
 import Compact from './Compact';
@@ -48,7 +49,7 @@ class Torrent extends Component {
     // TODO: Proper handling position depending on component bounds (left, top)
 
     return (
-      <div ref='target' style={{position: 'absolute', visibility: 'hidden', top: top, left: left + 50}}>
+      <div ref='target' style={{position: 'absolute', visibility: 'hidden', top: 50, left: left + 50}}>
         <TorrentContextMenu
           show={this.isContextMenuShown()}
           container={this}

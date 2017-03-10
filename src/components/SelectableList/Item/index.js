@@ -3,7 +3,7 @@ import React, { Component} from 'react';
 class Item extends Component {
   render() {
     return (
-      <div style={{ flex: 1 }}>
+      <div style={{ flex: 1, overflow: 'hidden' }}>
         {this.props.children}
       </div>
     );

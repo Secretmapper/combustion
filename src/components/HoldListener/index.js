@@ -52,7 +52,7 @@ HoldListener.propTypes = {
 };
 
 HoldListener.defaultProps = {
-  threshold: 600
+  threshold: 300
 };
 
 export default HoldListener;
