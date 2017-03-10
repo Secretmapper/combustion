@@ -69,6 +69,9 @@ class Header extends Component {
             : <NavIcon style={{color: 'white'}} />
           }
           </IconButton>
+          {/* Padding Icon to center Actions*/}
+          <IconButton style={{visibility: 'hidden'}}><NavIcon/></IconButton>
+
           <div styleName='header__inner_top'>
             <div styleName='headerName'>
               <ActionToolbar />

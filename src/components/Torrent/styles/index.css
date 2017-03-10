@@ -25,7 +25,6 @@
 }
 
 .torrentCompact {
-  color: white;
   padding: 7px;
   display: flex;
   align-items: center;
@@ -41,6 +40,7 @@
 }
 
 .nameCompact {
+  color: black;
   flex: 1;
 }
 
@@ -59,6 +59,7 @@
 }
 
 .detailsCompact {
+  color: red;
   margin-right: 10px;
 }
 

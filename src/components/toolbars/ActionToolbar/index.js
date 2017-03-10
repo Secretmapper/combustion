@@ -13,6 +13,8 @@ import PauseIcon from 'react-icons/lib/md/pause-circle-outline';
 import PlayAllIcon from 'react-icons/lib/md/play-circle-filled';
 import PauseAllIcon from 'react-icons/lib/md/pause-circle-filled';
 
+import MoveOptions from '../../Header/MoveOptions';
+
 import InfoIcon from 'react-icons/lib/md/info';
 
 import styles from './styles/index.css';
@@ -73,6 +75,7 @@ class ActionToolbar extends Component {
             <IconButton styleName='button' disabled={!isAnyStarted} title='Pause Selected Torrents' onClick={this.onPause} >
               <PauseIcon />
             </IconButton>
+            <MoveOptions />
           </div>
           : <div styleName='inline'>
             <IconButton styleName='button' title='Start All Torrents' onClick={this.onStartAll} >

@@ -6,7 +6,7 @@ import styles from './styles/index.css';
 import { IconButton } from 'react-toolbox/lib/button';
 import { Menu, MenuItem } from 'react-toolbox/lib/menu';
 import RightIcon from 'react-icons/lib/md/chevron-right';
-import MoreIcon from 'react-icons/lib/md/more-vert';
+import MoreIcon from 'react-icons/lib/md/sort';
 
 import FilterToolbar from 'components/toolbars/FilterToolbar';
 import SortByContextMenu from 'components/menus/SortByContextMenu';

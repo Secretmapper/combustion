@@ -1,7 +1,7 @@
 .toolbar {
   /* background-color: black; */
   color: white;
-  font-size: 3em;
+  font-size: 2rem;
   margin: 0 auto;
   flex: 1;
 }
@@ -13,6 +13,10 @@
 
 .inline {
   display: inline;
+}
+
+.button {
+  width: auto;
 }
 
 .button>svg {
