@@ -2,6 +2,12 @@
   "name": "react-transmission",
   "version": "0.0.1",
   "private": true,
+  "contributors": [
+    "Ferran Basora <fcsonline@gmail.com>",
+    "Eduardo Lanchares <eduardo@elanchares.com>",
+    "Sebastian Boolean",
+    "Secretmapper"
+  ],
   "devDependencies": {
     "autoprefixer": "6.5.1",
     "babel-core": "6.17.0",
