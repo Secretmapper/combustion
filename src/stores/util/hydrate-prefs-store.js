@@ -1,5 +1,6 @@
 import { FilterStates, PrefCookieKeys } from '../prefs-store'
 import { findByProperty } from 'util/common';
+import { rehydrateKey } from 'util/persistors';
 
 export default function () {
   // status filter is saved as a string (i.e. 'all')
@@ -12,27 +13,4 @@ export default function () {
     sortDirection: rehydrateKey(PrefCookieKeys.sortDirection, ''),
     compact: rehydrateKey(PrefCookieKeys.compact, false)
   }
-}
-
-function rehydrateKey (key, fallback) {
-  let val;
-  let lines = document.cookie.split(';');
-  for (let i = 0; !val && i < lines.length; ++i) {
-    let line = lines[i].trim();
-    let delim = line.indexOf('=');
-    if ((delim === key.length) && line.indexOf(key) === 0) {
-        val = line.substring(delim + 1);
-    };
-  };
-
-  // FIXME: we support strings and booleans... add number support too?
-  if (!val) {
-    val = fallback;
-  } else if (val === 'true') {
-    val = true;
-  } else if (val === 'false') {
-    val = false;
-  };
-
-  return val;
 }

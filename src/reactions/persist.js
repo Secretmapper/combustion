@@ -1,12 +1,7 @@
 import { reaction } from 'mobx';
 import { findByProperty } from 'util/common';
+import { persistKey } from 'util/persistors';
 import { FilterStates, PrefCookieKeys } from 'stores/prefs-store';
-
-function persistKey(key, val) {
-  const date = new Date();
-  date.setFullYear(date.getFullYear() + 1);
-  document.cookie = `${key}=${val}; expires=${date.toGMTString()}; path=/`
-}
 
 export default function ({ prefs_store }) {
   const keys = ['statusFilter', 'sortCriteria', 'sortDirection', 'compact']
