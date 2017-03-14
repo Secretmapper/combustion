@@ -22,7 +22,7 @@ const extractDomains = (torrent) => {
 class TorrentStore {
   @observable previousTorrents = [];
   @observable torrents = [];
-  @observable statusFilter = 0;
+  @observable statusFilter = -1;
   @observable trackerFilter = '';
   @observable textFilter = '';
   @observable sortCriteria = 'name';
@@ -329,7 +329,7 @@ class TorrentStore {
     const regexp = new RegExp(this.textFilter, 'i'); // TODO: Escape!
 
     return this.torrents.filter((torrent) => {
-      if (this.statusFilter && this.statusFilter !== torrent.status) return false;
+      if (this.statusFilter !== -1 && this.statusFilter !== torrent.status) return false;
       if (this.trackerFilter && !extractDomains(torrent).includes(this.trackerFilter)) return false;
       if (this.textFilter && !regexp.test(torrent.name)) return false;
 
