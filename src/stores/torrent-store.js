@@ -64,8 +64,9 @@ class TorrentStore {
           // XXX: This is a potentially slow operation. Perhaps cache should be a map?
           newTorrents.forEach(torrent => {
             const i = this.torrents.findIndex(t => t.id === torrent.id);
-            if (i >= 0)
-              this.torrents[i] = new Torrent(torrent);
+            if (i >= 0) {
+              this.torrents[i].update(torrent);
+            }
           });
         } else {
           // No ids passed, just replace the whole cache
