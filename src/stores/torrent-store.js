@@ -4,7 +4,7 @@ import Torrent from 'stores/torrent';
 import * as comparators from 'util/comparators';
 import { parseUri } from 'util/uri';
 
-const comparatorsMap = {
+export const comparatorsMap = {
   queue_order: comparators.compareByQueue,
   activity: comparators.compareByActivity,
   age: comparators.compareByAge,
@@ -15,18 +15,15 @@ const comparatorsMap = {
   state: comparators.compareByState,
 };
 
-const extractDomains = (torrent) => {
+export const extractDomains = (torrent) => {
   return torrent.trackers.map((tracker) => parseUri(tracker.announce).host);
 };
 
 class TorrentStore {
   @observable previousTorrents = [];
   @observable torrents = [];
-  @observable statusFilter = -1;
   @observable trackerFilter = '';
   @observable textFilter = '';
-  @observable sortCriteria = 'name';
-  @observable sortDirection = '';
 
   constructor(rpc) {
     this.rpc = rpc;
@@ -297,10 +294,6 @@ class TorrentStore {
     }));
   }
 
-  @action setSortCriteria(sortCriteria) {
-    this.sortCriteria = sortCriteria;
-  }
-
   @action askTrackerMorePeers(torrentIds) {
     const data = {
       ids: torrentIds,
@@ -323,18 +316,6 @@ class TorrentStore {
     }, []);
 
     return [...new Set(trackers)]; // Unique
-  }
-
-  @computed get filteredTorrents() {
-    const regexp = new RegExp(this.textFilter, 'i'); // TODO: Escape!
-
-    return this.torrents.filter((torrent) => {
-      if (this.statusFilter !== -1 && this.statusFilter !== torrent.status) return false;
-      if (this.trackerFilter && !extractDomains(torrent).includes(this.trackerFilter)) return false;
-      if (this.textFilter && !regexp.test(torrent.name)) return false;
-
-      return true;
-    }).sort(comparatorsMap[this.sortCriteria]);
   }
 
   @computed get startedTorrents() {
@@ -362,10 +343,6 @@ class TorrentStore {
 
   @computed get totalDownloadSpeed() {
     return this.torrents.reduce((total, torrent) => total + torrent.rateDownload, 0);
-  }
-
-  @action setStatusFilter(statusFilter) {
-    this.statusFilter = statusFilter;
   }
 
   @action setTrackerFilter(trackerFilter) {

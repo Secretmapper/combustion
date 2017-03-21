@@ -5,11 +5,13 @@ import { AppContainer } from 'react-hot-loader';
 
 import * as stores from 'stores';
 import notify from 'reactions/notify';
+import persist from 'reactions/persist';
 
 import App from 'components/App';
 
 // Start reactions
 notify(stores);
+persist(stores);
 
 const rootEl = document.getElementById('root');
 

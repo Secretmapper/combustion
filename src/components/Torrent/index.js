@@ -8,7 +8,7 @@ import TorrentContextMenu from 'components/menus/TorrentContextMenu';
 import Compact from './Compact';
 import Full from './Full';
 
-@inject('view_store')
+@inject('prefs_store', 'view_store')
 @observer
 class Torrent extends Component {
   constructor(props) {
@@ -61,8 +61,8 @@ class Torrent extends Component {
   }
 
   render() {
-    const {torrent, view_store} = this.props;
-    const View = view_store.compact ? Compact : Full;
+    const {torrent, prefs_store} = this.props;
+    const View = prefs_store.compact ? Compact : Full;
 
     return (
       <div onContextMenu={this.onContextMenu}>

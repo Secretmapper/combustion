@@ -5,7 +5,6 @@ class ViewStore {
   // TODO: Rename to selectedTorrentIds
   @observable selectedTorrents = [];
   @observable lastSelectedTorrent = null;
-  @observable compact = false;
   @observable notificationsEnabled = false;
 
   @observable torrentContextMenuShown = null;
@@ -86,10 +85,6 @@ class ViewStore {
 
   @action toggleInspector() {
     this.isInspectorShown = !this.isInspectorShown;
-  }
-
-  @action toggleCompact() {
-    this.compact = !this.compact;
   }
 
   @action setFilter(filter) {

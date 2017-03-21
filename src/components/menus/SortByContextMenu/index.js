@@ -7,7 +7,7 @@ import ContextMenu from 'components/menus/ContextMenu';
 
 import styles from './styles/index.css';
 
-@inject('view_store', 'torrents_store')
+@inject('prefs_store', 'view_store', 'torrents_store')
 @CSSModules(styles)
 class SortByContextMenu extends Component {
   @autobind onToggleSortByContextMenu() {
@@ -20,11 +20,11 @@ class SortByContextMenu extends Component {
   }
 
   @autobind onSetSortCriteria(sortCriteria) {
-    this.props.torrents_store.setSortCriteria(sortCriteria)
+    this.props.prefs_store.setSortCriteria(sortCriteria)
   }
 
   render() {
-    const { sortCriteria, sortDirection } = this.props.torrents_store;
+    const { sortCriteria, sortDirection } = this.props.prefs_store;
     const criteriaList = {
       queue_order: 'Queue Order',
       activity: 'Activity',
@@ -54,7 +54,7 @@ class SortByContextMenu extends Component {
           ))}
 
           <li styleName='torrentMenuSeparator' />
-          <li styleName={sortDirection === 'ascending' ? 'torrentMenuSelected' : 'torrentMenuItem'}>Reverse Sort Order</li>
+          <li styleName={sortDirection === 'ascending' ? 'torrentMenuItem' : 'torrentMenuSelected'}>Reverse Sort Order</li>
         </ul>
       </ContextMenu>
     );

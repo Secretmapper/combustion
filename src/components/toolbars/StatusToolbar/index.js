@@ -12,7 +12,7 @@ import SettingsContextMenu from 'components/menus/SettingsContextMenu';
 
 import styles from './styles/index.css';
 
-@inject('view_store', 'session_store')
+@inject('prefs_store', 'view_store', 'session_store')
 @observer
 @CSSModules(styles)
 class StatusToolbar extends Component {
@@ -32,7 +32,7 @@ class StatusToolbar extends Component {
   }
 
   @autobind onToggleCompact() {
-    this.props.view_store.toggleCompact();
+    this.props.prefs_store.toggleCompact();
   }
 
   @autobind onToggleTurtle() {
@@ -72,7 +72,7 @@ class StatusToolbar extends Component {
     let compactClassName = styles.button;
     let turtleClassName = styles.buttonTurtle;
 
-    if (this.props.view_store.compact) {
+    if (this.props.prefs_store.compact) {
       compactClassName += ` ${styles.buttonActive}`;
     }
 

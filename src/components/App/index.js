@@ -2,6 +2,7 @@ import React, { Component} from 'react';
 import CSSModules from 'react-css-modules';
 import DevTools, { setLogEnabled } from 'mobx-react-devtools';
 import { inject, observer } from 'mobx-react';
+import getFilteredTorrents from 'stores/util/getFilteredTorrents';
 import autobind from 'autobind-decorator';
 
 import Torrent from 'components/Torrent';
@@ -31,7 +32,7 @@ function renderDevTools() {
 /**
  * App component acts as the application layout.
  */
-@inject('torrents_store', 'stats_store', 'session_store', 'view_store')
+@inject('torrents_store', 'stats_store', 'session_store', 'prefs_store', 'view_store')
 @observer
 @CSSModules(styles)
 class App extends Component {
@@ -69,14 +70,14 @@ class App extends Component {
   }
 
   render() {
-    const { view_store, torrents_store } = this.props;
+    const { view_store, torrents_store, prefs_store } = this.props;
     const {
       selectedTorrents,
       isInspectorShown,
     } = view_store;
 
     const firstTorrent = torrents_store.getByIds(selectedTorrents)[0] || {};
-    const filteredTorrents = torrents_store.filteredTorrents;
+    const filteredTorrents = getFilteredTorrents(torrents_store, prefs_store);
 
     return (
       <DropzoneLayer>
