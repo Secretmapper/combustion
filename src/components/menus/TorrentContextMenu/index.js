@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import CSSModules from 'react-css-modules';
 import { inject } from 'mobx-react';
 import autobind from 'autobind-decorator';
+import getFilteredTorrents from 'stores/util/getFilteredTorrents'
 
 import ContextMenu from 'components/menus/ContextMenu';
 
 import styles from './styles/index.css';
 
-@inject('view_store', 'torrents_store')
+@inject('view_store', 'torrents_store', 'prefs_store')
 @CSSModules(styles)
 class TorrentContextMenu extends Component {
   @autobind pause() {
@@ -67,7 +68,8 @@ class TorrentContextMenu extends Component {
   }
 
   @autobind onSelectAll() {
-    this.props.view_store.selectTorrents(this.props.torrents_store.filteredTorrents.map((torrent) => torrent.id));
+    const filteredTorrents = getFilteredTorrents(this.props.torrents_store, this.props.prefs_store);
+    this.props.view_store.selectTorrents(filteredTorrents.map((torrent) => torrent.id));
   }
 
   @autobind onDeselectAll() {

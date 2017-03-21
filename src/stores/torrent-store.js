@@ -4,7 +4,7 @@ import Torrent from 'stores/torrent';
 import * as comparators from 'util/comparators';
 import { parseUri } from 'util/uri';
 
-const comparatorsMap = {
+export const comparatorsMap = {
   queue_order: comparators.compareByQueue,
   activity: comparators.compareByActivity,
   age: comparators.compareByAge,
@@ -15,7 +15,7 @@ const comparatorsMap = {
   state: comparators.compareByState,
 };
 
-const extractDomains = (torrent) => {
+export const extractDomains = (torrent) => {
   return torrent.trackers.map((tracker) => parseUri(tracker.announce).host);
 };
 
@@ -25,8 +25,7 @@ class TorrentStore {
   @observable trackerFilter = '';
   @observable textFilter = '';
 
-  constructor(rpc, prefs_store) {
-    this.prefs = prefs_store;
+  constructor(rpc) {
     this.rpc = rpc;
   }
 
@@ -317,18 +316,6 @@ class TorrentStore {
     }, []);
 
     return [...new Set(trackers)]; // Unique
-  }
-
-  @computed get filteredTorrents() {
-    const regexp = new RegExp(this.textFilter, 'i'); // TODO: Escape!
-
-    return this.torrents.filter((torrent) => {
-      if (this.prefs.statusFilter !== -1 && this.prefs.statusFilter !== torrent.status) return false;
-      if (this.trackerFilter && !extractDomains(torrent).includes(this.trackerFilter)) return false;
-      if (this.textFilter && !regexp.test(torrent.name)) return false;
-
-      return true;
-    }).sort(comparatorsMap[this.prefs.sortCriteria]);
   }
 
   @computed get startedTorrents() {

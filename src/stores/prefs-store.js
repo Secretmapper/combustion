@@ -9,7 +9,7 @@ export const PrefCookieKeys = {
 }
 
 export const FilterStates = [
-  {value: 0, label: 'All', persistKey: 'all'},
+  {value: -1, label: 'All', persistKey: 'all'},
   {value: 11, label: 'Active', persistKey: 'active'},
   {value: Torrent.STATUS_DOWNLOAD, label: 'Downloading', persistKey: 'downloading'},
   {value: Torrent.STATUS_SEED, label: 'Seeding', persistKey: 'seeding'},
@@ -27,7 +27,7 @@ class PrefsStore {
     this.rehydrate(init)
   }
 
-  @action rehydrate({ statusFilter = 0, sortCriteria = 'name', sortDirection = '', compact = false }) {
+  @action rehydrate({ statusFilter = -1, sortCriteria = 'name', sortDirection = '', compact = false } = {}) {
     this.statusFilter = statusFilter;
     this.sortCriteria = sortCriteria;
     this.sortDirection = sortDirection;
