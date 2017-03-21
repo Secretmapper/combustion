@@ -20,6 +20,10 @@ class Torrent {
     extendObservable(this, torrent);
   }
 
+  update(torrent) {
+    extendObservable(this, torrent)
+  }
+
   // TODO: Find a better name for this (displayName, compareName, etc.)
   @computed get publicName() {
     if (!this.collatedName && this.name) {
