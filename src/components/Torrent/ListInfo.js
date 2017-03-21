@@ -4,13 +4,12 @@ import { inject } from 'mobx-react';
 
 import styles from './styles/listInfo.css';
 
-@inject('view_store', 'torrents_store')
+@inject('view_store', 'torrents_store', 'prefs_store')
 @CSSModules(styles)
 export default class ListInfo extends Component {
   render () {
-    const { torrents_store: { filter } } = this.props
     const states = this.props.torrents_store.statesWithCount;
-    const status = this.props.torrents_store.statusFilter;
+    const status = this.props.prefs_store.statusFilter;
 
     const allCount = states[states.findIndex(o => o.label === 'All')].count;
     const label = states[states.findIndex(o => o.value === status)].label;

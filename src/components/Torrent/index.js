@@ -3,7 +3,6 @@ import { findDOMNode } from 'react-dom'
 import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
 
-import { isRightClick } from 'util/common';
 import TorrentContextMenu from 'components/menus/TorrentContextMenu';
 
 import Compact from './Compact';
@@ -44,7 +43,7 @@ class Torrent extends Component {
   }
 
   @autobind renderContextMenu() {
-    const { top, left } = this.state.position;
+    const { left } = this.state.position;
 
     // TODO: Proper handling position depending on component bounds (left, top)
 

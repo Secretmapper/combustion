@@ -19,9 +19,6 @@ import ClearIcon from 'react-icons/lib/md/clear';
 import StatsToolbar from 'components/toolbars/StatsToolbar';
 import ActionToolbar from 'components/toolbars/ActionToolbar';
 
-import AppBar from 'react-toolbox/lib/app_bar';
-import Navigation from 'react-toolbox/lib/navigation';
-
 @inject('view_store', 'torrents_store')
 @CSSModules(styles)
 class Header extends Component {
