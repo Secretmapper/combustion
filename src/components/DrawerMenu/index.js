@@ -40,7 +40,7 @@ class DrawerMenu extends Component {
 
   render() {
     const search = this.props.torrents_store.textFilter;
-    const currCriteria = this.props.torrents_store.sortCriteria;
+    const currCriteria = this.props.prefs_store.sortCriteria;
 
     const tracker = this.props.torrents_store.trackerFilter;
     const trackers = this.props.torrents_store.trackers.map((domain) => {
