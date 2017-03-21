@@ -12,7 +12,7 @@ import { sortCriteria } from 'stores/torrent-store'
 
 import styles from './styles/index.css';
 
-@inject('view_store', 'torrents_store')
+@inject('view_store', 'torrents_store', 'prefs_store')
 @CSSModules(styles)
 class DrawerMenu extends Component {
   @autobind deselectAllTorrents() {
@@ -20,7 +20,7 @@ class DrawerMenu extends Component {
   }
 
   @autobind onChange(value) {
-    this.props.torrents_store.setSortCriteria(value);
+    this.props.prefs_store.setSortCriteria(value);
   }
 
   @autobind onChangeSearch(search) {

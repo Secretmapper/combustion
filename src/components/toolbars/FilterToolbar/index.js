@@ -19,7 +19,7 @@ class FilterToolbar extends Component {
 
   onClickFilterState = value => _ => {
     this.deselectAllTorrents();
-    this.props.torrents_store.setStatusFilter(+value);
+    this.props.prefs_store.setStatusFilter(+value);
 
     if (this.props.onAnySelected) {
       this.props.onAnySelected()
@@ -28,7 +28,7 @@ class FilterToolbar extends Component {
 
   render() {
     const states = this.props.torrents_store.statesWithCount;
-    const status = this.props.torrents_store.statusFilter;
+    const status = this.props.prefs_store.statusFilter;
 
     return (
       <div>

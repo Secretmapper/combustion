@@ -47,8 +47,9 @@ class TorrentStore {
   @observable trackerFilter = '';
   @observable textFilter = '';
 
-  constructor(rpc) {
+  constructor(rpc, prefs) {
     this.rpc = rpc;
+    this.prefs = prefs;
   }
 
   @action fetch(torrentIds) {
@@ -145,7 +146,7 @@ class TorrentStore {
   }
 
   @action queueMoveTop(torrentIds) {
-    this.setSortCriteria('queue_order');
+    this.prefs.setSortCriteria('queue_order');
     const data = {
       ids: torrentIds,
     };
@@ -156,7 +157,7 @@ class TorrentStore {
   }
 
   @action queueMoveUp(torrentIds) {
-    this.setSortCriteria('queue_order');
+    this.prefs.setSortCriteria('queue_order');
     const data = {
       ids: torrentIds,
     };
@@ -167,7 +168,7 @@ class TorrentStore {
   }
 
   @action queueMoveDown(torrentIds) {
-    this.setSortCriteria('queue_order');
+    this.prefs.setSortCriteria('queue_order');
     const data = {
       ids: torrentIds,
     };
@@ -178,7 +179,7 @@ class TorrentStore {
   }
 
   @action queueMoveBottom(torrentIds) {
-    this.setSortCriteria('queue_order');
+    this.prefs.setSortCriteria('queue_order');
     const data = {
       ids: torrentIds,
     };
