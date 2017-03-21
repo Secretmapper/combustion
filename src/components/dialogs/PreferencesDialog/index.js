@@ -11,6 +11,7 @@ import TorrentsTabPanel from './TorrentsTabPanel'
 import SpeedTabPanel from './SpeedTabPanel'
 import PeersTabPanel from './PeersTabPanel'
 import NetworkTabPanel from './NetworkTabPanel'
+import { parseStringIfNumber } from 'util/common'
 
 import styles from './styles/index.css';
 
@@ -19,17 +20,17 @@ import styles from './styles/index.css';
 @CSSModules(styles)
 class PreferencesDialog extends Component {
   @autobind onBlur(event) {
-    const type = event.target.attributes.type.value;
+    const type = event.target.type;
     const id = event.target.attributes.id.value;
     const value = event.target.value;
 
-    if (type !== 'checkbox') {
-      this.props.session_store.setPreference(id, value);
+    if (type !== 'checkbox' && type !== 'radio') {
+      this.props.session_store.setPreference(id, parseStringIfNumber(value));
     }
   }
 
   @autobind onChange(event) {
-    const type = event.target.attributes.type.value;
+    const type = event.target.type;
     const id = event.target.attributes.id.value;
     const value = event.target.checked;
 

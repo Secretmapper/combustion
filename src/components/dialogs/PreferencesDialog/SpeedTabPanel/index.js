@@ -1,36 +1,16 @@
 import React, { Component} from 'react';
 import { inject, observer } from 'mobx-react';
-import { range } from 'lodash';
 
 import TextRow from '../fields/TextRow';
 import CheckRow from '../fields/CheckRow';
 import CheckValueRow from '../fields/CheckValueRow';
 import SelectRow from '../fields/SelectRow';
+import { times, days } from './schedule.fixture'
 
 @inject('view_store')
 @observer
 class SpeedTabPanel extends Component {
   render() {
-    const times = range(0, 1440, 15).reduce( (memo, item) => {
-      const hours = Math.round(item/60);
-      const minutes = item % 60;
-
-      memo[item] = `${hours}:${minutes}`;
-      return memo;
-    }, {});
-    const days = {
-      '127': 'Everyday',
-      '62': 'Weekdays',
-      '65': 'Weekends',
-      '1': 'Sunday',
-      '2': 'Monday',
-      '4': 'Tuesday',
-      '8': 'Wednesday',
-      '16': 'Thursday',
-      '32': 'Friday',
-      '64': 'Saturday',
-    }
-
     return (
       <div>
         <h3>Speed Limits</h3>

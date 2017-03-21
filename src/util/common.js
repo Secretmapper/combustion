@@ -27,3 +27,16 @@ export function findByProperty(arr, key, value) {
   return arr[arr.findIndex(o => o[key] === value)]
 }
 
+/**
+ * Parse a string if it's an integer, float, or just a string
+ */
+export function parseStringIfNumber(str) {
+  if (parseInt(str, 10).toString() === str) {
+    return parseInt(str, 10);
+  }
+  if (parseFloat(str).toString() === str) {
+    return parseFloat(str);
+  }
+
+  return str;
+}
