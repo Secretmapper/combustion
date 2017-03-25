@@ -7,7 +7,7 @@ import TorrentStats from 'stores/torrent-stats';
 
 import { Tab, Tabs } from 'react-toolbox/lib/tabs';
 
-import { Button } from 'react-toolbox/lib/button'
+import { IconButton, Button } from 'react-toolbox/lib/button'
 import InfoIcon from 'react-icons/lib/md/info';
 import PeersIcon from 'react-icons/lib/md/device-hub';
 import TrackersIcon from 'react-icons/lib/md/track-changes';
@@ -37,11 +37,20 @@ class Inspector extends Component {
     this.props.view_store.toggleInspector();
   }
 
+  @autobind rename() {
+    this.props.view_store.toggleRenamePrompt();
+  }
+
+  @autobind setLocation() {
+    this.props.view_store.toggleLocationPrompt();
+  }
+
   render() {
     const selectedTorrentIds = this.props.view_store.selectedTorrents;
     const torrents = this.props.torrents_store.getByIds(selectedTorrentIds);
 
     const info = new TorrentStats(torrents);
+    const singleTorrent = torrents.length === 1;
 
     return (
       <div styleName='inspector'>
@@ -51,9 +60,13 @@ class Inspector extends Component {
         <Tabs index={this.state.index} onChange={this.handleTabChange} fixed>
           <Tab label='Info' icon={<InfoIcon />}>
             <div>
-              <h1>{info.title}</h1>
+              <h1>{info.title} {singleTorrent && <IconButton onClick={this.rename} icon='edit'/>}</h1>
               <Activity info={info} />
-              <Details info={info} />
+              <Details
+                info={info}
+                setLocation={this.setLocation}
+                canSetLocation={singleTorrent}
+              />
             </div>
           </Tab>
           <Tab label='Peers' icon={<PeersIcon />}>

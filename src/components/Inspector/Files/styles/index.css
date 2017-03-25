@@ -42,3 +42,7 @@
 .priorityButton button:last-child {
   border-radius: 0px 5px 5px 0px;
 }
+
+.verifyLocalDataBtn {
+  margin-bottom: 10px;
+}

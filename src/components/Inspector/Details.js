@@ -18,12 +18,12 @@ function formatComment(comment) {
   return comment;
 }
 
-function Details({ info }) {
+function Details({ info, setLocation, canSetLocation }) {
   return (
     <div>
       <h3>Details</h3>
       <DetailsRow label='Size' value={info.size} />
-      <DetailsRow label='Location' value={info.foldername} />
+      <DetailsRow label='Location' value={info.foldername} action={setLocation} actionable={canSetLocation}/>
       <DetailsRow label='Hash' value={info.hash} />
       <DetailsRow label='Privacy' value={info.privacy} />
       <DetailsRow label='Origin' value={info.origin} />

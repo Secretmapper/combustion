@@ -39,3 +39,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.morePeersBtn {
+  margin-bottom: 10px;
+}
