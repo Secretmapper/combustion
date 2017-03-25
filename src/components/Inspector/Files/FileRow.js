@@ -8,6 +8,7 @@ import WantedButton from './WantedButton';
 import styles from './styles/index.css';
 
 function FileRow({ name, node, setPriority, setWanted }) {
+  if (!node) return <div styleName='fileRowContainer' />
   const { priority, fileIds, entries } = node;
   const wanted = !!node.wanted;
 
