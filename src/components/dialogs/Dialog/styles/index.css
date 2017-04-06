@@ -1,5 +1,15 @@
 .body {
   display: flex;
 }
+
 .body h2 {
+}
+
+.button {
+  margin-right: 6px;
+  min-width: 0;
+
+  &>[data-react-toolbox="font-icon"] {
+    margin-right: 0;
+  }
 }

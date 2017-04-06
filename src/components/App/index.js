@@ -13,7 +13,7 @@ import ListInfo from 'components/Torrent/ListInfo';
 import SelectableList from 'components/SelectableList';
 import Inspector from 'components/Inspector';
 import Header from 'components/Header';
-import StatusToolbar from 'components/toolbars/StatusToolbar';
+import Footer from 'components/Footer';
 import DropzoneLayer from 'components/DropzoneLayer';
 import DrawerMenu from 'components/DrawerMenu';
 import OpenDialog from 'components/dialogs/OpenDialog';
@@ -108,35 +108,35 @@ class App extends Component {
           </NavDrawer>
           <Panel>
             <div styleName='container' onClick={this.onToggleContextMenu}>
-              <Header onToggleDrawer={this.onToggleDrawer} />
               <WithAside
                 aside={<Inspector />}
                 showAside={isInspectorShown}
                 styleName='container__inner'
               >
-                <main styleName='main' role='main'>
-                  <div styleName='list'>
-                    <SelectableList
-                      selectedItemIds={view_store.selectedTorrents}
-                      lastSelectedItemId={view_store.lastSelectedTorrent}
+                <div style={{ overflow: 'hidden' }}>
+                  <main styleName='main' role='main'>
+                    <div styleName='list'>
+                      <SelectableList
+                        selectedItemIds={view_store.selectedTorrents}
+                        lastSelectedItemId={view_store.lastSelectedTorrent}
 
-                      onSelectItem={(id) => view_store.setSelected(id)}
-                      onToggleSelectItem={(id) => view_store.toggleSelected(id)}
-                      onSelectRange={(id, selectedIds) => view_store.addSelectedRange(id, selectedIds)}
-                    >
-                      {filteredTorrents.map((torrent, index) => (
-                        <SelectableList.Item key={index} id={torrent.id}>
-                          <Torrent torrent={torrent}/>
-                        </SelectableList.Item>
-                      ))}
-                    </SelectableList>
-                    <ListInfo />
-                  </div>
-                </main>
+                        onSelectItem={(id) => view_store.setSelected(id)}
+                        onToggleSelectItem={(id) => view_store.toggleSelected(id)}
+                        onSelectRange={(id, selectedIds) => view_store.addSelectedRange(id, selectedIds)}
+                      >
+                        {filteredTorrents.map((torrent, index) => (
+                          <SelectableList.Item key={index} id={torrent.id}>
+                            <Torrent torrent={torrent}/>
+                          </SelectableList.Item>
+                        ))}
+                      </SelectableList>
+                      <ListInfo />
+                    </div>
+                  </main>
+                  <Header onToggleDrawer={this.onToggleDrawer} />
+                  <Footer />
+                </div>
               </WithAside>
-              <footer styleName='footer'>
-                <StatusToolbar/>
-              </footer>
 
               <OpenDialog />
               <DeleteDialog />
