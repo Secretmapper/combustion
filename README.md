@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Combustion is a modern, sleek web interface for [Transmission](https://transmissionbt.com)
+Combustion is a sleek, modern web interface for [Transmission](https://transmissionbt.com)
 
 ## Technology
 

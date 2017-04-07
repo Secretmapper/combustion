@@ -1,0 +1,22 @@
+{
+  "name": "",
+  "version": "",
+  "private": true,
+  "scripts": {
+    "start": "brunch watch --server"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "babel-brunch": "^6.0.4",
+    "jaded-brunch": "^2.3.0",
+    "jshint-brunch": "^2.0.0",
+    "stylus-brunch": "^2.6.0",
+    "auto-reload-brunch": "^2.0.0",
+    "autoprefixer-stylus": "^0.9.3",
+    "clean-css-brunch": "^2.0.0",
+    "css-brunch": "^2.0.0",
+    "javascript-brunch": "^2.0.0",
+    "uglify-js-brunch": "^2.0.0"
+  }
+}

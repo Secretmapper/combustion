@@ -1,0 +1,105 @@
+*
+  font-family -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif
+  margin: 0
+  padding: 0
+
+body
+  background-color black
+
+.hero
+  color white
+  min-width 100vw
+  &__main
+    margin 0 auto
+    max-width 650px
+    padding 96px 18px 124px
+    text-align center
+  &__title
+    font-size 48px
+    font-weight 300
+    margin-bottom 24px
+  &__sub
+    font-weight 300
+    margin-bottom 24px
+  &__image
+    max-width 300px
+
+.info_container
+  background-color rgb(251, 249, 248)
+  .info
+    box-sizing border-box
+    display flex
+    flex-direction column
+    margin 0 auto
+    max-width 940px
+    padding-bottom 64px
+    padding-left 24px
+    padding-right 24px
+    padding-top 64px
+    width 100%
+    @media (min-width 640px)
+      flex-direction row
+      &:nth-child(odd)
+        flex-direction row-reverse
+    &__blurb
+      flex-grow 0
+      flex-shrink 0
+      flex-direction column
+      display flex
+      max-width 100%
+      width 390px
+    &__title
+      font-size 2em
+      font-weight 600
+      padding-bottom 12px
+    &__sub
+      font-weight 300
+      line-height 1.5em
+    &__gutter
+      flex-shrink 0
+      height 56px
+      @media (min-width 640px)
+        height 100%
+        width 56px
+    &__image_container
+      align-items center
+      display flex
+      flex-shrink 0
+      justify-content center
+      position relative
+      width 100%
+      @media (min-width 640px)
+        width 630px
+    &__image
+      display flex
+      width 100%
+
+.button
+  background-color #fff
+  border-radius 64px
+  color black
+  display inline-block
+  font-size 13.95px
+  font-weight 600
+  letter-spacing 1px
+  margin 0 12px
+  margin-bottom 12px
+  padding 14px 22px
+  text-decoration none
+  text-transform uppercase
+  transition .25s ease-in-out
+  &:hover
+    transform scale(1.06)
+  &--block
+    display block
+
+footer
+  border-top 1px solid rgb(238, 238, 238)
+  background rgb(250, 247, 244)
+  margin 0 auto
+  padding 24px
+  text-align center
+  a
+    text-decoration none
+  .main
+    padding-bottom 12px
