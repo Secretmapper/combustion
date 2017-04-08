@@ -8,7 +8,6 @@ body {
 }
 .hero {
   color: #fff;
-  min-width: 100vw;
 }
 .hero__main {
   margin: 0 auto;
