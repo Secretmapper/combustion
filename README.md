@@ -15,7 +15,7 @@ Prepare the paths
 mkdir ~/.combustion && cd ~/.combustion
 
 Download and unzip the new theme into path ~/.combustion:
-rm release.zip && wget https://github.com/Secretmapper/combustion/archive/release.zip && unzip release.zip;
+rm -f release.zip && wget https://github.com/Secretmapper/combustion/archive/release.zip && unzip release.zip;
 
 Edit environment with "vi ~/.profile" and add/replace as below:
 export TRANSMISSION_WEB_HOME="$HOME/.combustion/combustion-release"
