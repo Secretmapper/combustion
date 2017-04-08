@@ -15,16 +15,16 @@ Prepare the paths
 mkdir ~/.combustion && cd ~/.combustion
 
 Download and unzip the new theme into path ~/.combustion:
-rm release.zip && wget https://github.com/Secretmapper/combustion/archive/release.zip && unzip -j release.zip;
+rm release.zip && wget https://github.com/Secretmapper/combustion/archive/release.zip && unzip release.zip;
 
 Edit environment with "vi ~/.profile" and add/replace as below:
-export TRANSMISSION_WEB_HOME="$HOME/.combustion"
+export TRANSMISSION_WEB_HOME="$HOME/.combustion/combustion-release"
 
 Edit crontab with "crontab -e" and replace as below:
-@reboot export TRANSMISSION_WEB_HOME="$HOME/.combustion" && /usr/local/bin/transmission-daemon
+@reboot export TRANSMISSION_WEB_HOME="$HOME/.combustion/combustion-release" && /usr/local/bin/transmission-daemon
 
 Stop then restart the daemon:
-export TRANSMISSION_WEB_HOME="$HOME/.combustion" && transmission-stop && transmission-daemon;
+export TRANSMISSION_WEB_HOME="$HOME/.combustion/combustion-release" && transmission-stop && transmission-daemon;
 ```
 
 Alternatively, 
