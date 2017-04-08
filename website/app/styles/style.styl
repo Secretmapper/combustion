@@ -21,11 +21,24 @@ body
   &__sub
     font-weight 300
     margin-bottom 24px
-  &__image
+  &__image_container
     max-width 300px
+    margin 0 auto
+  &__image_container_inner
+    position relative
+    height 0
+    overflow hidden
+    background-color black
+    padding-bottom 178.41%
+  &__image
+    position absolute
+    top: 0
+    left 0
+    width 100%
 
 .info_container
   background-color rgb(251, 249, 248)
+  overflow-x hidden
   .info
     box-sizing border-box
     display flex
