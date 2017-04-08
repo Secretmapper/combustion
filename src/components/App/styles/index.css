@@ -29,10 +29,18 @@
 
 .container__inner {
   display: flex;
-  height: 100vh;
+  position: absolute;
+  top: 58px;
+  left: 0;
+  right: 0;
+  bottom: 35px;
+  overflow-y: auto;
+  background: #FAFAFA;
 }
 
 .main {
+  height: 100%;
+  overflow: scroll;
   width: 100%;
 }
 
@@ -42,13 +50,7 @@
 }
 
 .list {
-  position: absolute;
-  top: 58px;
-  left: 0;
-  right: 0;
-  bottom: 35px;
-  overflow-y: auto;
-  background: #FAFAFA;
+  flex: 1;
 }
 
 .details {

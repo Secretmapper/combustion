@@ -108,12 +108,12 @@ class App extends Component {
           </NavDrawer>
           <Panel>
             <div styleName='container' onClick={this.onToggleContextMenu}>
-              <WithAside
-                aside={<Inspector />}
-                showAside={isInspectorShown}
-                styleName='container__inner'
-              >
-                <div style={{ overflow: 'hidden' }}>
+              <div style={{ overflow: 'hidden' }}>
+                <WithAside
+                  aside={<Inspector />}
+                  showAside={isInspectorShown}
+                  styleName='container__inner'
+                >
                   <main styleName='main' role='main'>
                     <div styleName='list'>
                       <SelectableList
@@ -133,10 +133,10 @@ class App extends Component {
                       <ListInfo />
                     </div>
                   </main>
-                  <Header onToggleDrawer={this.onToggleDrawer} />
-                  <Footer />
-                </div>
-              </WithAside>
+                </WithAside>
+                <Header onToggleDrawer={this.onToggleDrawer} />
+                <Footer />
+              </div>
 
               <OpenDialog />
               <DeleteDialog />

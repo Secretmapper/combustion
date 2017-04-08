@@ -18,6 +18,13 @@ class WithAside extends Component {
         >
           {this.props.children}
         </div>
+        <aside
+          className={
+            cx(styles.aside, {[styles['aside--active']]: this.props.showAside})
+          }
+        >
+          {this.props.aside}
+        </aside>
       </div>
     )
   }
