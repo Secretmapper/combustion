@@ -1,48 +1,46 @@
-# lazy-static-site-gen
+# Prerequisites
 
-This is a simple skeleton of static site generator.
+Install node modules `(i.e. yarn install)`, and install brunch
 
-Uses [Brunch](http://brunch.io) as build system.
+# Developing
 
-## Structure
+Launch a development server to preview edits. The website is generated using brunch and the `lazy-static-site-gen` skeleton
 
 ```
-static-site-gen
-│  .gitignore
-│  .jshintrc
-│  brunch-config.js
-│  package.json
-│  README.md
-│
-└─app
-    │  initialize.js
-    │
-    ├─assets
-    ├─js
-    ├─static_jade
-    │      index.jade
-    │      _head.jade
-    │
-    └─styles
-            style.styl
+brunch w --server
 ```
 
-- package.json - npm settings with all required dependencies for this skeleton.
-- .jshintrc - settings for great lint tool [JSHint](http://jshint.com/). Each build runs it using these settings.
-- **app** - contains everything that's going to be build.
-    - **assets** - Everything inside is copied as it is.
-    - **js** - Contains JS code that will be concatenated into `js/app.js`
-        - Each js file will be available as separated module which can be loaded via `require`
-    - **styles** - Contains _stylus_ CSS templates which are concatenated into `style.css`
-    - **static_jade** - Contains [Jade](http://jade-lang.com/) templates.
-        - `index.jade` - Will be parsed into `index.html`
-        - `_head.jade` - Will be ignored, but can be included by other templates. Files starting with `_` are ignored.
-    - **styles** - Contains [Stylus](https://github.com/stylus/stylus) CSS templates which are concatenated into `style.css`.
+# Publish the website
 
-## Usage
+## Setup
 
-- Fill it with content!
-- Run server to preview site with command `npm start`
-- Once satisfied build your site with `brunch build --production`
-- Post it on github pages or wherever you want!
-- PROFIT!
+The publish script expects you to have two sibling folders named `combustion` and `combustion-gh-pages`
+
+```
+# From combustion/website/
+(
+  cd ../../
+  git clone git@github.com:Secretmapper/combustion.git combustion-gh-pages
+  cd combustion-gh-pages
+  git checkout gh-pages
+)
+```
+
+## Building
+
+```
+# From combustion/website/
+(cd ../; ./website/publish.sh)
+```
+
+## Publishing
+
+The build system has now built the website into combustion-gh-pages. All that's left to do is to check it over, commit it, and push it to origin/gh-pages.
+
+```
+cd ../../combustion-gh-pages
+git status  # Check it over to see if the changes look right
+git diff --word-diff=color  # Or go over it in detail
+git add --all && git commit -m "Updating the website in preparation for v0.3.0"
+git push
+```
