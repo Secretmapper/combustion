@@ -4,6 +4,31 @@
 
 Combustion is a sleek, modern web interface for [Transmission](https://transmissionbt.com)
 
+## Easy installation
+
+Latest Releases at: `https://github.com/Secretmapper/combustion/archive/release.zip`
+
+If you need instructions to setup the theme, run the following commands. Note that it installs the theme on `~/.combustion`, edit the path if you want it placed elsewhere
+
+```
+Prepare the paths
+mkdir ~/.combustion && cd ~/.combustion
+
+Download and unzip the new theme into path ~/.combustion:
+rm release.zip && wget https://github.com/Secretmapper/combustion/archive/release.zip && unzip -j release.zip;
+
+Edit environment with "vi ~/.profile" and add/replace as below:
+export TRANSMISSION_WEB_HOME="$HOME/.combustion"
+
+Edit crontab with "crontab -e" and replace as below:
+@reboot export TRANSMISSION_WEB_HOME="$HOME/.combustion" && /usr/local/bin/transmission-daemon
+
+Stop then restart the daemon:
+export TRANSMISSION_WEB_HOME="$HOME/.combustion" && transmission-stop && transmission-daemon;
+```
+
+Alternatively, 
+
 ## Technology
 
 - [Webpack](https://webpack.github.io/)
