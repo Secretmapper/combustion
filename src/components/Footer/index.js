@@ -97,7 +97,7 @@ class Footer extends Component {
           </IconButton>
         </Card>
         <div styleName='toolbar'>
-          <div styleName='button' onClick={this.onToggleCompact}>
+          <div styleName='button' onClick={this.onToggleTurtle}>
             {turtle
               ? <SlowIcon />
               : <FastIcon />
