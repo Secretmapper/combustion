@@ -22,6 +22,7 @@ class RPC {
     return fetch(this._url, {
       method: 'POST',
       headers,
+      credentials: 'include',
       body
     }).then((response) => {
       if (response.status === 502) {
