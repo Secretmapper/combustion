@@ -77,7 +77,8 @@
     "react-overlays": "0.6.10",
     "react-style-proptype": "^2.0.1",
     "react-tabs": "^0.8.2",
-    "react-toolbox": "^2.0.0-beta.6"
+    "react-toolbox": "^2.0.0-beta.6",
+    "semver-compare": "^1.0.0"
   },
   "scripts": {
     "start": "node scripts/start.js",

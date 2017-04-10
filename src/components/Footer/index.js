@@ -4,6 +4,7 @@ import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
 import cx from 'classnames';
 
+import UpdateNotice from '../../components/UpdateNotice';
 import Input from 'react-toolbox/lib/input';
 import { Card } from 'react-toolbox/lib/card';
 import { IconButton } from 'react-toolbox/lib/button';
@@ -113,6 +114,15 @@ class Footer extends Component {
             <SearchIcon />
           </div>
         </div>
+        <UpdateNotice
+          action='Dismiss'
+          active={true}
+          label='Snackbar action cancel'
+          timeout={2000}
+          onClick={_ => {}}
+          onTimeout={_ => {}}
+          type='cancel'
+        />
       </div>
     );
   }

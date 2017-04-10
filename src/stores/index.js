@@ -2,6 +2,7 @@ import { useStrict } from 'mobx';
 
 import RPC from 'util/rpc';
 import PrefsStore from './prefs-store';
+import VersionStore from './version-store';
 import ViewStore from './view-store';
 import TorrentStore from './torrent-store';
 import StatsStore from './stats-store';
@@ -20,6 +21,7 @@ const onDisconnect = () => view_store.toggleConnectionDialog(true);
 const rpc = new RPC(onConnect, onDisconnect);
 
 export const prefs_store = new PrefsStore(hydratePrefsStore());
+export const version_store = new VersionStore(prefs_store);
 export const torrents_store = new TorrentStore(rpc, prefs_store);
 export const stats_store = new StatsStore(rpc);
 export const session_store = new SessionStore(rpc);
