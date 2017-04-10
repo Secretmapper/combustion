@@ -40,7 +40,7 @@
 
 .main {
   height: 100%;
-  overflow: scroll;
+  overflow-y: scroll;
   width: 100%;
 }
 
