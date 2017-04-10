@@ -45,7 +45,13 @@ function getProgressStyles(torrent) {
 function ProgressBar({ torrent }) {
   return (
     <div className={getProgressStyles(torrent)}>
-      <progress max='100' value={getPercentage(torrent)} />
+      <div
+        role='progressbar'
+        aria-valuenow={getPercentage(torrent)}
+        aria-valuemin='0'
+        aria-valuemax="100"
+        style={{ width: getPercentage(torrent) }}
+      />
     </div>
   );
 }
