@@ -27,7 +27,12 @@ Stop then restart the daemon:
 export TRANSMISSION_WEB_HOME="$HOME/.combustion/combustion-release" && transmission-stop && transmission-daemon;
 ```
 
-Alternatively, 
+## Using Docker
+Alternatively, you can use the **docker** image,
+```bash
+sudo docker build -t combustion .
+sudo docker run -d --restart=always -p 80:80 --link some-transmission container combustion
+```
 
 ## Technology
 
