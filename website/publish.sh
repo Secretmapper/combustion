@@ -12,6 +12,7 @@ cd ../../combustion-gh-pages
 # git rebase
 rm -Rf *
 cd ../combustion/website
+rm -Rf public/
 brunch b
 cp -R public/* ../../combustion-gh-pages/
 rm -Rf public/

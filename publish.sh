@@ -12,6 +12,7 @@ cd ../combustion-release
 # git rebase
 rm -Rf *
 cd ../combustion
+rm -Rf build/
 yarn build
 cp -R build/* ../combustion-release/
 rm -Rf build/
