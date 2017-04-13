@@ -15,7 +15,12 @@ Simply move the files from the release archives (unzipped) to Transmission's web
 Linux: `~/.local/share/transmission/web/`
 OSX: `/Applications/Transmission.app/Contents/Resources/web/`
 
-Example script:
+### Install through Docker
+
+```bash
+sudo docker build -t combustion .
+sudo docker run -d --restart=always -p 80:80 --link some-transmission container combustion
+```
 
 ### Install by pointing transmission to a custom directory
 
