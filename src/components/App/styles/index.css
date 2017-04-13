@@ -35,12 +35,11 @@
   right: 0;
   bottom: 35px;
   overflow-y: auto;
-  background: #FAFAFA;
 }
 
 .main {
   height: 100%;
-  overflow: scroll;
+  overflow-y: scroll;
   width: 100%;
 }
 

@@ -1,0 +1,40 @@
+.container {
+  background-color: #212121;
+  box-sizing: border-box;
+  color: #fff;
+  display: flex;
+  flex-grow: 1;
+  height: 100%;
+  overflow-y: hidden;
+  padding: 0;
+  max-height: 0;
+  transition: max-height 0.25s cubic-bezier(.4,0,.2,1), padding 0.25s cubic-bezier(.4,0,.2,1);
+}
+
+.container--show {
+  max-height: 50px;
+  padding: 17px 21px;
+}
+
+.label {
+  font-size: 14px;
+  flex-grow: 1;
+}
+
+.get-it {
+  display: flex;
+  color: #2196F3 !important;
+  margin: -8px 0;
+  padding: 0 !important;
+}
+
+.dismiss {
+  display: flex;
+  color: rgb(244, 67, 54) !important;
+  margin: -8px 0;
+  padding: 0 !important;
+}
+
+.buttonlink {
+  text-decoration: none;
+}

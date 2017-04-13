@@ -11,6 +11,7 @@ export default function () {
     statusFilter: findByProperty(FilterStates, 'persistKey', savedFilter).value,
     sortCriteria: rehydrateKey(PrefCookieKeys.sortCriteria, 'name'),
     sortDirection: rehydrateKey(PrefCookieKeys.sortDirection, ''),
-    compact: rehydrateKey(PrefCookieKeys.compact, false)
+    compact: rehydrateKey(PrefCookieKeys.compact, false),
+    skipUpdate: rehydrateKey(PrefCookieKeys.skipUpdate, false)
   }
 }

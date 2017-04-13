@@ -5,7 +5,8 @@ export const PrefCookieKeys = {
   statusFilter: 'filter',
   sortCriteria: 'sort_method',
   sortDirection: 'sort_direction',
-  compact: 'compact_display_state'
+  compact: 'compact_display_state',
+  skipUpdate: 'skip_update'
 }
 
 export const FilterStates = [
@@ -22,16 +23,18 @@ class PrefsStore {
   @observable sortCriteria;
   @observable sortDirection;
   @observable compact;
+  @observable skipUpdate;
 
   constructor(init) {
     this.rehydrate(init)
   }
 
-  @action rehydrate({ statusFilter = -1, sortCriteria = 'name', sortDirection = '', compact = false } = {}) {
+  @action rehydrate({ statusFilter = -1, sortCriteria = 'name', sortDirection = '', compact = false, skipUpdate = false } = {}) {
     this.statusFilter = statusFilter;
     this.sortCriteria = sortCriteria;
     this.sortDirection = sortDirection;
     this.compact = compact;
+    this.skipUpdate = skipUpdate;
   }
 
   @action setStatusFilter(statusFilter) {
@@ -44,6 +47,10 @@ class PrefsStore {
 
   @action setSortDirection(sortDirection) {
     this.sortDirection = sortDirection;
+  }
+
+  @action setSkipUpdate(type) {
+    this.skipUpdate = true
   }
 
   @action toggleCompact() {

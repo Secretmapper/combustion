@@ -1,36 +1,44 @@
 .container {
-}
-
-.main {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  flex: 1;
-  max-width: 100%;
-  transition: max-width 0.25s cubic-bezier(.4,0,.2,1);
+  background-color: white;
+  overflow: hidden;
   position: relative;
 }
 
+.main {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
+}
+
 .main--aside {
-  max-width: 0;
 }
 
 .aside {
+  background-color: white;
+  bottom: 0;
+  left: 100%;
   overflow: auto;
-  width: 0;
-  transition: width 0.25s cubic-bezier(.4,0,.2,1);
+  position: absolute;
+  top: 0;
+  transition: transform 0.3s cubic-bezier(.4,0,.2,1);
   &>div {
     flex: 1;
   }
 }
 
 .aside--active {
+  transform: translate(-100%, 0);
   width: 100%;
 }
 
 @media screen and (min-width: 480px) {
   .main--aside {
-    max-width: 40%;
+    margin-right: 60%;
+    width: 100%;
   }
 
   .aside--active {
