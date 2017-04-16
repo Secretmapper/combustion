@@ -18,8 +18,10 @@ class UpdateNotice extends Component {
   }
 
   @autobind shouldShow() {
-    const { latest } = this.props.version_store;
+    let { latest } = this.props.version_store;
     if (!latest) return false;
+    // remove v from version number
+    latest = latest[0] === 'v' ? latest.substring(1) : latest
 
     return !this.state.dismissed && semcmp(process.env.VERSION, latest) < 0;
   }
