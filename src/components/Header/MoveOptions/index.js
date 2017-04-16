@@ -3,6 +3,7 @@ import CSSModules from 'react-css-modules';
 import { inject } from 'mobx-react';
 import autobind from 'autobind-decorator';
 
+import SwapVert from 'react-icons/lib/md/swap-vert';
 import styles from './styles/index.css';
 
 import { IconMenu, MenuItem } from 'react-toolbox/lib/menu';
@@ -32,7 +33,7 @@ export default class MoveOptions extends React.Component {
 
   render () {
     return (
-      <IconMenu icon='swap_vert' position='auto' menuRipple styleName='rightOptions'>
+      <IconMenu icon={<SwapVert />} position='auto' menuRipple styleName='rightOptions'>
         <MenuItem caption='Move to Top' onClick={this.queueMoveTop} />
         <MenuItem caption='Move Up' onClick={this.queueMoveUp} />
         <MenuItem caption='Move Down' onClick={this.queueMoveDown} />

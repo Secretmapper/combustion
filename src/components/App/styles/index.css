@@ -1,12 +1,11 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,600');
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import "normalize.css";
 
 :global body {
   margin: 0px;
   padding: 0px;
 
-  font: 62.5% "Roboto", "Helvetica Neue",Helvetica,Arial,sans-serif;
+  /* font: 62.5% "Roboto", "Helvetica Neue",Helvetica,Arial,sans-serif; */
+  font: 62.5% "Roboto";
 
   height: 100vh;
 }

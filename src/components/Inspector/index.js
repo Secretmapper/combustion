@@ -8,6 +8,8 @@ import TorrentStats from 'stores/torrent-stats';
 import { Tab, Tabs } from 'react-toolbox/lib/tabs';
 
 import { IconButton, Button } from 'react-toolbox/lib/button'
+import ChevronRight from 'react-icons/lib/md/chevron-right';
+import Edit from 'react-icons/lib/md/edit';
 import InfoIcon from 'react-icons/lib/md/info';
 import PeersIcon from 'react-icons/lib/md/device-hub';
 import TrackersIcon from 'react-icons/lib/md/track-changes';
@@ -55,12 +57,12 @@ class Inspector extends Component {
     return (
       <div styleName='inspector'>
         <div styleName='inspectorCloseButton'>
-          <Button icon='chevron_right' label='Close Inspector' onMouseUp={this.onToggleInspector} raised primary />
+          <Button icon={<ChevronRight style={{ verticalAlign: 'baseline' }} />} label='Close Inspector' onMouseUp={this.onToggleInspector} raised primary />
         </div>
         <Tabs index={this.state.index} onChange={this.handleTabChange} fixed>
           <Tab label='Info' icon={<InfoIcon />}>
             <div>
-              <h1>{info.title} {singleTorrent && <IconButton onClick={this.rename} icon='edit'/>}</h1>
+              <h1>{info.title} {singleTorrent && <IconButton onClick={this.rename} icon={<Edit style={{ verticalAlign: 'baseline' }} />} />}</h1>
               <Activity info={info} />
               <Details
                 info={info}

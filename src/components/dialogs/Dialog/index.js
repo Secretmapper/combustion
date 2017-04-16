@@ -3,6 +3,7 @@ import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
 import Button from 'react-toolbox/lib/button';
 
+import Left from 'react-icons/lib/md/chevron-left';
 import MDialog from 'react-toolbox/lib/dialog';
 
 import styles from './styles/index.css';
@@ -21,7 +22,7 @@ class Dialog extends Component {
         title={
           <div>
             <Button
-              icon='chevron_left'
+              icon={<Left style={{ lineHeight: 36, verticalAlign: 'baseline' }} />}
               label=' '
               theme={{
                 button: styles.button
