@@ -73,6 +73,8 @@ recursive(paths.appBuild, (err, fileNames) => {
 
   // Merge with the public folder
   copyPublicFolder();
+  // Copy license
+  copyLicense();
 });
 
 // Print a detailed summary of build files.
@@ -220,5 +222,11 @@ function copyPublicFolder() {
   fs.copySync(paths.appPublic, paths.appBuild, {
     dereference: true,
     filter: file => file !== paths.appHtml
+  });
+}
+
+function copyLicense() {
+  fs.copySync(paths.license, path.join(paths.appBuild, 'LICENSE'), {
+    dereference: true
   });
 }
