@@ -50,7 +50,7 @@ function ProgressBar({ torrent }) {
         aria-valuenow={getPercentage(torrent)}
         aria-valuemin='0'
         aria-valuemax="100"
-        style={{ width: getPercentage(torrent) }}
+        style={{ width: getPercentage(torrent) + '%' }}
       />
     </div>
   );
