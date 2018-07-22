@@ -3,8 +3,8 @@ import 'whatwg-fetch';
 class RPC {
   static SESSION_ID_HEADER = 'X-Transmission-Session-Id';
 
-  constructor(onConnect = () => {}, onDisconnect = () => {}) {
-    this._url = '/transmission/rpc';
+  constructor(rpcEndpoint, onConnect = () => {}, onDisconnect = () => {}) {
+    this._url = rpcEndpoint;
     this._onConnect = onConnect;
     this._onDisconnect = onDisconnect;
     this._sessionId = null;

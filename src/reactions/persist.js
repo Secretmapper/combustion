@@ -4,7 +4,7 @@ import { persistKey } from 'util/persistors';
 import { FilterStates, PrefCookieKeys } from 'stores/prefs-store';
 
 export default function ({ prefs_store }) {
-  const keys = ['statusFilter', 'sortCriteria', 'sortDirection', 'compact', 'skipUpdate']
+  const keys = ['statusFilter', 'sortCriteria', 'sortDirection', 'compact', 'skipUpdate', 'rpcEndpoint']
   keys.forEach(k => {
     reaction(
       _ => prefs_store[k],

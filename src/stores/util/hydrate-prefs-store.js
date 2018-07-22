@@ -12,6 +12,8 @@ export default function () {
     sortCriteria: rehydrateKey(PrefCookieKeys.sortCriteria, 'name'),
     sortDirection: rehydrateKey(PrefCookieKeys.sortDirection, ''),
     compact: rehydrateKey(PrefCookieKeys.compact, false),
-    skipUpdate: rehydrateKey(PrefCookieKeys.skipUpdate, false)
+    skipUpdate: rehydrateKey(PrefCookieKeys.skipUpdate, false),
+
+    rpcEndpoint: rehydrateKey(PrefCookieKeys.rpcEndpoint, '/transmission/rpc')
   }
 }
