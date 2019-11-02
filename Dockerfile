@@ -7,6 +7,8 @@
 FROM alpine:latest
 MAINTAINER Clement Trösa <iomonad@riseup.net>
 
+ENV PORT 9091
+
 RUN apk add --update \
     lighttpd wget unzip \
       && rm -rf /var/cache/apk/*
