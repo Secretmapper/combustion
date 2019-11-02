@@ -12,7 +12,8 @@ Latest Releases are available at: `https://github.com/Secretmapper/combustion/ar
 
 Simply move the files from the release archives (unzipped) to Transmission's web theme folder:
 
-Linux: `~/.local/share/transmission/web/`
+Linux: `~/.local/share/transmission/web/` (Kodi: `/usr/share/transmission/web/`)
+
 OSX: `/Applications/Transmission.app/Contents/Resources/web/`
 
 ### Install through Docker
