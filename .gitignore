@@ -13,5 +13,5 @@ build
 .DS_Store
 .env
 .jshintrc
-.package-lock.json
+package-lock.json
 npm-debug.log
