@@ -8,7 +8,7 @@ export const PrefCookieKeys = {
   compact: 'compact_display_state',
   skipUpdate: 'skip_update',
   rpcEndpoint: 'rpc_endpoint'
-}
+};
 
 export const FilterStates = [
   {value: -1, label: 'All', persistKey: 'all'},

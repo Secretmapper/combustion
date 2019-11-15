@@ -24,7 +24,7 @@ import StatisticsDialog from 'components/dialogs/StatisticsDialog';
 import AboutDialog from 'components/dialogs/AboutDialog';
 import PromptDialog from 'components/dialogs/PromptDialog';
 
-import 'typeface-roboto'
+import 'typeface-roboto';
 import styles from './styles/index.css';
 
 setLogEnabled(false);

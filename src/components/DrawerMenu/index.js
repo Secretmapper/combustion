@@ -8,7 +8,7 @@ import Dropdown from 'react-toolbox/lib/dropdown';
 import { List, ListItem, ListSubHeader, ListDivider } from 'react-toolbox/lib/list';
 import SettingsIcon from 'react-icons/lib/md/settings';
 import FilterToolbar from 'components/toolbars/FilterToolbar';
-import { sortCriteria } from 'stores/torrent-store'
+import { sortCriteria } from 'stores/torrent-store';
 
 import styles from './styles/index.css';
 
