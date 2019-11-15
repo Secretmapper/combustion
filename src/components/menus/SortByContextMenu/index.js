@@ -15,7 +15,7 @@ class SortByContextMenu extends Component {
     this.props.prefs_store.setSortCriteria(sortCriteria)
   }
   @autobind onSetSortReverse(sortDirection) {
-    this.props.prefs_store.setSortDirection( (sortDirection==='ascending'?'descending':'ascending') )
+    this.props.prefs_store.setSortDirection( (sortDirection==='descending'?'ascending':'descending') )
   }
 
   render() {
@@ -41,7 +41,7 @@ class SortByContextMenu extends Component {
           selected={true}
           caption='Reverse Sort Order'
           onClick={this.onSetSortReverse.bind(this, sortDirection)}
-          styleName={sortDirection === 'ascending' ? 'torrentMenuSelected' : 'torrentMenuItem'}
+          styleName={sortDirection === 'descending' ? 'torrentMenuSelected' : 'torrentMenuItem'}
         />
       </Menu>
     );

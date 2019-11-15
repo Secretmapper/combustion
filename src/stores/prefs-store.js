@@ -33,7 +33,7 @@ class PrefsStore {
     this.rehydrate(init)
   }
 
-  @action rehydrate({ statusFilter = -1, sortCriteria = 'name', sortDirection = '', compact = false, skipUpdate = false, rpcEndpoint = '/transmission/rpc' } = {}) {
+  @action rehydrate({ statusFilter = -1, sortCriteria = 'name', sortDirection = 'ascending', compact = false, skipUpdate = false, rpcEndpoint = '/transmission/rpc' } = {}) {
     this.statusFilter = statusFilter;
     this.sortCriteria = sortCriteria;
     this.sortDirection = sortDirection;

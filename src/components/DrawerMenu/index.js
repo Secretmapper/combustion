@@ -19,8 +19,12 @@ class DrawerMenu extends Component {
     this.props.view_store.selectTorrents([]);
   }
 
-  @autobind onChange(value) {
+  @autobind onChangeSort(value) {
     this.props.prefs_store.setSortCriteria(value);
+  }
+
+  @autobind onChangeSortDir(value) {
+    this.props.prefs_store.setSortDirection(value);
   }
 
   @autobind onChangeSearch(search) {
@@ -41,6 +45,7 @@ class DrawerMenu extends Component {
   render() {
     const search = this.props.torrents_store.textFilter;
     const currCriteria = this.props.prefs_store.sortCriteria;
+    const currDir = this.props.prefs_store.sortDirection;
 
     const tracker = this.props.torrents_store.trackerFilter;
     const trackers = this.props.torrents_store.trackers.map((domain) => {
@@ -65,7 +70,15 @@ class DrawerMenu extends Component {
             label='SORT BY'
             source={sortCriteria}
             value={currCriteria}
-            onChange={this.onChange}
+            onChange={this.onChangeSort}
+            theme={{ inputInput: styles.list_item }}
+          />
+          <Dropdown
+            auto
+            label='SORT DIRECTION'
+            source={[{value: 'ascending', label: 'Ascending'}, {value: 'descending', label: 'Descending'}]}
+            value={currDir}
+            onChange={this.onChangeSortDir}
             theme={{ inputInput: styles.list_item }}
           />
           <ListSubHeader caption='Filter by Status' />
