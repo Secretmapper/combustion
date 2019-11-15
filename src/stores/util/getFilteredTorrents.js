@@ -10,6 +10,6 @@ export default function getFilteredTorrents (torrentStore, prefsStore) {
 
     return true;
   }).sort(comparatorsMap[prefsStore.sortCriteria]);
-  
-  return ('ascending' === prefsStore.sortDirection) ? sortedTorrents : sortedTorrents.reverse();
+
+  return ('ascending' === prefsStore.sortDirection) ? sortedTorrents.reverse() : sortedTorrents;
 }
