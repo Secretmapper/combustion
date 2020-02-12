@@ -1,5 +1,6 @@
 import React, { Component} from 'react';
 import CSSModules from 'react-css-modules';
+import { when } from 'mobx';
 import { inject, observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
 import { size } from 'util/formatters';
@@ -20,7 +21,14 @@ class OpenDialog extends Component {
     super(props);
 
     this.torrentUpload = new TorrentUpload();
-    this.torrentUpload.setDownloadDir(this.props.session_store.settings['download-dir']);
+    when(
+      () => this.props.session_store.settings['download-dir'],
+      () => {
+        const downloadDir = this.props.session_store.settings['download-dir'];
+        this.torrentUpload.setDownloadDir(downloadDir);
+        this.props.session_store.getFreeSpace(downloadDir);
+      }
+    )
 
     this.state = { shouldStart: true }
   }
