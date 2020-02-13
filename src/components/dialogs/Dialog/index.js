@@ -7,6 +7,7 @@ import Left from 'react-icons/lib/md/chevron-left';
 import MDialog from 'react-toolbox/lib/dialog';
 
 import styles from './styles/index.css';
+import theme from './styles/theme.css'
 
 @inject('view_store')
 @observer
@@ -33,6 +34,7 @@ class Dialog extends Component {
           </div>
         }
         type='fullscreen'
+        theme={theme}
       >
         {this.props.children}
       </MDialog>

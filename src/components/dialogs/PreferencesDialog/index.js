@@ -70,7 +70,6 @@ class PreferencesDialog extends Component {
       <Dialog
         show={this.props.view_store.isPreferencesDialogShown}
         onHide={this.onHide}
-        style={{ overflow: 'auto' }}
         header='Preferences'
         type='large'
       >
