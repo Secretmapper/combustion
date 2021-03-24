@@ -4,7 +4,8 @@ class SessionStore {
   @observable sessionId = null;
   @observable settings = {};
   @observable freeSpace = -1; // TODO: Decide if this should be in TorrentUpload
-
+  @observable blocklistSize = -1;
+  
   constructor(rpc) {
     this.rpc = rpc;
   }
@@ -81,6 +82,16 @@ class SessionStore {
 
   @action togglePreference(id) {
     return this.setPreference(id, !this.settings[id]);
+  }
+
+  @action updateBlocklist() {
+    return this.rpc.sendRequest('blocklist-update')
+      .then(action((response) => {
+        return response.json().then(action((result) => {
+          this.blocklistSize = result.arguments['blocklist-size'];
+          return this.blocklistSize;
+        }));
+    }));
   }
 }
 

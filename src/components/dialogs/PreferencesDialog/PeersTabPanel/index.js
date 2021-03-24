@@ -1,6 +1,9 @@
 import React, { Component} from 'react';
 import CSSModules from 'react-css-modules';
 import { inject, observer } from 'mobx-react';
+import autobind from 'autobind-decorator';
+
+import { Button } from 'react-toolbox/lib/button'
 
 import styles from '../styles/index.css';
 
@@ -9,10 +12,23 @@ import CheckRow from '../fields/CheckRow';
 import CheckValueRow from '../fields/CheckValueRow';
 import SelectRow from '../fields/SelectRow';
 
-@inject('view_store')
+@inject('view_store', 'session_store')
 @observer
 @CSSModules(styles)
 class PeersTabPanel extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      blocklistSize: (this.props.session_store.blocklistSize == -1) ? '?' : this.props.session_store.blocklistSize,
+    };
+  }
+
+  @autobind updateBlocklist() {
+    this.props.session_store.updateBlocklist().then((size) => {
+      this.setState({ blocklistSize: size });
+    });
+  }
+
   render() {
     const encryption = {
       tolerated: 'Allow encryption',
@@ -36,11 +52,11 @@ class PeersTabPanel extends Component {
         <CheckRow id='lpd-enabled' label='Use LPD to find more peers' title="LPD is a tool for finding peers on your local network."/>
 
         <h3>Blocklist</h3>
-        <CheckValueRow idCheck='blocklist-enabled' idValue='blocklist-url' label='Enable blocklist'/>
+        <CheckValueRow idCheck='blocklist-enabled' idValue='blocklist-url' label='Enable blocklist' type='url'/>
 
         <div className="row">
-          <div className="key" id="blocklist-info">Blocklist has <span id="blocklist-size">?</span> rules</div>
-          <div className="value"><input type="button" id="blocklist-update-button" value="Update"/></div>
+          <div className="key" id="blocklist-info">Blocklist has <span id="blocklist-size">{this.state.blocklistSize}</span> rules</div>
+          <Button label='Update blocklist' onMouseUp={this.updateBlocklist} raised primary />
         </div>
       </div>
     );
